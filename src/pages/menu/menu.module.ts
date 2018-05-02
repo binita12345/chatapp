@@ -11,5 +11,8 @@ import { HeaderComponentModule } from '../../components/header/header.module';
     IonicPageModule.forChild(MenuPage),
     HeaderComponentModule
   ],
+  exports: [
+    MenuPage
+  ]
 })
 export class MenuPageModule {}

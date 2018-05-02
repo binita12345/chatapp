@@ -5,13 +5,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HeaderColor } from '@ionic-native/header-color';
 
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
 
 import { HeaderComponent } from '../components/header/header';
 import { HeaderComponentModule } from '../components/header/header.module';
+// import { MenuPageModule } from '../pages/menu/menu';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { HeaderComponentModule } from '../components/header/header.module';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HeaderComponentModule,
+    // MenuPageModule
 
   ],
   bootstrap: [IonicApp],

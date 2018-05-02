@@ -6,6 +6,7 @@ import { HeaderColor } from '@ionic-native/header-color';
 
 // import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
+// import { MenuPageModule } from '../pages/menu/menu';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,12 +22,12 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { title: 'INICIO', component: 'MenuPage', icon: 'ios-home'},
-      { icon: 'md-qr-scanner', title: 'CONFIGURA TU EQUIPO', component: ''},
-      { icon: 'ios-download-outline', title: 'TECNOLOGÍAS PARA CELULARES', component: ''},
-      { icon: 'ios-film', title: 'TUTORIALES EN VIDEO', component: ''},
-      { icon: 'information-circle', title: 'PREGUNTAS FRECUENTES', component: ''},
-      { icon: 'chatbubbles', title: 'CHAT DE SOPORTE', component: ''}
+      { icon: 'ios-home', title: 'INICIO', component: ''},
+      { icon: 'md-qr-scanner', title: 'CONFIGURA TU EQUIPO', component: 'ConfiguraPage'},
+      { icon: 'ios-download-outline', title: 'TECNOLOGÍAS PARA CELULARES', component: 'CelularesPage'},
+      { icon: 'ios-film', title: 'TUTORIALES EN VIDEO', component: 'VideosPage'},
+      { icon: 'information-circle', title: 'PREGUNTAS FRECUENTES', component: 'PreguntasPage'},
+      { icon: 'chatbubbles', title: 'CHAT DE SOPORTE', component: 'ChatPage'}
     ];
   }
 

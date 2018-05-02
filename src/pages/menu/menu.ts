@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+
 /**
  * Generated class for the MenuPage page.
  *
@@ -26,5 +27,22 @@ export class MenuPage {
   	console.log("go to configura");
   	this.navCtrl.push("ConfiguraPage");
   }
+  celulares(){
+    console.log("go to CelularesPage");
+    this.navCtrl.push("CelularesPage");
+  }
+  videos(){
+    console.log("go to VideosPage");
+    this.navCtrl.push("VideosPage");
+  }
+  preguntas(){
+    console.log("go to PreguntasPage");
+    this.navCtrl.push("PreguntasPage");
+  }
+  chat(){
+    console.log("go to ChatPage");
+    this.navCtrl.push("ChatPage");
+  }
+
 
 }
