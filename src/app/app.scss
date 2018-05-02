@@ -1,0 +1,47 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.padding-top {
+  margin-top: 48px !important;
+}
+
+.platform-ios .padding-top{
+    margin-top: 35px !important;
+}
+.platform-android .padding-top{
+    margin-top: 55px !important;
+}
+.list-md .item-block .item-inner {
+    border-bottom: 1px solid grey;
+}
+
+.platform-ios .list-md .item-block{
+    border-bottom: 1px solid grey;
+}
+.list-ios > .item-block:first-child {
+    border-top: 0.55px solid grey;
+}
+.list-ios .item-block .item-inner {
+    border-bottom: 0.55px solid grey;
+}
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+    border-bottom: 0.55px solid grey;
+}
+
+.item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input {
+    margin-left: 10px;
+}

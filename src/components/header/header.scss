@@ -1,0 +1,12 @@
+header {
+
+	[nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
+ 	   background: #FF5F00;
+	}
+	.bar.bar-stable {
+	    border-color: #FF5F00;
+	    background-color: #FF5F00;
+	    background-image: linear-gradient(0deg, #FF5F00, #FF5F00 50%, transparent 50%);
+	    color: #444;
+	}
+}
