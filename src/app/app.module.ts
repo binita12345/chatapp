@@ -23,6 +23,7 @@ import { HeaderComponentModule } from '../components/header/header.module';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HeaderComponentModule,
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
