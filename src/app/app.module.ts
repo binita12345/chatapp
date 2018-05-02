@@ -23,7 +23,7 @@ import { HeaderComponentModule } from '../components/header/header.module';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HeaderComponentModule,
-    
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,5 +38,6 @@ import { HeaderComponentModule } from '../components/header/header.module';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HeaderColor
   ]
+  
 })
 export class AppModule {}
