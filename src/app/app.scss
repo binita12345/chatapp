@@ -18,25 +18,37 @@
 .padding-top {
   margin-top: 48px !important;
 }
+.ios ion-nav > .ion-page > .toolbar.statusbar-padding:first-child, .ios ion-nav > .ion-page > ion-header > .toolbar.statusbar-padding:first-child, .ios ion-tab > .ion-page > .toolbar.statusbar-padding:first-child, .ios ion-tab > .ion-page > ion-header > .toolbar.statusbar-padding:first-child, .ios ion-tabs > .ion-page.tab-subpage > ion-header > .toolbar.statusbar-padding:first-child, .ios ion-menu > .menu-inner > .toolbar.statusbar-padding:first-child, .ios ion-menu > .menu-inner > ion-header > .toolbar.statusbar-padding:first-child {
+    padding-top: calc(20px + 4px);
+    padding-top: calc(constant(safe-area-inset-top) + 4px);
+    padding-top: calc(env(safe-area-inset-top) + 4px);
+    min-height: calc(0px + 20px);
+    min-height: calc(44px + constant(safe-area-inset-top));
+    min-height: calc(44px + env(safe-area-inset-top));
+}
 .toolbar-background-md {
     border-color: #b2b2b2;
-    background: #ff6e00;
+    background: #FF5F00;
 }
 .toolbar-background-ios {
-    background: #ff6e00;
+    background: #FF5F00;
 }
 
 .toolbar-background-wp {
     border-color: #b2b2b2;
-    background: #ff6e00;
+    background: #FF5F00;
 }
 
 .platform-ios .padding-top{
-    margin-top: 35px !important;
+    margin-top: 33px !important;
 }
 .platform-android .padding-top{
-    margin-top: 55px !important;
+    margin-top: 45px !important;
 }
+.platform-windows .padding-top{
+    margin-top: 35px !important;
+}
+
 .list-md .item-block .item-inner {
     border-bottom: 1px solid grey;
 }

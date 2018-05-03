@@ -20,6 +20,9 @@ var MenuPageModule = /** @class */ (function () {
                 IonicPageModule.forChild(MenuPage),
                 HeaderComponentModule
             ],
+            exports: [
+                MenuPage
+            ]
         })
     ], MenuPageModule);
     return MenuPageModule;

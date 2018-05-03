@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 // import { HomePage } from '../pages/home/home';
-import { MenuPage } from '../pages/menu/menu';
+import { PassportloginPage } from '../pages/passportlogin/passportlogin';
 // import { MenuPageModule } from '../pages/menu/menu';
 
 @Component({
@@ -13,7 +13,7 @@ import { MenuPage } from '../pages/menu/menu';
 export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = MenuPage;
+  rootPage:any = PassportloginPage;
 
   pages: Array<{title: string, component: any, icon: any}>;
 
@@ -21,12 +21,15 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { icon: 'ios-home', title: 'INICIO', component: ''},
-      { icon: 'md-qr-scanner', title: 'CONFIGURA TU EQUIPO', component: 'ConfiguraPage'},
-      { icon: 'ios-download-outline', title: 'TECNOLOGÍAS PARA CELULARES', component: 'CelularesPage'},
-      { icon: 'ios-film', title: 'TUTORIALES EN VIDEO', component: 'VideosPage'},
-      { icon: 'information-circle', title: 'PREGUNTAS FRECUENTES', component: 'PreguntasPage'},
-      { icon: 'chatbubbles', title: 'CHAT DE SOPORTE', component: 'ChatPage'}
+      { icon: 'wifi', title: 'WiFi', component: ''},
+      { icon: 'md-bluetooth', title: 'Bluetooth', component: ''},
+      { icon: 'md-log-out', title: 'Log Out', component: ''},
+      // { icon: 'ios-home', title: 'INICIO', component: ''},
+      // { icon: 'md-qr-scanner', title: 'CONFIGURA TU EQUIPO', component: 'ConfiguraPage'},
+      // { icon: 'ios-download-outline', title: 'TECNOLOGÍAS PARA CELULARES', component: 'CelularesPage'},
+      // { icon: 'ios-film', title: 'TUTORIALES EN VIDEO', component: 'VideosPage'},
+      // { icon: 'information-circle', title: 'PREGUNTAS FRECUENTES', component: 'PreguntasPage'},
+      // { icon: 'chatbubbles', title: 'CHAT DE SOPORTE', component: 'ChatPage'}
     ];
   }
 

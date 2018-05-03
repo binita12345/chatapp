@@ -7,21 +7,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { MenuPage } from '../pages/menu/menu';
+// import { HomePage } from '../pages/home/home';
+import { PassportloginPage } from '../pages/passportlogin/passportlogin';
+// import { MenuPageModule } from '../pages/menu/menu';
 var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen) {
-        this.rootPage = MenuPage;
-        platform.ready().then(function () {
+        this.platform = platform;
+        this.statusBar = statusBar;
+        this.splashScreen = splashScreen;
+        this.rootPage = PassportloginPage;
+        this.initializeApp();
+        this.pages = [
+            { icon: 'wifi', title: 'WiFi', component: '' },
+            { icon: 'md-bluetooth', title: 'Bluetooth', component: '' },
+            { icon: 'md-log-out', title: 'Log Out', component: '' },
+        ];
+    }
+    MyApp.prototype.initializeApp = function () {
+        var _this = this;
+        this.platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            statusBar.styleDefault();
-            splashScreen.hide();
+            _this.statusBar.styleDefault();
+            _this.splashScreen.hide();
         });
-    }
+    };
+    MyApp.prototype.openPage = function (page) {
+        if (page.component) {
+            this.nav.setRoot(page.component);
+        }
+    };
+    __decorate([
+        ViewChild(Nav),
+        __metadata("design:type", Nav)
+    ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Component({
             templateUrl: 'app.html'

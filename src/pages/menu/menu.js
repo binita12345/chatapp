@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Socket } from 'ng-socket-io';
 /**
  * Generated class for the MenuPage page.
  *
@@ -16,12 +17,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 var MenuPage = /** @class */ (function () {
-    function MenuPage(navCtrl, navParams) {
+    function MenuPage(navCtrl, navParams, socket) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.socket = socket;
+        this.nickname = 'Binita Doriwala';
     }
     MenuPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad MenuPage');
+    };
+    // configura(){
+    // 	console.log("go to configura");
+    // 	this.navCtrl.push("ConfiguraPage");
+    // }
+    MenuPage.prototype.celulares = function () {
+        console.log("go to CelularesPage");
+        this.navCtrl.push("CelularesPage");
+    };
+    MenuPage.prototype.videos = function () {
+        console.log("go to VideosPage");
+        this.navCtrl.push("VideosPage");
+    };
+    // preguntas(){
+    //   console.log("go to PreguntasPage");
+    //   this.navCtrl.push("PreguntasPage");
+    // }
+    // chat(){
+    //   console.log("go to ChatPage");
+    //   this.navCtrl.push("ChatPage");
+    // }
+    MenuPage.prototype.chatting = function () {
+        console.log("go to chattingPage");
+        this.socket.connect();
+        this.socket.emit('set-nickname', this.nickname);
+        this.navCtrl.push("ChatPage", { nickname: this.nickname });
     };
     MenuPage = __decorate([
         IonicPage(),
@@ -29,7 +58,7 @@ var MenuPage = /** @class */ (function () {
             selector: 'page-menu',
             templateUrl: 'menu.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams])
+        __metadata("design:paramtypes", [NavController, NavParams, Socket])
     ], MenuPage);
     return MenuPage;
 }());

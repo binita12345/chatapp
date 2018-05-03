@@ -1,3 +1,50 @@
 page-chat {
+	.lbl{
+		border: 1px solid black;
+	    min-width: 105%;
+	    margin-left: -9px!important;
+	    margin-top: 2px;
+	    padding: 10px;
+	}
+	.user_name {
+        color: #afafaf;
+    }
+    .message {
+        padding: 10px !important;
+        transition: all 250ms ease-in-out !important;
+        border-radius: 10px !important;
+        margin-bottom: 4px !important;
+    }
+    .my_message {
+        background: color($colors, primary) !important;
+        color: #000 !important;
+    }
+    .other_message {
+        background: #dcdcdc !important;
+        color: #000 !important;
+    }
+    .time {
+        color: #afafaf;
+        float: right;
+        font-size: small;
+    }
+    .message_row {
+        background-color: #fff;
+    }
+
+    .icons {
+	    display: inline-block;
+	    font-size: 16px;
+	    border: 1px solid black;
+	    padding: 5px;
+	    border-radius: 33px;
+	    margin-left: 44px;
+	    margin-top: 7px;
+	}
+	.sendmsg{
+		border: 1px solid;
+    	border-radius: 8px;
+    	margin-left: 15px;
+	}
 
 }

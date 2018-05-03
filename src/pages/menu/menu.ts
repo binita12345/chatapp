@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Socket } from 'ng-socket-io';
 
 /**
  * Generated class for the MenuPage page.
@@ -16,17 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MenuPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  nickname = 'Binita Doriwala';
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuPage');
   }
 
-  configura(){
-  	console.log("go to configura");
-  	this.navCtrl.push("ConfiguraPage");
-  }
+  // configura(){
+  // 	console.log("go to configura");
+  // 	this.navCtrl.push("ConfiguraPage");
+  // }
   celulares(){
     console.log("go to CelularesPage");
     this.navCtrl.push("CelularesPage");
@@ -35,13 +37,20 @@ export class MenuPage {
     console.log("go to VideosPage");
     this.navCtrl.push("VideosPage");
   }
-  preguntas(){
-    console.log("go to PreguntasPage");
-    this.navCtrl.push("PreguntasPage");
-  }
-  chat(){
-    console.log("go to ChatPage");
-    this.navCtrl.push("ChatPage");
+  // preguntas(){
+  //   console.log("go to PreguntasPage");
+  //   this.navCtrl.push("PreguntasPage");
+  // }
+  // chat(){
+  //   console.log("go to ChatPage");
+  //   this.navCtrl.push("ChatPage");
+  // }
+
+  chatting(){
+    console.log("go to chattingPage");
+    this.socket.connect();
+    this.socket.emit('set-nickname', this.nickname);
+    this.navCtrl.push("ChatPage", { nickname: this.nickname });
   }
 
 

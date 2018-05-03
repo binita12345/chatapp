@@ -13,7 +13,17 @@ page-menu {
 		background-color:#8e8f91;
 
 	}
-
+	.aquibtn{
+		background-color: #008B7D;
+		border-radius: 2px;
+		text-transform: none;
+	    // overflow: hidden;
+	    height: 4.3rem;
+	    width: 10rem;
+        bottom: 65px;
+	    margin: auto;
+	    left: 35%;
+	}
 	.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
 	    display: block;
 	    max-width: 106%;
@@ -21,9 +31,16 @@ page-menu {
 	    margin-left: -10px;
 	}
 	.img {
-	    max-width: 106%;
+	    max-width: 110%;
 	    border: 0;
 	    margin-left: -10px;
+	    height: 200px;
+	}
+	.imgbtn{
+		max-width: 110%;
+	    border: 0;
+	    margin-left: -7px;
+	    height: 200px;
 	}
 	.callbtn {
 	    background: linear-gradient(to bottom, rgba(255,104,22,1) 0%,rgba(237,75,0,1) 100%);

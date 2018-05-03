@@ -9,9 +9,16 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HeaderColor } from '@ionic-native/header-color';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { MenuPage } from '../pages/menu/menu';
+// import { MenuPage } from '../pages/menu/menu';
+import { PassportloginPage } from '../pages/passportlogin/passportlogin';
+import { HeaderComponent } from '../components/header/header';
+import { HeaderComponentModule } from '../components/header/header.module';
+import { SocketIoModule } from 'ng-socket-io';
+var config = { url: 'http://localhost:3001', options: {} };
+// import { MenuPageModule } from '../pages/menu/menu';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -20,22 +27,27 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 MyApp,
                 HomePage,
-                MenuPage
+                PassportloginPage
             ],
             imports: [
                 BrowserModule,
-                IonicModule.forRoot(MyApp)
+                IonicModule.forRoot(MyApp),
+                HeaderComponentModule,
+                SocketIoModule.forRoot(config)
+                // PassportloginPageModule
             ],
             bootstrap: [IonicApp],
             entryComponents: [
                 MyApp,
                 HomePage,
-                MenuPage
+                PassportloginPage,
+                HeaderComponent
             ],
             providers: [
                 StatusBar,
                 SplashScreen,
-                { provide: ErrorHandler, useClass: IonicErrorHandler }
+                { provide: ErrorHandler, useClass: IonicErrorHandler },
+                HeaderColor
             ]
         })
     ], AppModule);

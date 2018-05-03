@@ -11,18 +11,18 @@
   </ion-navbar>
 
 </ion-header> -->
-<header title="Demo Chat"> </header> 
+<header title=""> </header> 
 
 <ion-content class="padding-top">
 	<ion-grid>
 		<ion-row>
 			<ion-col col-12 col-xl-12>
-				<img src="assets/imgs/slide_home.png" class="img">
+				<button class="imgbtn"><img src="assets/imgs/slide_home.png" class="img" (click)="chatting()"><button ion-button class="aquibtn" (click)="chatting()">Aqui</button></button>
 			</ion-col>
 		</ion-row>
 	</ion-grid>
 	<ion-grid padding>
-		<ion-row>
+		<!-- <ion-row>
 			<ion-col col-12 col-xl-12>
 				<button ion-button full class="btn">
 					<ion-grid>
@@ -40,7 +40,7 @@
 					</ion-grid>
 				</button>
 			</ion-col>
-		</ion-row>
+		</ion-row> -->
 		<ion-row>
 			<ion-col col-6 col-xl-6 (click)="celulares()">
 				<button ion-button full class="btn">
@@ -52,7 +52,7 @@
 						</ion-row>
 						<ion-row>
 							<ion-col col-10 col-xl-10>
-									<p style="font-variant: small-caps;font-size: 10px;" class="head">Tecnologías en <br/> <b style="font-size: 13px;"> celulares</b> </p>
+									<p style="font-variant: small-caps;font-size: 10px;" class="head">tecnologías en <br/> <b style="font-size: 13px;"> celulares</b> </p>
 							</ion-col>
 							<ion-col col-2 col-xl-2 style="margin-top: 17px;">
 									<img src="assets/imgs/ic_arrow_right_gray.png" style="height: 20px;width: 25px; ">
@@ -72,7 +72,7 @@
 						</ion-row>
 						<ion-row>
 							<ion-col col-10 col-xl-10>
-									<p style="font-variant: small-caps;font-size: 10px;" class="head">Tutoriales en  <br/> <b style="font-size: 13px;"> Videos</b> </p>
+									<p style="font-variant: small-caps;font-size: 10px;" class="head">tutoriales en  <br/> <b style="font-size: 13px;"> videos</b> </p>
 							</ion-col>
 							<ion-col col-2 col-xl-2 style="margin-top: 17px;">
 									<img src="assets/imgs/ic_arrow_right_gray.png" style="height: 20px;width: 25px; ">
@@ -82,19 +82,19 @@
 				</button>
 			</ion-col>
 		</ion-row>
-		<ion-row>
+		<br/>
+		<!-- <ion-row>
 			<ion-col col-6 col-xl-6 (click)="preguntas()">
 				<button ion-button full class="btn">
 					<ion-grid>
 						<ion-row>
 							<ion-col col-12 col-xl-12 style="margin-bottom: -15px;margin-top: 20px;">
-								<!-- <img src="assets/imgs/vdoplyr.jpg" style="height: 25px;width: 25px;"> -->
 								<ion-icon name="information-circle" style="font-size: 35px;"></ion-icon>
 							</ion-col>
 						</ion-row>
 						<ion-row>
 							<ion-col col-10 col-xl-10>
-									<p style="font-variant: small-caps;font-size: 10px;" class="head">Preguntas <br/> <b style="font-size: 13px;">  Frecuentes</b> </p>
+									<p style="font-variant: small-caps;font-size: 10px;" class="head">preguntas <br/> <b style="font-size: 13px;">  frecuentes</b> </p>
 							</ion-col>
 							<ion-col col-2 col-xl-2 style="margin-top: 17px;">
 									<img src="assets/imgs/ic_arrow_right_gray.png" style="height: 20px;width: 25px; ">
@@ -113,7 +113,7 @@
 						</ion-row>
 						<ion-row>
 							<ion-col col-10 col-xl-10>
-									<p style="font-variant: small-caps;font-size: 10px;" class="head">Chat<br/> <b style="font-size: 13px;"> de soporte</b> </p>
+									<p style="font-variant: small-caps;font-size: 10px;" class="head">chat<br/> <b style="font-size: 13px;"> de soporte</b> </p>
 							</ion-col>
 							<ion-col col-2 col-xl-2 style="margin-top: 17px;">
 									<img src="assets/imgs/ic_arrow_right_gray.png" style="height: 20px;width: 25px; ">
@@ -122,7 +122,7 @@
 					</ion-grid>
 				</button>
 			</ion-col>
-		</ion-row>
+		</ion-row> -->
 		<ion-row>
 			<ion-col col-12 col-xl-12>
 				<button ion-button full class="callbtn" style="height: 50px;">
@@ -132,13 +132,14 @@
 								 <ion-icon name="call" style="font-size: 35px;"></ion-icon>
 							</ion-col>
 							<ion-col col-9 col-xl-9>
-									<p style="font-variant: small-caps;font-size: 15px;" >Soporte telefónico</p>
+									<p style="font-variant: small-caps;font-size: 15px;" >soporte telefónico</p>
 							</ion-col>
 						</ion-row>
 					</ion-grid>
 				</button>
 			</ion-col>
 		</ion-row>
+		<br/><br/><br/>
 		<h6 color="grey">Powered by <a href="http://gearlabs.cl/" onclick="window.open(this.href, '_blank', 'location=no'); return false;">Gearlabs</a></h6>
 	</ion-grid>
 
