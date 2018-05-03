@@ -1,0 +1,25 @@
+page-traveladvice {
+	.header6{
+		text-align: center;
+		color: grey;
+	}
+	.itemlist{
+		border: 1px solid grey;
+	}
+	.para{
+		padding-top: 10px;
+    	padding-bottom: 10px;
+	}
+	ion-label {
+	    display: block;
+	    font-size: inherit;
+	    text-overflow: ellipsis;
+	    white-space: normal;
+	    margin: 0px;
+	    overflow: hidden;
+	    flex: 1 1 0%;
+	}
+	.label-md {
+ 	   margin: 0px;
+	}
+}

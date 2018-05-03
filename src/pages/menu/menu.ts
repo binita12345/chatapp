@@ -29,14 +29,14 @@ export class MenuPage {
   // 	console.log("go to configura");
   // 	this.navCtrl.push("ConfiguraPage");
   // }
-  celulares(){
-    console.log("go to CelularesPage");
-    this.navCtrl.push("CelularesPage");
-  }
-  videos(){
-    console.log("go to VideosPage");
-    this.navCtrl.push("VideosPage");
-  }
+  // celulares(){
+  //   console.log("go to CelularesPage");
+  //   this.navCtrl.push("CelularesPage");
+  // }
+  // videos(){
+  //   console.log("go to VideosPage");
+  //   this.navCtrl.push("VideosPage");
+  // }
   // preguntas(){
   //   console.log("go to PreguntasPage");
   //   this.navCtrl.push("PreguntasPage");
@@ -53,5 +53,11 @@ export class MenuPage {
     this.navCtrl.push("ChatPage", { nickname: this.nickname });
   }
 
+  traveladvice(){
+    this.navCtrl.push("TraveladvicePage");
+  }
+  usefulinfo(){
+    this.navCtrl.push("UsefulinfoPage");
+  }
 
 }
