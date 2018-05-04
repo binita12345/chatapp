@@ -13,6 +13,7 @@ import { HeaderComponent } from '../components/header/header';
 import { HeaderComponentModule } from '../components/header/header.module';
 
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { CallNumber } from '@ionic-native/call-number';
 const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 // import { MenuPageModule } from '../pages/menu/menu';
 
@@ -41,6 +42,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CallNumber
   ]
   
 })

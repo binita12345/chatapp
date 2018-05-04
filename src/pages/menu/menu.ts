@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Socket } from 'ng-socket-io';
-
+// import { Socket } from 'ng-socket-io';
+import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the MenuPage page.
  *
@@ -18,7 +18,9 @@ export class MenuPage {
 
   nickname = 'Binita Doriwala';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket) {
+  // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private callNumber: CallNumber) {
+  // }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber) {
   }
 
   ionViewDidLoad() {
@@ -46,18 +48,23 @@ export class MenuPage {
   //   this.navCtrl.push("ChatPage");
   // }
 
-  chatting(){
-    console.log("go to chattingPage");
-    this.socket.connect();
-    this.socket.emit('set-nickname', this.nickname);
-    this.navCtrl.push("ChatPage", { nickname: this.nickname });
-  }
+  // chatting(){
+  //   console.log("go to chattingPage");
+  //   this.socket.connect();
+  //   this.socket.emit('set-nickname', this.nickname);
+  //   this.navCtrl.push("ChatPage", { nickname: this.nickname });
+  // }
 
   traveladvice(){
     this.navCtrl.push("TraveladvicePage");
   }
   usefulinfo(){
     this.navCtrl.push("UsefulinfoPage");
+  }
+  phone(){
+    this.callNumber.callNumber("8734814110", true)
+    .then(() => console.log('Launched dialer!'))
+    .catch(() => console.log('Error launching dialer'));
   }
 
 }
