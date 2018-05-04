@@ -39,7 +39,18 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      // this.statusBar.overlaysWebView(false); 
     });
+
+    // if (this.platform.is('ios')) {
+    //   // This will only print when on iOS
+    //   console.log('I am an iOS device!');
+    //   this.statusBar.overlaysWebView(false);
+    // } else if (this.platform.is('android')) {
+    //   this.statusBar.overlaysWebView(true);
+    //     console.log('I am an android device!');
+
+    // }
   }
 
   openPage(page) {

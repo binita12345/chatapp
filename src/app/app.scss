@@ -69,3 +69,32 @@
 .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input {
     margin-left: 10px;
 }
+
+// .platform-ios 
+// {
+//     page-menu { // replaced by your page HERE
+//         top: 20px !important;
+//     }
+//     page-home { // replaced by your page HERE
+//         top: 20px !important;
+//     }
+//     page-chat { // replaced by your page HERE
+//         top: 20px !important;
+//     }
+//     page-passportlogin { // replaced by your page HERE
+//         top: 20px !important;
+//     }
+//     page-password { // replaced by your page HERE
+//         top: 20px !important;
+//     }
+//     page-traveladvice { // replaced by your page HERE
+//         top: 20px !important;
+//     }
+//     page-usefulinfo { // replaced by your page HERE
+//         top: 20px !important;
+//     }
+// }
+.error-message{
+    color: red;
+    text-align: center;
+}

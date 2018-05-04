@@ -33,14 +33,15 @@ page-menu {
 	.img {
 	    max-width: 110%;
 	    border: 0;
-	    margin-left: -10px;
+	    margin-left: -17px;
 	    height: 200px;
 	}
 	.imgbtn{
-		max-width: 110%;
-	    border: 0;
-	    margin-left: -7px;
-	    height: 200px;
+		background-color: transparent;
+		// max-width: 110%;
+	 //    border: 0;
+	 //    margin-left: -7px;
+	    
 	}
 	.callbtn {
 	    background: linear-gradient(to bottom, rgba(255,104,22,1) 0%,rgba(237,75,0,1) 100%);
@@ -78,6 +79,15 @@ page-menu {
 	    color: #FF5F00;
 	    text-decoration: none;
 	    font-family: 'Din-Medium', Sans-Serif;
+	}
+
+	@media(min-width: 576px){
+		.img {
+		    min-width: 100%;
+		    border: 0;
+		    // margin-left: -2px;
+		    height: 100%;
+		}
 	}
 
 }

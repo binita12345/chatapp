@@ -3,4 +3,70 @@ page-usefulinfo {
 		text-align: center;
 		color: grey;
 	}
+	.border{
+		    border: 1px solid;
+	}
+	.item-datetime .label-md {
+	    color: #222;
+	}
+	.item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+	    color: #222;
+	}
+	.iconfix{
+		border: 1px solid;
+		text-align: center;
+	}
+	// .iconsize{
+	//     font-size: 40px !important;
+	// }
+	.ionrow{
+		max-height: 30px;
+	}
+	.ionlbl{
+		margin: 0px;
+	}
+	.text-input-md{
+	    margin: 0px !important;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
+	}
+	.text-input-ios{
+	    margin: 0px !important;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
+	}
+	.text-input-wp{
+	    margin: 0px !important;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
+	    border: 0px solid rgba(0, 0, 0, 0.5);
+		line-height: 0rem;
+	}
+	.oddcolor{
+		background-color: #DCDBDC;
+	}
+	.evencolor{
+		background-color: #F3F3F3;
+	}
+	.item-md.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: 0px solid rgb(222, 222, 222);
+	}
+	.item-ios.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: 0px solid rgb(222, 222, 222);
+	}
+	.item-wp.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: 0px solid rgb(222, 222, 222);
+	}
+	.select-md .select-icon .select-icon-inner {
+	    color: #222;
+	}
+	.select-ios .select-icon .select-icon-inner {
+	    color: #222;
+	}
+	.select-wp .select-icon .select-icon-inner {
+	    color: #222;
+	}
 }	

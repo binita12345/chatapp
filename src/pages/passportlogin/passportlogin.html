@@ -25,18 +25,20 @@
 	  	<ion-item>
 	    	<ion-label floating>RUT Usuario</ion-label>
 	    	<ion-input formControlName="usuario" type="text" 
-        	[class.invalid]="!passportloginForm.controls.usuario.valid && passportloginForm.controls.usuario.dirty"></ion-input>
+        	[class.invalid]="!passportloginForm.controls.usuario.valid && passportloginForm.controls.usuario.dirty" (keypress)="onChange($event)"></ion-input>
 	  	</ion-item>
 	  	<div *ngIf="!passportloginForm.controls.usuario.valid  && passportloginForm.controls.usuario.dirty">
 	      	<p class="parag">Please enter a valid usuario.</p>
 	    </div>
 	    <br/>
+	    <div class="error-message">
+			{{error}}
+		</div>
+	    
 		<br/>
 		<br/>
 		<br/>
-			<!-- <div  class="error-message">
-				{{error}}
-			</div> -->
+			
 		<button ion-button type="submit" class="center btn">continuar</button>
 		  <!-- <button ion-button block type="submit" [disabled]="!passportloginForm.valid">Login</button> -->
 		<!-- </div> -->

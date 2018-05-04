@@ -14,9 +14,38 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'usefulinfo.html',
 })
 export class UsefulinfoPage {
+	// countries : any;
+	options = [];
+	currency : any;
+	capitalcity : any;
+	idiom : any;
+	numone : any;
+	numtwo : any;
+	numthree : any;
+	address : any;
+	emailadd : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  	this.options =  [
+      {
+        "name": "India",
+      }
+    ];
+    this.currency = "currency"
+    this.capitalcity = "Capital City"
+    this.idiom = "Idiom"
+
+    this.numone = "Phone Number 01"
+    this.numtwo = "Phone Number 02"
+    this.numthree = "Phone Number 03"
+    this.address = "Address"
+    this.emailadd = "Email Address 01"
+	}
+
+ //  optionsFn() {
+	//   console.log(this.countries);
+	//   let item = this.countries;
+	// }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UsefulinfoPage');

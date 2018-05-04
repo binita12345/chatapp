@@ -17,6 +17,7 @@ export class PasswordPage {
 
 	headerdisplay : any;
 	public passwordloginForm:FormGroup;  
+  error : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private formBuilder: FormBuilder) {
   	this.passwordloginForm = formBuilder.group({
@@ -38,8 +39,18 @@ export class PasswordPage {
     console.log('ionViewDidLoad PasswordPage');
   }
 
+  onChange(){
+    if(this.passwordloginForm.value.password.length > -1){
+      this.error = '';
+    }
+  }
+
   passwordlogin(){
-  	this.navCtrl.push("MenuPage");
+    if(this.passwordloginForm.value.password == ''){
+      this.error = "please enter your Password";
+    } else{
+      this.navCtrl.push("MenuPage");
+    }
   }
 
 }
