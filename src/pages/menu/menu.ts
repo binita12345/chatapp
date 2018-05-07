@@ -48,12 +48,13 @@ export class MenuPage {
   //   this.navCtrl.push("ChatPage");
   // }
 
-  // chatting(){
-  //   console.log("go to chattingPage");
-  //   this.socket.connect();
-  //   this.socket.emit('set-nickname', this.nickname);
-  //   this.navCtrl.push("ChatPage", { nickname: this.nickname });
-  // }
+  chatting(){
+    console.log("go to chattingPage");
+    // this.socket.connect();
+    // this.socket.emit('set-nickname', this.nickname);
+    // this.navCtrl.push("ChatPage");
+    this.navCtrl.push("ChatPage", { nickname: this.nickname });
+  }
 
   traveladvice(){
     this.navCtrl.push("TraveladvicePage");
