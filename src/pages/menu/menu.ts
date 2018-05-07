@@ -16,12 +16,19 @@ import { CallNumber } from '@ionic-native/call-number';
 })
 export class MenuPage {
 
-  nickname = 'Binita Doriwala';
+  toUser : {toUserId: string, toUserName: string};
+
+  // nickname = 'Binita Doriwala';
 
   // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private callNumber: CallNumber) {
-  // }
-  constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber) {
+    this.toUser = {
+      toUserId:'210000198410281948',
+      toUserName:'Hancock'
+    }
   }
+  // constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber) {
+  // }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuPage');
@@ -48,12 +55,12 @@ export class MenuPage {
   //   this.navCtrl.push("ChatPage");
   // }
 
-  // chatting(){
-  //   console.log("go to chattingPage");
-  //   this.socket.connect();
-  //   this.socket.emit('set-nickname', this.nickname);
-  //   this.navCtrl.push("ChatPage", { nickname: this.nickname });
-  // }
+  chatting(){
+    console.log("go to chattingPage");
+    // this.socket.connect();
+    // this.socket.emit('set-nickname', this.nickname);
+    this.navCtrl.push("ChatPage", { toUser: this.toUser });
+  }
 
   traveladvice(){
     this.navCtrl.push("TraveladvicePage");

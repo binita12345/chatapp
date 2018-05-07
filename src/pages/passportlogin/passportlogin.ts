@@ -18,7 +18,6 @@ export class PassportloginPage {
 	headerdisplay : any;
 	public passportloginForm:FormGroup;  
   error : any = '';
-  brag: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private formBuilder: FormBuilder
 ) {
