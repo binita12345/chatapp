@@ -40,7 +40,7 @@
 }
 
 .platform-ios .padding-top{
-    margin-top: 33px !important;
+    margin-top: 50px !important;
 }
 .platform-android .padding-top{
     margin-top: 45px !important;
@@ -94,7 +94,19 @@
 //         top: 20px !important;
 //     }
 // }
+.toolbar-ios {
+    // padding-top: 15px;
+    padding-left: 4px;
+    padding-right: 4px;
+    min-height: 61px;
+}
 .error-message{
     color: red;
     text-align: center;
 }
+.platform-ios .ios-header {
+  height:calc(56px + 20px);
+  min-height:calc(56px + 20px);
+  padding-top:20px;
+}
+

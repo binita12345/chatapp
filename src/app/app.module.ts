@@ -14,7 +14,11 @@ import { HeaderComponentModule } from '../components/header/header.module';
 
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { CallNumber } from '@ionic-native/call-number';
-const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
+import { Loader } from '../providers/loader/loader';
+import { EmojiProvider } from '../providers/emoji';
+import { HttpClientModule } from "@angular/common/http";
+
+// const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 // import { MenuPageModule } from '../pages/menu/menu';
 
 @NgModule({
@@ -24,10 +28,11 @@ const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
     PassportloginPage
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HeaderComponentModule,
-    SocketIoModule.forRoot(config)
+    // SocketIoModule.forRoot(config)
     // PassportloginPageModule
 
   ],
@@ -42,7 +47,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CallNumber
+    EmojiProvider,
+    CallNumber,
+    Loader
   ]
   
 })

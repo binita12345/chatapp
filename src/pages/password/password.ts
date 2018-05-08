@@ -52,5 +52,8 @@ export class PasswordPage {
       this.navCtrl.push("MenuPage");
     }
   }
+  resetpassword(){
+    this.navCtrl.push("ResetpasswordPage");
+  }
 
 }
