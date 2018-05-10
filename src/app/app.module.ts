@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -11,8 +12,8 @@ import { PassportloginPage } from '../pages/passportlogin/passportlogin';
 
 import { HeaderComponent } from '../components/header/header';
 import { HeaderComponentModule } from '../components/header/header.module';
-
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { FooterComponentModule } from '../components/footer/footer.module';
+// import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { CallNumber } from '@ionic-native/call-number';
 import { Loader } from '../providers/loader/loader';
 import { EmojiProvider } from '../providers/emoji';
@@ -32,6 +33,7 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HeaderComponentModule,
+    FooterComponentModule
     // SocketIoModule.forRoot(config)
     // PassportloginPageModule
 
@@ -44,6 +46,7 @@ import { HttpClientModule } from "@angular/common/http";
     HeaderComponent
   ],
   providers: [
+    Keyboard,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

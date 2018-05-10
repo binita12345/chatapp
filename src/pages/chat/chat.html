@@ -38,9 +38,15 @@
  
     	</ion-row>
   </ion-grid> -->
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-label stacked class="lbl">Travel Agent: {{toUser.name}}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <div class="message-wrap">
-
+    
     <div *ngFor="let msg of msgList"
          class="message"
          [class.left]=" msg.userId === toUser.id "

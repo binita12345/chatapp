@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
 
 // import { HomePage } from '../pages/home/home';
 import { PassportloginPage } from '../pages/passportlogin/passportlogin';
@@ -17,7 +18,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private keyboard: Keyboard) {
     this.initializeApp();
 
     this.pages = [
@@ -40,6 +41,16 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.statusBar.show();
+
+      // this.statusBar.styleDefault();
+
+      this.keyboard.onKeyboardShow().subscribe(() => {
+          document.body.classList.add('keyboard-is-open');
+      });
+
+      this.keyboard.onKeyboardHide().subscribe(() => {
+          document.body.classList.remove('keyboard-is-open');
+      });
       // this.statusBar.overlaysWebView(false); 
     });
 

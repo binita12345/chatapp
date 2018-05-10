@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PasswordPage } from './password';
+import { FooterComponentModule } from '../../components/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { PasswordPage } from './password';
   ],
   imports: [
     IonicPageModule.forChild(PasswordPage),
+    FooterComponentModule
   ],
 })
 export class PasswordPageModule {}
