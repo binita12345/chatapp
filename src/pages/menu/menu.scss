@@ -1,5 +1,7 @@
 page-menu {
-
+	.chatImg{
+		margin-bottom: -30px;
+	}
 	.coladvice{
 		background-color: #0071CE;
 		border-top-left-radius: 15px;
@@ -15,8 +17,8 @@ page-menu {
 	.para{
 		text-align: center;
 	    color: #ffffff;
-	    margin-top: -35%;
-	    font-size: 16px;
+	    margin-top: -42%;
+	    font-size: 18px;
 	}
 	// .btn{
 	// 	border-color: #8e8f91;
@@ -51,10 +53,9 @@ page-menu {
 	    margin-left: -10px;
 	}
 	.img {
-	    max-width: 110%;
+	    min-width: 110%;
 	    border: 0;
 	    margin-left: -17px;
-	    height: 200px;
 	}
 	.imgbtn{
 		background-color: transparent;
@@ -63,14 +64,14 @@ page-menu {
 	 //    margin-left: -7px;
 	    
 	}
-	.callbtn {
-	    background: linear-gradient(to bottom, rgba(255,104,22,1) 0%,rgba(237,75,0,1) 100%);
-	    display: inline-table;
-	    height: auto;
-	    width: 100%;
-	    padding: 10px 7px;
-	    border-radius: 0px 0px 0px 0px;
-	}
+	// .callbtn {
+	//     background: linear-gradient(to bottom, rgba(255,104,22,1) 0%,rgba(237,75,0,1) 100%);
+	//     display: inline-table;
+	//     height: auto;
+	//     width: 100%;
+	//     padding: 10px 7px;
+	//     border-radius: 0px 0px 0px 0px;
+	// }
 	button:hover{
 		opacity: 0.85;
 	}
@@ -101,42 +102,116 @@ page-menu {
 	    font-family: 'Din-Medium', Sans-Serif;
 	}
 
-	@media(min-width: 576px){
-		.img {
-		    min-width: 100%;
-		    border: 0;
-		    // margin-left: -2px;
-		    height: 100%;
-		}
+	ion-footer {
+	    left: 0;
+	    bottom: 42px;
+	    position: absolute;
+	    z-index: 10;
+	    display: block;
+	    width: 100%;
 	}
-	div.wrapper{
-		float:left; /* important */
-		position:relative; /* important(so we can absolutely position the description div */
+	.travelImg{
+	    margin-left: -6px;
+	    max-width: 110%;
+	    border: 0;
+	    border-bottom-left-radius: 5px;
+	    border-top-left-radius: 15px;
+	    margin-top: -6px;
 	}
-	div.description{
-		position:absolute; /* absolute position (so we can position it where we want)*/
-		bottom:0px; /* position will be on bottom */
-		left:0px;
-		width:100%;
-		/* styling bellow */
-		background-color:black;
-		color:white;
-		opacity:0.2; /* transparency */
-		filter:alpha(opacity=60); /* IE transparency */
+	.infoImg{
+		margin-left: -7px;
+	    max-width: 109%;
+	    border: 0;
+	    border-bottom-right-radius: 5px;
+	    border-top-right-radius: 15px;
+	    margin-top: -6px;
 	}
-	p.description_content{
-		padding: 9px;
-	    margin: 13px;
-	    margin-top: 22px;
-	    font-size: 15px;
-	    text-align: center;
+	.calldiv{
+		border: 1px solid #B3061E;
+		max-height: 80px;
+    	background-color: #ffffff;
 	}
-	p.description_content2{
-		padding: 8px;
-	    margin: 18px;
-	    margin-top: 37px;
-	    font-size: 14px;
-	    text-align: center;
+	.padding-top{
+		background-color: #F2F2F2;
+	}
+	.callImg{
+		text-align: center;
+		margin-top: 15px;
+	}
+	.callpara{
+		text-align: center !important;
+		color: #B3061E;
+	}
+	[col-xl-6] {
+ 	   padding: 6px;
+	}
+	.para1{
+		text-align: center;
+		font-size: 16px;
+		margin-top: 5px;
+	}
+	.para2{
+		font-size: 24px;font-weight: 400;
 	}
 
+	@media(min-width: 768px) and (max-width: 1024px){
+		.imgbtn{
+		   width: 100%;
+		}
+		.firstgrid{
+			height: 75%;
+		}
+		.travelImg{
+		    width: 104%;
+		}
+		.infoImg{
+		    min-width: 104%;
+		    margin-left: -8px;
+		}
+		.ipad768{
+			min-height: 40%;
+		}
+	}
+
+	@media(min-width: 1024px){
+		.infoImg{
+		    min-width: 103%;
+		    margin-left: -8px;
+		}
+	}
+
+	@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+
+	}
+
+	/* ----------- iPhone X ----------- */
+
+	/* Portrait and Landscape */
+	@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) { 
+
+	}
+
+	/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+	/* Portrait and Landscape */
+	@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) { 
+		.travelImg {
+			max-height: 100%;
+			min-width: 122%;
+		}
+		.infoImg {
+			max-height: 100%;
+			min-width: 108%;
+		}
+	}
+	@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) { 
+		.travelImg {
+		    margin-left: -5px;
+		    max-width: 108%;
+	    }
+	    .infoImg {
+			margin-left: -6px;
+    		max-width: 107%;
+		}
+	}
 }

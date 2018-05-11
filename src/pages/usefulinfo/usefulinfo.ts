@@ -31,15 +31,24 @@ export class UsefulinfoPage {
         "name": "India",
       }
     ];
-    this.currency = "currency"
-    this.capitalcity = "Capital City"
-    this.idiom = "Idiom"
+    // this.currency = "currency"
+    // this.capitalcity = "Capital City"
+    // this.idiom = "Idiom"
 
-    this.numone = "Phone Number 01"
-    this.numtwo = "Phone Number 02"
-    this.numthree = "Phone Number 03"
-    this.address = "Address"
-    this.emailadd = "Email Address 01"
+    // this.numone = "Phone Number 01"
+    // this.numtwo = "Phone Number 02"
+    // this.numthree = "Phone Number 03"
+    // this.address = "Address"
+    // this.emailadd = "Email Address 01"
+    this.currency = ""
+    this.capitalcity = ""
+    this.idiom = ""
+
+    this.numone = ""
+    this.numtwo = ""
+    this.numthree = ""
+    this.address = ""
+    this.emailadd = ""
 	}
 
  //  optionsFn() {

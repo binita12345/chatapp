@@ -182,6 +182,10 @@ export class ChatPage {
     console.log('ionViewDidLoad ChatPage');
   }
 
+  goback(){
+    this.navCtrl.pop();
+  }
+
   // sendMessage() {
   //   this.socket.emit('add-message', { text: this.message });
   //   this.message = '';

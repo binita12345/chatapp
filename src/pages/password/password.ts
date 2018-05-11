@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 /**
  * Generated class for the PasswordPage page.
  *
@@ -19,7 +20,7 @@ export class PasswordPage {
 	public passwordloginForm:FormGroup;  
   error : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private formBuilder: FormBuilder, public keyboard: Keyboard) {
   	this.passwordloginForm = formBuilder.group({
       password: ['', Validators.compose([Validators.required, Validators.required])]
     });
@@ -55,5 +56,9 @@ export class PasswordPage {
   resetpassword(){
     this.navCtrl.push("ResetpasswordPage");
   }
+
+  // keyboardCheck() {
+  //    return !this.keyboard.show();
+  // }
 
 }

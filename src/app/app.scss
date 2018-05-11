@@ -28,15 +28,15 @@
 }
 .toolbar-background-md {
     border-color: #b2b2b2;
-    background: #F3F3F3;
+    background: #F3F4F6;
 }
 .toolbar-background-ios {
-    background: #F3F3F3;
+    background: #F3F4F6;
 }
 
 .toolbar-background-wp {
     border-color: #b2b2b2;
-    background: #F3F3F3;
+    background: #F3F4F6;
 }
 
 .platform-ios .padding-top{
@@ -109,4 +109,19 @@
   min-height:calc(58px + 22px);
   padding-top:25px;
 }
+// body.keyboard-is-open ion-footer {
+//   display: none;
+// }
 
+body.keyboard-is-open .scroll-content {
+  margin-bottom: 0 !important;
+}
+
+body.keyboard-is-open .fixed-content {
+  margin-bottom: 0 !important;
+}
+
+body.keyboard-is-open .applyFooter{
+        display: none;
+        bottom: 0;
+}

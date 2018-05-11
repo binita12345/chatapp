@@ -86,8 +86,24 @@ page-passportlogin {
 	   	bottom: 0;
 	   	width: 100%;
 	}
-	body.keyboard-is-open .hideElementOnKeyboardShown{
-	    display: none;        
-	}
+	// body.keyboard-is-open .hideElementOnKeyboardShown{
+	//     display: none;        
+	// }
+	// body.keyboard-is-open ion-footer {
+	//   display: none;
+	// }
+
+	// body.keyboard-is-open .scroll-content {
+	//   margin-bottom: 0 !important;
+	// }
+
+	// body.keyboard-is-open .fixed-content {
+	//   margin-bottom: 0 !important;
+	// }
+
+	// body.keyboard-is-open .applyFooter{
+	//         display: none;
+	//         bottom: 0;
+	// }
 
 }

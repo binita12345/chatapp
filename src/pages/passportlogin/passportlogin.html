@@ -42,7 +42,8 @@
 		<!-- <br/><br/><br/> -->
 		<!-- <a href="http://gearlabs.cl/" onclick="window.open(this.href, '_blank', 'location=no'); return false;"><img class="footerlogo" src="assets/imgs/Marqueta/paer.png"></a> -->
 	</form>
-	<ion-footer class="footer hideElementOnKeyboardShown">
+	<!-- <ion-footer class="footer" *ngIf="keyboardCheck()"> -->
+	<ion-footer class="footer hideElementOnKeyboardShown hide-on-keyboard-open applyFooter">
 	  <a href="http://gearlabs.cl/" onclick="window.open(this.href, '_blank', 'location=no'); return false;"><img class="footerlogo" src="assets/imgs/Marqueta/paer.png"></a>
 	</ion-footer>
 	<!-- <footer class="footer hide-on-keyboard-open hideElementOnKeyboardShown" scroll="false" ></footer> -->

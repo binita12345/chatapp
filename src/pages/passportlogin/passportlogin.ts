@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 /**
  * Generated class for the PassportloginPage page.
  *
@@ -19,8 +20,7 @@ export class PassportloginPage {
 	public passportloginForm:FormGroup;  
   error : any = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private formBuilder: FormBuilder
-) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private formBuilder: FormBuilder, public keyboard: Keyboard) {
 
   	this.passportloginForm = formBuilder.group({
       usuario: ['', Validators.compose([Validators.required])]
@@ -63,5 +63,9 @@ export class PassportloginPage {
    //    this.errors = false;
    //  }
   }
+
+  // keyboardCheck() {
+  //    return !this.keyboard.show();
+  // }
 
 }

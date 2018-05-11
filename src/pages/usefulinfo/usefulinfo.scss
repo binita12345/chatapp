@@ -1,11 +1,23 @@
 page-usefulinfo {
+	.maincontent{
+		// margin-top: 70px !important;
+		height: 95vh;
+		padding: 30px!important;
+	}
 	.header6{
 		text-align: center;
-		color: grey;
+		color: #484848;
+		font-weight: 400;
 	}
-	.border{
+	.borderdrop{
 		    border: 1px solid;
 	}
+	.border{
+		border-right: 1px solid;
+	}
+	.bordertop{
+		border-top: 1px solid #C5C5C5;
+	} 
 	.item-datetime .label-md {
 	    color: #222;
 	}
@@ -13,7 +25,8 @@ page-usefulinfo {
 	    color: #222;
 	}
 	.iconfix{
-		border: 1px solid;
+		// border: 1px solid;
+		// height: 100%;
 		text-align: center;
 	}
 	// .iconsize{
@@ -43,10 +56,10 @@ page-usefulinfo {
 		line-height: 0rem;
 	}
 	.oddcolor{
-		background-color: #DCDBDC;
+		background-color: #EDECED;
 	}
 	.evencolor{
-		background-color: #F3F3F3;
+		background-color: #DFDFDF;
 	}
 	.item-md.item-block .item-inner {
 	    padding-right: 8px;
@@ -68,5 +81,8 @@ page-usefulinfo {
 	}
 	.select-wp .select-icon .select-icon-inner {
 	    color: #222;
+	}
+	[padding] h1:first-child, [padding] h2:first-child, [padding] h3:first-child, [padding] h4:first-child, [padding] h5:first-child, [padding] h6:first-child {
+	    margin-top: 10px;
 	}
 }	
