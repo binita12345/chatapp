@@ -83,7 +83,7 @@
         <ion-textarea type="text" placeholder="Enviar mansaje..." [(ngModel)]="message" class="textmsg"></ion-textarea>
       </ion-col>
       <ion-col col-1 col-xl-1>
-        <img src="assets/imgs/Marqueta/send-button.png">
+        <img src="assets/imgs/Marqueta/send-button.png" (click)="sendMessage()">
       </ion-col>
     </ion-row>
   </ion-grid>
