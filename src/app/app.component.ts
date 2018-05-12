@@ -6,6 +6,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 // import { HomePage } from '../pages/home/home';
 import { PassportloginPage } from '../pages/passportlogin/passportlogin';
+// import { NotlogedinPage } from '../pages/notlogedin/notlogedin';
 // import { MenuPageModule } from '../pages/menu/menu';
 
 @Component({
@@ -15,6 +16,7 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
   rootPage:any = PassportloginPage;
+  // rootPage:any = NotlogedinPage;
 
   pages: Array<{title: string, component: any, icon: any}>;
 
@@ -22,15 +24,9 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { icon: 'wifi', title: 'WiFi', component: ''},
-      { icon: 'md-bluetooth', title: 'Bluetooth', component: ''},
-      { icon: 'md-log-out', title: 'Log Out', component: ''},
-      // { icon: 'ios-home', title: 'INICIO', component: ''},
-      // { icon: 'md-qr-scanner', title: 'CONFIGURA TU EQUIPO', component: 'ConfiguraPage'},
-      // { icon: 'ios-download-outline', title: 'TECNOLOGÍAS PARA CELULARES', component: 'CelularesPage'},
-      // { icon: 'ios-film', title: 'TUTORIALES EN VIDEO', component: 'VideosPage'},
-      // { icon: 'information-circle', title: 'PREGUNTAS FRECUENTES', component: 'PreguntasPage'},
-      // { icon: 'chatbubbles', title: 'CHAT DE SOPORTE', component: 'ChatPage'}
+      { icon: 'ios-arrow-forward', title: 'Solicita tu viaje', component: 'ChatPage'},
+      { icon: 'ios-arrow-forward', title: 'Consejos para tu viaje', component: 'TraveladvicePage'},
+      { icon: 'ios-arrow-forward', title: 'Datos Utiles', component: 'UsefulinfoPage'},
     ];
   }
 

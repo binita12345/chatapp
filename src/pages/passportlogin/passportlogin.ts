@@ -64,6 +64,10 @@ export class PassportloginPage {
    //  }
   }
 
+  gotonotlogedin(){
+    this.navCtrl.push("NotlogedinPage");
+  }
+
   // keyboardCheck() {
   //    return !this.keyboard.show();
   // }

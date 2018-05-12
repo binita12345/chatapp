@@ -15,6 +15,44 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+// @font-face {
+//     font-family: '';
+//     src: url('../assets/fonts/DIN-RegularAlternate.ttf');
+// }
+
+//  ion-content, form, ion-item, ion-label, ion-input, p{
+//     font-family: '' !important;
+// }
+
+// @font-face {
+//   font-family: 'Raleway';
+//   src: url('../assets/fonts/Raleway.woff2') format('woff2');
+// }
+
+// * {
+//   font-family: Raleway;
+// }
+
+@font-face {
+  font-family: 'Din';
+  src: url('../assets/fonts/DINPro-Regular.e96653d.woff2') format('woff2');
+}
+
+* {
+  font-family: Din;
+}
+
+// DINPro-Regular.e96653d.woff2
+
+// @font-face {
+//     font-family: 'Raleway';
+//     src: url('../assets/fonts/raleway.woff2');
+// }
+
+// body, span, button, h1, h3, h5, h6, p, div, ion-item, ion-title, li, a, img, textarea, input, ion-content {
+//     font-family: 'Raleway', sans-serif !important;
+// }
+
 .padding-top {
   margin-top: 48px !important;
 }
@@ -50,24 +88,41 @@
 }
 
 .list-md .item-block .item-inner {
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #2E2B2C;
+}
+.list-wp .item-block .item-inner {
+    border-bottom: 1px solid #2E2B2C;
 }
 
 .platform-ios .list-md .item-block{
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #2E2B2C;
+}
+.platform-wp .list-md .item-block{
+    border-bottom: 1px solid #2E2B2C;
 }
 .list-ios > .item-block:first-child {
-    border-top: 0.55px solid grey;
+    border-top: 0.55px solid #2E2B2C;
 }
 .list-ios .item-block .item-inner {
-    border-bottom: 0.55px solid grey;
+    border-bottom: 0.55px solid #2E2B2C;
 }
 .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
-    border-bottom: 0.55px solid grey;
+    border-bottom: 0.55px solid #2E2B2C;
 }
 
 .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input {
     margin-left: 10px;
+}
+.no-scroll .scroll-content{
+     overflow: hidden;
+}
+
+.menubtn{
+    background-color: #2e2b2c;
+    color: white;
+    font-size: 18px;
+    padding-left: 5px;
+    border-bottom: 1px solid #706e6f;
 }
 
 // .platform-ios 

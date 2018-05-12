@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 // import { MenuPage } from '../pages/menu/menu';
 import { PassportloginPage } from '../pages/passportlogin/passportlogin';
+// import { NotlogedinPage } from '../pages/notlogedin/notlogedin';
 
 import { HeaderComponent } from '../components/header/header';
 import { HeaderComponentModule } from '../components/header/header.module';
@@ -18,6 +19,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { Loader } from '../providers/loader/loader';
 import { EmojiProvider } from '../providers/emoji';
 import { HttpClientModule } from "@angular/common/http";
+import { RestProvider } from '../providers/rest/rest';
 
 // const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 // import { MenuPageModule } from '../pages/menu/menu';
@@ -26,7 +28,8 @@ import { HttpClientModule } from "@angular/common/http";
   declarations: [
     MyApp,
     HomePage,
-    PassportloginPage
+    PassportloginPage,
+    // NotlogedinPage
   ],
   imports: [
     HttpClientModule,
@@ -43,6 +46,7 @@ import { HttpClientModule } from "@angular/common/http";
     MyApp,
     HomePage,
     PassportloginPage,
+    // NotlogedinPage,
     HeaderComponent
   ],
   providers: [
@@ -52,7 +56,8 @@ import { HttpClientModule } from "@angular/common/http";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EmojiProvider,
     CallNumber,
-    Loader
+    Loader,
+    RestProvider
   ]
   
 })

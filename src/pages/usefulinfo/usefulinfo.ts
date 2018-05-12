@@ -59,5 +59,8 @@ export class UsefulinfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad UsefulinfoPage');
   }
+  goback(){
+    this.navCtrl.pop();
+  }
 
 }

@@ -71,6 +71,9 @@ page-passportlogin {
 	.button-wp.activated{
 		background-color: #CB0D12;
 	}
+	.btn:hover{
+		background-color: #CB0D12 !important;
+	}
 	.label-md[stacked] {
 	    font-size: 20px !important;
 	}
@@ -86,6 +89,10 @@ page-passportlogin {
 	   	bottom: 0;
 	   	width: 100%;
 	}
+
+	$list-ios-activated-background-color: #CB0D12;
+	$list-md-activated-background-color: #CB0D12;
+	$list-wp-activated-background-color: #CB0D12;
 	// body.keyboard-is-open .hideElementOnKeyboardShown{
 	//     display: none;        
 	// }

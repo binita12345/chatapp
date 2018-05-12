@@ -1,0 +1,79 @@
+<!--
+  Generated template for the MenuPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>Demo Chat</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+<ion-header>
+  <ion-navbar>   
+  	<ion-buttons text-center>
+		<button ion-button style="max-width: 175px;"> <img src="assets/imgs/Marqueta/logo.png"></button>
+	</ion-buttons>
+   
+    <!-- <ion-title text-center> {{title}} </ion-title> -->
+    <!-- <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+  <ion-buttons end>
+		<button ion-button menuToggle> <img src="assets/imgs/Marqueta/menu.png"></button>
+	</ion-buttons>
+	<!-- <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button> -->
+  </ion-navbar>
+</ion-header> 
+<!-- <header title=""> </header>  -->
+
+<ion-content class="notlogconten">
+	<ion-grid class="firstgrid">
+		<ion-row>
+			<ion-col col-12 col-xl-12 col-lg-12 class="chatImg">
+				<button class="imgbtn"><img src="assets/imgs/Marqueta/cdqw.jpg" class="img" (click)="chatting()"><button ion-button class="aquibtn" (click)="chatting()">AQUI</button></button>
+			</ion-col>
+		</ion-row>
+		<ion-row padding class="ipad768">
+			<!-- <ion-col col-12 col-xl-12>
+				<ion-grid>
+					<ion-row> -->
+						<ion-col col-6 col-xl-6 col-lg-6 col-md-6 (click)="traveladvice()" class="coladvice">
+							<img src="assets/imgs/Marqueta/ascsac.jpg" class="travelImg">
+							<p class="para">Consejos <br> para tu viaje</p>
+						</ion-col>
+						<ion-col col-6 col-xl-6 col-lg-6 col-md-6 (click)="usefulinfo()" class="colinfo">
+							<img src="assets/imgs/Marqueta/qqq.jpg" class="infoImg">
+							<p class="para">Datos utiles</p>
+						</ion-col>
+					<!-- </ion-row>
+				</ion-grid>
+			</ion-col> -->
+		</ion-row>
+	</ion-grid>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-12 col-xl-12>
+				<div class="calldiv">
+					<ion-grid (click)="phone()">
+						<ion-row>
+							<ion-col col-3 col-xl-3 class="callImg">
+								<img src="assets/imgs/Marqueta/coll.png">
+							</ion-col>
+							<ion-col col-6 col-xl-6 class="callpara">
+									<p class="para1"><b class="para2">SOS</b> <br/>para tu viaje</p>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-footer class="footer hideElementOnKeyboardShown hide-on-keyboard-open applyFooter">
+	  <a href="http://gearlabs.cl/" onclick="window.open(this.href, '_blank', 'location=no'); return false;"><img class="footerlogo" src="assets/imgs/Marqueta/paer.png"></a>
+	</ion-footer>
+</ion-content>

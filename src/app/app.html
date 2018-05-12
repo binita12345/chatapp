@@ -2,10 +2,10 @@
 
 <ion-menu [content]="content"  side="left" persistent="true">
 
-  <ion-content style="background-color: grey;">
-    <ion-list >
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style="background-color: grey;color: white;font-size: 14px;">
-        {{p.title}} <ion-icon [name]="p.icon" item-start style="font-size: 23px;"></ion-icon> 
+  <ion-content style="background-color: #2e2b2c;">
+    <ion-list>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="menubtn no-scroll">
+        {{p.title}} <ion-icon [name]="p.icon" item-start style="font-size: 28px;color: #CB0D12"></ion-icon> 
       </button>
       <!-- <button (click)="logout()" menuClose ion-button full large icon-right  style="font-weight:500;color:#FFFFFF;text-transform:none;font-size: 16px;" color="dark-red" type="button" class="logoutBtn">
               Log out <ion-icon name="md-log-out"></ion-icon>

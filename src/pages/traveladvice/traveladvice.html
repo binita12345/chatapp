@@ -26,18 +26,18 @@
 			</ion-col>
 		</ion-row>
 	</ion-grid>
-	<h6 class="header6">Titulo seccion aqui</h6>
+	<h6 class="header6">Consejos para tu viaje</h6>
 	
 	<ion-grid>
 		<ion-row>
 			<ion-col col-12 col-xl-12>
-				<ion-list *ngFor="let item of items">
+				<ion-list *ngFor="let advice of advices">
 					<!-- {{item | json}} -->
 				  <ion-item class="itemlist">
 				    <ion-thumbnail item-start>
-				      <img src="{{item.image}}">
+				      <img src="{{advice.image}}">
 				    </ion-thumbnail>
-				    <p class="para">{{item.parag}}</p>
+				    <p class="para">{{advice.parag}}</p>
 				  </ion-item>
 				</ion-list>
 			</ion-col>
