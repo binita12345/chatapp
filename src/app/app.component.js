@@ -11,20 +11,23 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
 // import { HomePage } from '../pages/home/home';
 import { PassportloginPage } from '../pages/passportlogin/passportlogin';
+// import { NotlogedinPage } from '../pages/notlogedin/notlogedin';
 // import { MenuPageModule } from '../pages/menu/menu';
 var MyApp = /** @class */ (function () {
-    function MyApp(platform, statusBar, splashScreen) {
+    function MyApp(platform, statusBar, splashScreen, keyboard) {
         this.platform = platform;
         this.statusBar = statusBar;
         this.splashScreen = splashScreen;
+        this.keyboard = keyboard;
         this.rootPage = PassportloginPage;
         this.initializeApp();
         this.pages = [
-            { icon: 'wifi', title: 'WiFi', component: '' },
-            { icon: 'md-bluetooth', title: 'Bluetooth', component: '' },
-            { icon: 'md-log-out', title: 'Log Out', component: '' },
+            { icon: 'ios-arrow-forward', title: 'Solicita tu viaje', component: 'ChatPage' },
+            { icon: 'ios-arrow-forward', title: 'Consejos para tu viaje', component: 'TraveladvicePage' },
+            { icon: 'ios-arrow-forward', title: 'Datos Utiles', component: 'UsefulinfoPage' },
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -34,7 +37,24 @@ var MyApp = /** @class */ (function () {
             // Here you can do any higher level native things you might need.
             _this.statusBar.styleDefault();
             _this.splashScreen.hide();
+            _this.statusBar.show();
+            // this.statusBar.styleDefault();
+            _this.keyboard.onKeyboardShow().subscribe(function () {
+                document.body.classList.add('keyboard-is-open');
+            });
+            _this.keyboard.onKeyboardHide().subscribe(function () {
+                document.body.classList.remove('keyboard-is-open');
+            });
+            // this.statusBar.overlaysWebView(false); 
         });
+        // if (this.platform.is('ios')) {
+        //   // This will only print when on iOS
+        //   console.log('I am an iOS device!');
+        //   this.statusBar.overlaysWebView(false);
+        // } else if (this.platform.is('android')) {
+        //   this.statusBar.overlaysWebView(true);
+        //     console.log('I am an android device!');
+        // }
     };
     MyApp.prototype.openPage = function (page) {
         if (page.component) {
@@ -49,7 +69,7 @@ var MyApp = /** @class */ (function () {
         Component({
             templateUrl: 'app.html'
         }),
-        __metadata("design:paramtypes", [Platform, StatusBar, SplashScreen])
+        __metadata("design:paramtypes", [Platform, StatusBar, SplashScreen, Keyboard])
     ], MyApp);
     return MyApp;
 }());

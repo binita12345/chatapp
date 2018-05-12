@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
+import { RestProvider } from '../../providers/rest/rest';
 /**
  * Generated class for the PassportloginPage page.
  *
@@ -17,13 +19,16 @@ import { FormBuilder, Validators } from '@angular/forms';
  * Ionic pages and navigation.
  */
 var PassportloginPage = /** @class */ (function () {
-    function PassportloginPage(navCtrl, navParams, plt, formBuilder) {
+    function PassportloginPage(navCtrl, navParams, plt, formBuilder, keyboard, restProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.plt = plt;
         this.formBuilder = formBuilder;
+        this.keyboard = keyboard;
+        this.restProvider = restProvider;
+        this.error = '';
         this.passportloginForm = formBuilder.group({
-            usuario: ['', Validators.compose([Validators.required, Validators.required])]
+            usuario: ['', Validators.compose([Validators.required])]
         });
         if (this.plt.is('ios')) {
             // This will only print when on iOS
@@ -38,8 +43,37 @@ var PassportloginPage = /** @class */ (function () {
     PassportloginPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad PassportloginPage');
     };
+    PassportloginPage.prototype.onChange = function () {
+        if (this.passportloginForm.value.usuario.length > -1) {
+            this.error = '';
+        }
+    };
     PassportloginPage.prototype.passportlogin = function () {
-        this.navCtrl.push("PasswordPage");
+        var _this = this;
+        console.log("login by passport");
+        console.log("rut data", this.passportloginForm.value.usuario);
+        var rutData = this.passportloginForm.value.usuario;
+        console.log(this.passportloginForm.value.usuario.length);
+        if (this.passportloginForm.value.usuario == '' || this.passportloginForm.value.usuario.length == 0) {
+            this.error = "please enter your RUT Usuario";
+            // this.error = true;
+        }
+        else {
+            // this.error = false;
+            console.log("rutData", rutData);
+            this.restProvider.getRut(rutData)
+                .then(function (data) {
+                _this.rut = data;
+                console.log(_this.rut);
+                _this.navCtrl.push("PasswordPage", { rut: rutData });
+            });
+        }
+        // if(this.passportloginForm.value.usuario.length > 0){
+        //    this.errors = false;
+        //  }
+    };
+    PassportloginPage.prototype.gotonotlogedin = function () {
+        this.navCtrl.push("NotlogedinPage");
     };
     PassportloginPage = __decorate([
         IonicPage(),
@@ -47,7 +81,8 @@ var PassportloginPage = /** @class */ (function () {
             selector: 'page-passportlogin',
             templateUrl: 'passportlogin.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, Platform, FormBuilder])
+        __metadata("design:paramtypes", [NavController, NavParams, Platform,
+            FormBuilder, Keyboard, RestProvider])
     ], PassportloginPage);
     return PassportloginPage;
 }());

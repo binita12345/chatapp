@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
+import { RestProvider } from '../../providers/rest/rest';
 /**
  * Generated class for the PasswordPage page.
  *
@@ -19,8 +20,14 @@ export class PasswordPage {
 	headerdisplay : any;
 	public passwordloginForm:FormGroup;  
   error : any;
+  rut : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private formBuilder: FormBuilder, public keyboard: Keyboard) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, 
+              private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider) {
+
+    this.rut = this.navParams.get('rut');
+    console.log("this.rut", this.rut);
+
   	this.passwordloginForm = formBuilder.group({
       password: ['', Validators.compose([Validators.required, Validators.required])]
     });
@@ -47,10 +54,22 @@ export class PasswordPage {
   }
 
   passwordlogin(){
+    console.log("this.passwordloginForm.value.password", this.passwordloginForm.value.password);
+
+    let clave : any = this.passwordloginForm.value.password;
+    console.log("clave", clave);
+    console.log("rut", this.rut);
+
     if(this.passwordloginForm.value.password == ''){
       this.error = "please enter your Password";
     } else{
-      this.navCtrl.push("MenuPage");
+      this.restProvider.getClaveData(this.rut, clave)
+      .then(data => {
+        // this.rut = data;
+        console.log("clave api data", data);
+        this.navCtrl.push("MenuPage");
+      });
+      
     }
   }
   resetpassword(){

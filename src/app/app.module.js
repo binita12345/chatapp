@@ -9,15 +9,22 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HeaderColor } from '@ionic-native/header-color';
+import { Keyboard } from '@ionic-native/keyboard';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 // import { MenuPage } from '../pages/menu/menu';
 import { PassportloginPage } from '../pages/passportlogin/passportlogin';
+// import { NotlogedinPage } from '../pages/notlogedin/notlogedin';
 import { HeaderComponent } from '../components/header/header';
 import { HeaderComponentModule } from '../components/header/header.module';
-import { SocketIoModule } from 'ng-socket-io';
-var config = { url: 'http://localhost:3001', options: {} };
+import { FooterComponentModule } from '../components/footer/footer.module';
+// import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { CallNumber } from '@ionic-native/call-number';
+import { Loader } from '../providers/loader/loader';
+import { EmojiProvider } from '../providers/emoji';
+import { HttpClientModule } from "@angular/common/http";
+import { RestProvider } from '../providers/rest/rest';
+// const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 // import { MenuPageModule } from '../pages/menu/menu';
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -27,13 +34,15 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 MyApp,
                 HomePage,
-                PassportloginPage
+                PassportloginPage,
             ],
             imports: [
+                HttpClientModule,
                 BrowserModule,
                 IonicModule.forRoot(MyApp),
                 HeaderComponentModule,
-                SocketIoModule.forRoot(config)
+                FooterComponentModule
+                // SocketIoModule.forRoot(config)
                 // PassportloginPageModule
             ],
             bootstrap: [IonicApp],
@@ -41,13 +50,18 @@ var AppModule = /** @class */ (function () {
                 MyApp,
                 HomePage,
                 PassportloginPage,
+                // NotlogedinPage,
                 HeaderComponent
             ],
             providers: [
+                Keyboard,
                 StatusBar,
                 SplashScreen,
                 { provide: ErrorHandler, useClass: IonicErrorHandler },
-                HeaderColor
+                EmojiProvider,
+                CallNumber,
+                Loader,
+                RestProvider
             ]
         })
     ], AppModule);

@@ -13,17 +13,15 @@
 </ion-header>
 
 
-<ion-content class="padding-bottom has-header" scroll="false" >
-	<form [formGroup]="passportloginForm" (submit)="passportlogin()" novalidate id="logIn-form1" class="list center-form">
+<ion-content class="padding-bottom has-header" scrollY="false" >
+	<form [formGroup]="passportloginForm" (submit)="passportlogin()" novalidate class="list center-form">
 		<img src="assets/imgs/Marqueta/logo.png" class="center loginimg">
 		<br/>
 		<br/>
 		<br/>
 		<br/>
-		<br/>
-		
 	  	<ion-item class="itemclr">
-	    	<ion-label stacked>Rut Usuario</ion-label>
+	    	<ion-label stacked>Rut Usuario (ex. 9456789-K, 18934567-4)</ion-label>
 	    	<ion-input formControlName="usuario" type="text" 
         	[class.invalid]="!passportloginForm.controls.usuario.valid && passportloginForm.controls.usuario.dirty" (keypress)="onChange($event)"></ion-input>
 	  	</ion-item>
@@ -35,7 +33,6 @@
 			{{error}}
 		</div>
 	    <br/>
-		<br/>
 		<br/>
 		<br/>
 		<button ion-button type="submit" class="center btn">continuar</button>

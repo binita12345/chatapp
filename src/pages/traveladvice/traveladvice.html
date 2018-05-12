@@ -31,13 +31,13 @@
 	<ion-grid>
 		<ion-row>
 			<ion-col col-12 col-xl-12>
-				<ion-list *ngFor="let advice of advices">
-					<!-- {{item | json}} -->
+				<ion-list *ngFor="let advice of adviceArray">
+					<!-- {{advice | json}} -->
 				  <ion-item class="itemlist">
 				    <ion-thumbnail item-start>
-				      <img src="{{advice.image}}">
+				      <img src="{{advice.imagen}}">
 				    </ion-thumbnail>
-				    <p class="para">{{advice.parag}}</p>
+				    <p class="para">{{advice.texto}}</p>
 				  </ion-item>
 				</ion-list>
 			</ion-col>

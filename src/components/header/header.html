@@ -6,17 +6,28 @@
 
 <ion-header>
   <ion-navbar>   
-  	<ion-buttons text-center>
-		<button ion-button> <img src="assets/imgs/Marqueta/logo_2.png"></button>
-	</ion-buttons>
-   
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2 col-xl-2>
+          <ion-buttons>
+            <button ion-button menuToggle> <img src="assets/imgs/Marqueta/menu.png"></button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col col-8 col-xl-8>
+        	<ion-buttons text-center>
+        		<button ion-button> <img src="assets/imgs/Marqueta/logo_2.png"></button>
+        	</ion-buttons>
+        </ion-col>
+        <ion-col col-2 col-xl-2>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+       
     <!-- <ion-title text-center> {{title}} </ion-title> -->
     <!-- <button ion-button menuToggle end>
       <ion-icon name="menu"></ion-icon>
     </button> -->
-  <ion-buttons end>
-		<button ion-button menuToggle> <img src="assets/imgs/Marqueta/menu.png"></button>
-	</ion-buttons>
+  
 	<!-- <button ion-button menuToggle icon-only>
       <ion-icon name='menu'></ion-icon>
     </button> -->

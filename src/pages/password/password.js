@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
+import { RestProvider } from '../../providers/rest/rest';
 /**
  * Generated class for the PasswordPage page.
  *
@@ -17,11 +19,15 @@ import { FormBuilder, Validators } from '@angular/forms';
  * Ionic pages and navigation.
  */
 var PasswordPage = /** @class */ (function () {
-    function PasswordPage(navCtrl, navParams, plt, formBuilder) {
+    function PasswordPage(navCtrl, navParams, plt, formBuilder, keyboard, restProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.plt = plt;
         this.formBuilder = formBuilder;
+        this.keyboard = keyboard;
+        this.restProvider = restProvider;
+        this.rut = this.navParams.get('rut');
+        console.log("this.rut", this.rut);
         this.passwordloginForm = formBuilder.group({
             password: ['', Validators.compose([Validators.required, Validators.required])]
         });
@@ -38,8 +44,23 @@ var PasswordPage = /** @class */ (function () {
     PasswordPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad PasswordPage');
     };
+    PasswordPage.prototype.onChange = function () {
+        if (this.passwordloginForm.value.password.length > -1) {
+            this.error = '';
+        }
+    };
     PasswordPage.prototype.passwordlogin = function () {
-        this.navCtrl.push("MenuPage");
+        console.log("this.passwordloginForm.value.password", this.passwordloginForm.value.password);
+        var clave = ;
+        if (this.passwordloginForm.value.password == '') {
+            this.error = "please enter your Password";
+        }
+        else {
+            this.navCtrl.push("MenuPage");
+        }
+    };
+    PasswordPage.prototype.resetpassword = function () {
+        this.navCtrl.push("ResetpasswordPage");
     };
     PasswordPage = __decorate([
         IonicPage(),
@@ -47,7 +68,8 @@ var PasswordPage = /** @class */ (function () {
             selector: 'page-password',
             templateUrl: 'password.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, Platform, FormBuilder])
+        __metadata("design:paramtypes", [NavController, NavParams, Platform,
+            FormBuilder, Keyboard, RestProvider])
     ], PasswordPage);
     return PasswordPage;
 }());

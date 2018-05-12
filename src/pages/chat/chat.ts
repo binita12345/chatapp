@@ -183,7 +183,7 @@ export class ChatPage {
   }
 
   goback(){
-    this.navCtrl.pop();
+    this.navCtrl.push("MenuPage");
   }
 
   // sendMessage() {

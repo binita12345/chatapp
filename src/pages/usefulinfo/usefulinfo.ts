@@ -60,7 +60,8 @@ export class UsefulinfoPage {
     console.log('ionViewDidLoad UsefulinfoPage');
   }
   goback(){
-    this.navCtrl.pop();
+    // this.navCtrl.pop();
+    this.navCtrl.push("MenuPage");
   }
 
 }

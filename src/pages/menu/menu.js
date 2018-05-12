@@ -9,7 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Socket } from 'ng-socket-io';
+// import { Socket } from 'ng-socket-io';
+import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the MenuPage page.
  *
@@ -17,12 +18,19 @@ import { Socket } from 'ng-socket-io';
  * Ionic pages and navigation.
  */
 var MenuPage = /** @class */ (function () {
-    function MenuPage(navCtrl, navParams, socket) {
+    // nickname = 'Binita Doriwala';
+    // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private callNumber: CallNumber) {
+    function MenuPage(navCtrl, navParams, callNumber) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.socket = socket;
-        this.nickname = 'Binita Doriwala';
+        this.callNumber = callNumber;
+        this.toUser = {
+            toUserId: '210000198410281948',
+            toUserName: 'Hancock'
+        };
     }
+    // constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber) {
+    // }
     MenuPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad MenuPage');
     };
@@ -30,14 +38,14 @@ var MenuPage = /** @class */ (function () {
     // 	console.log("go to configura");
     // 	this.navCtrl.push("ConfiguraPage");
     // }
-    MenuPage.prototype.celulares = function () {
-        console.log("go to CelularesPage");
-        this.navCtrl.push("CelularesPage");
-    };
-    MenuPage.prototype.videos = function () {
-        console.log("go to VideosPage");
-        this.navCtrl.push("VideosPage");
-    };
+    // celulares(){
+    //   console.log("go to CelularesPage");
+    //   this.navCtrl.push("CelularesPage");
+    // }
+    // videos(){
+    //   console.log("go to VideosPage");
+    //   this.navCtrl.push("VideosPage");
+    // }
     // preguntas(){
     //   console.log("go to PreguntasPage");
     //   this.navCtrl.push("PreguntasPage");
@@ -48,9 +56,22 @@ var MenuPage = /** @class */ (function () {
     // }
     MenuPage.prototype.chatting = function () {
         console.log("go to chattingPage");
-        this.socket.connect();
-        this.socket.emit('set-nickname', this.nickname);
-        this.navCtrl.push("ChatPage", { nickname: this.nickname });
+        // this.socket.connect();
+        // this.socket.emit('set-nickname', this.nickname);
+        // this.navCtrl.push("ChatPage");
+        // this.navCtrl.push("ChatPage", { nickname: this.nickname });
+        this.navCtrl.push("ChatPage", { toUser: this.toUser });
+    };
+    MenuPage.prototype.traveladvice = function () {
+        this.navCtrl.push("TraveladvicePage");
+    };
+    MenuPage.prototype.usefulinfo = function () {
+        this.navCtrl.push("UsefulinfoPage");
+    };
+    MenuPage.prototype.phone = function () {
+        this.callNumber.callNumber("8734814110", true)
+            .then(function () { return console.log('Launched dialer!'); })
+            .catch(function () { return console.log('Error launching dialer'); });
     };
     MenuPage = __decorate([
         IonicPage(),
@@ -58,7 +79,7 @@ var MenuPage = /** @class */ (function () {
             selector: 'page-menu',
             templateUrl: 'menu.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, Socket])
+        __metadata("design:paramtypes", [NavController, NavParams, CallNumber])
     ], MenuPage);
     return MenuPage;
 }());

@@ -16,15 +16,16 @@ import { RestProvider } from '../../providers/rest/rest';
 export class TraveladvicePage {
 
   advices: any;
+  adviceArray : any = [];
 	// advices: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
-  	this.advices = [
-	    {image: "assets/imgs/Marqueta/12.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
-	    {image: "assets/imgs/Marqueta/13.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
-	    {image: "assets/imgs/Marqueta/14.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
-	    {image: "assets/imgs/Marqueta/15.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"}
-	];
+ //  	this.advices = [
+	//     {image: "assets/imgs/Marqueta/12.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
+	//     {image: "assets/imgs/Marqueta/13.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
+	//     {image: "assets/imgs/Marqueta/14.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
+	//     {image: "assets/imgs/Marqueta/15.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"}
+	// ];
 
     this.getTravelAdviceData();
   }
@@ -34,15 +35,23 @@ export class TraveladvicePage {
   }
 
   goback(){
-    this.navCtrl.pop();
+    // this.navCtrl.pop();
+    this.navCtrl.push("MenuPage");
   }
 
   getTravelAdviceData() {
-    // this.restProvider.getTravelAdvice()
-    // .then(data => {
-    //   this.advices = data;
-    //   console.log(this.advices);
-    // });
+    this.restProvider.getTravelAdvice()
+    .then(data => {
+      let serviceData : any =  data['consejosviaje'];
+      console.log("ts data", serviceData);
+      // this.advices = data;
+      // console.log(this.advices);
+      // for(let advice of this.advices){
+      //   console.log("for loop advice", advice);
+      // }
+      this.adviceArray = serviceData;
+      // console.log(this.adviceArray);
+    });
   }
 
 }
