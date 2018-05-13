@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { ChatService, ChatMessage, UserInfo } from "../../providers/chat-service";
 import { Events, Content } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the ChatPage page.
  *
@@ -29,10 +30,16 @@ export class ChatPage {
   toUser: UserInfo;
   editorMsg = '';
   showEmojiPicker = false;
+  getdata : any;
 
   // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private toastCtrl: ToastController) {
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController,private chatService: ChatService,
-              private events: Events) {
+              private events: Events, public storage: Storage) {
+
+    this.storage.get('rutdata').then((getdata) => {
+      console.log('getdata ' +getdata);
+      this.getdata = getdata;
+    });
 
     this.toUser = {
       id: navParams.get('toUserId'),
@@ -183,8 +190,28 @@ export class ChatPage {
   }
 
   goback(){
-    this.navCtrl.push("MenuPage");
+    // this.navCtrl.pop();
+    // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+    // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+    if(this.getdata == ''){
+      this.navCtrl.push("NotlogedinPage");
+    } else {
+      this.navCtrl.push("MenuPage");
+    }
+    // this.navCtrl.push("MenuPage");
+    // this.navCtrl.popToRoot();
+    // this.navCtrl.canGoBack();
   }
+
+  // goback(){
+  //   // this.navCtrl.push("MenuPage");
+  //   this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+  //   // this.navCtrl.popToRoot();
+  //   // this.navCtrl.canGoBack();
+  //   // this.navCtrl.pop();
+  //   // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+  //   // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+  // }
 
   // sendMessage() {
   //   this.socket.emit('add-message', { text: this.message });

@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the UsefulinfoPage page.
  *
@@ -16,11 +17,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 var UsefulinfoPage = /** @class */ (function () {
-    function UsefulinfoPage(navCtrl, navParams) {
+    function UsefulinfoPage(navCtrl, navParams, storage) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.storage = storage;
         // countries : any;
         this.options = [];
+        this.storage.get('rutdata').then(function (getdata) {
+            console.log('getdata ' + getdata);
+            _this.getdata = getdata;
+        });
         this.options = [
             {
                 "name": "India",
@@ -51,8 +58,19 @@ var UsefulinfoPage = /** @class */ (function () {
         console.log('ionViewDidLoad UsefulinfoPage');
     };
     UsefulinfoPage.prototype.goback = function () {
+        if (this.getdata == '') {
+            this.navCtrl.push("NotlogedinPage");
+        }
+        else {
+            this.navCtrl.push("MenuPage");
+        }
         // this.navCtrl.pop();
-        this.navCtrl.push("MenuPage");
+        // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+        // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+        // this.navCtrl.push("MenuPage");
+        // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+        // this.navCtrl.popToRoot();
+        // this.navCtrl.canGoBack();
     };
     UsefulinfoPage = __decorate([
         IonicPage(),
@@ -60,7 +78,7 @@ var UsefulinfoPage = /** @class */ (function () {
             selector: 'page-usefulinfo',
             templateUrl: 'usefulinfo.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams])
+        __metadata("design:paramtypes", [NavController, NavParams, Storage])
     ], UsefulinfoPage);
     return UsefulinfoPage;
 }());

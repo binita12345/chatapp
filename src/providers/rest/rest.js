@@ -28,15 +28,17 @@ var RestProvider = /** @class */ (function () {
     // second api for TravelAdvice /traerconsejosdeviaje/status
     // this service to get all travel advice 
     // This service returns a JSON with all the travel advice in JSON format, with links to the image type contents.
-    //  getTravelAdvice() {
-    //   return new Promise(resolve => {
-    //     this.http.get(this.apiUrl+'/traerconsejosdeviaje').subscribe(data => {
-    //       resolve(data);
-    //     }, err => {
-    //       console.log(err);
-    //     });
-    //   });
-    // }
+    RestProvider.prototype.getTravelAdvice = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get('http://sensussoft.com/ionic/consejosdeviaje.php').subscribe(function (data) {
+                resolve(data);
+                console.log("travel advice data", data);
+            }, function (err) {
+                console.log(err);
+            });
+        });
+    };
     // // this api Validates the “RUT*:”and returns the some characteristics/parameters of the user.
     // // This service returns a JSON with the characteristics of the user.
     // // *RUT = is a number that identifies a chilean national, is a 7-8 sequence number followed by a dash and a number from 0 to 9 or ‘K’. examples: 9456789-K 18934567-4
@@ -53,12 +55,12 @@ var RestProvider = /** @class */ (function () {
             });
         });
     };
-    RestProvider.prototype.getClaveData = function (data) {
+    RestProvider.prototype.getClaveData = function (rut, clave) {
         var _this = this;
-        console.log("service clave data" + data);
+        console.log("service clave data", rut, clave);
         return new Promise(function (resolve, reject) {
             // this.http.get(this.apiUrl+'/autenticacion')
-            _this.http.get('http://192.168.0.120:8080/ionic/Autenticacion.php?rut=' + data + '&&clave=' + )
+            _this.http.get('http://192.168.0.120:8080/ionic/Autenticacion.php?rut=' + rut + '&&clave=' + clave)
                 .subscribe(function (res) {
                 resolve(res);
             }, function (err) {

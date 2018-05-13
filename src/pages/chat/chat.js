@@ -12,6 +12,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 // import { Socket } from 'ng-socket-io';
 import { ChatService } from "../../providers/chat-service";
 import { Events, Content } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the ChatPage page.
  *
@@ -20,16 +21,21 @@ import { Events, Content } from 'ionic-angular';
  */
 var ChatPage = /** @class */ (function () {
     // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private toastCtrl: ToastController) {
-    function ChatPage(navCtrl, navParams, toastCtrl, chatService, events) {
+    function ChatPage(navCtrl, navParams, toastCtrl, chatService, events, storage) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.toastCtrl = toastCtrl;
         this.chatService = chatService;
         this.events = events;
+        this.storage = storage;
         this.msgList = [];
         this.editorMsg = '';
         this.showEmojiPicker = false;
+        this.storage.get('rutdata').then(function (getdata) {
+            console.log('getdata ' + getdata);
+            _this.getdata = getdata;
+        });
         this.toUser = {
             id: navParams.get('toUserId'),
             name: navParams.get('toUserName')
@@ -166,7 +172,18 @@ var ChatPage = /** @class */ (function () {
         console.log('ionViewDidLoad ChatPage');
     };
     ChatPage.prototype.goback = function () {
-        this.navCtrl.push("MenuPage");
+        // this.navCtrl.pop();
+        // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+        // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+        if (this.getdata == '') {
+            this.navCtrl.push("NotlogedinPage");
+        }
+        else {
+            this.navCtrl.push("MenuPage");
+        }
+        // this.navCtrl.push("MenuPage");
+        // this.navCtrl.popToRoot();
+        // this.navCtrl.canGoBack();
     };
     __decorate([
         ViewChild(Content),
@@ -183,7 +200,7 @@ var ChatPage = /** @class */ (function () {
             templateUrl: 'chat.html',
         }),
         __metadata("design:paramtypes", [NavController, NavParams, ToastController, ChatService,
-            Events])
+            Events, Storage])
     ], ChatPage);
     return ChatPage;
 }());

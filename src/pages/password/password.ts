@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { RestProvider } from '../../providers/rest/rest';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the PasswordPage page.
  *
@@ -23,10 +24,12 @@ export class PasswordPage {
   rut : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, 
-              private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider) {
+              private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider, public storage: Storage) {
 
     this.rut = this.navParams.get('rut');
     console.log("this.rut", this.rut);
+
+    // this.storage.set('rutdata', this.rut);
 
   	this.passwordloginForm = formBuilder.group({
       password: ['', Validators.compose([Validators.required, Validators.required])]
@@ -59,6 +62,13 @@ export class PasswordPage {
     let clave : any = this.passwordloginForm.value.password;
     console.log("clave", clave);
     console.log("rut", this.rut);
+
+    // let loginData = {
+    //   'rut' : this.rut,
+    //   'clave' : clave
+    // }
+
+    // this.storage.set('logData', loginData);
 
     if(this.passwordloginForm.value.password == ''){
       this.error = "please enter your Password";

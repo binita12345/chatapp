@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -17,11 +17,12 @@ import { PassportloginPage } from '../pages/passportlogin/passportlogin';
 // import { NotlogedinPage } from '../pages/notlogedin/notlogedin';
 // import { MenuPageModule } from '../pages/menu/menu';
 var MyApp = /** @class */ (function () {
-    function MyApp(platform, statusBar, splashScreen, keyboard) {
+    function MyApp(platform, statusBar, splashScreen, keyboard, menu) {
         this.platform = platform;
         this.statusBar = statusBar;
         this.splashScreen = splashScreen;
         this.keyboard = keyboard;
+        this.menu = menu;
         this.rootPage = PassportloginPage;
         this.initializeApp();
         this.pages = [
@@ -57,6 +58,7 @@ var MyApp = /** @class */ (function () {
         // }
     };
     MyApp.prototype.openPage = function (page) {
+        this.menu.close();
         if (page.component) {
             this.nav.setRoot(page.component);
         }
@@ -69,7 +71,7 @@ var MyApp = /** @class */ (function () {
         Component({
             templateUrl: 'app.html'
         }),
-        __metadata("design:paramtypes", [Platform, StatusBar, SplashScreen, Keyboard])
+        __metadata("design:paramtypes", [Platform, StatusBar, SplashScreen, Keyboard, MenuController])
     ], MyApp);
     return MyApp;
 }());

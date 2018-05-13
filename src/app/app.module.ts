@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Keyboard } from '@ionic-native/keyboard';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -21,6 +22,7 @@ import { EmojiProvider } from '../providers/emoji';
 import { HttpClientModule } from "@angular/common/http";
 import { RestProvider } from '../providers/rest/rest';
 
+
 // const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 // import { MenuPageModule } from '../pages/menu/menu';
 
@@ -35,6 +37,7 @@ import { RestProvider } from '../providers/rest/rest';
     HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     HeaderComponentModule,
     FooterComponentModule
     // SocketIoModule.forRoot(config)

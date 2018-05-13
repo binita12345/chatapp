@@ -12,6 +12,8 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { RestProvider } from '../../providers/rest/rest';
+import { RutValidator } from '../../validators/rut';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the PassportloginPage page.
  *
@@ -19,16 +21,18 @@ import { RestProvider } from '../../providers/rest/rest';
  * Ionic pages and navigation.
  */
 var PassportloginPage = /** @class */ (function () {
-    function PassportloginPage(navCtrl, navParams, plt, formBuilder, keyboard, restProvider) {
+    function PassportloginPage(navCtrl, navParams, plt, formBuilder, keyboard, restProvider, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.plt = plt;
         this.formBuilder = formBuilder;
         this.keyboard = keyboard;
         this.restProvider = restProvider;
+        this.storage = storage;
         this.error = '';
         this.passportloginForm = formBuilder.group({
-            usuario: ['', Validators.compose([Validators.required])]
+            usuario: ['', Validators.compose([Validators.required, RutValidator.isValid])]
+            // usuario: ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{8}-[a-zA-Z0-9]{1}')])]
         });
         if (this.plt.is('ios')) {
             // This will only print when on iOS
@@ -52,6 +56,7 @@ var PassportloginPage = /** @class */ (function () {
         var _this = this;
         console.log("login by passport");
         console.log("rut data", this.passportloginForm.value.usuario);
+        this.storage.set('rutdata', this.passportloginForm.value.usuario);
         var rutData = this.passportloginForm.value.usuario;
         console.log(this.passportloginForm.value.usuario.length);
         if (this.passportloginForm.value.usuario == '' || this.passportloginForm.value.usuario.length == 0) {
@@ -61,6 +66,7 @@ var PassportloginPage = /** @class */ (function () {
         else {
             // this.error = false;
             console.log("rutData", rutData);
+            // this.storage.set('rutdata', rutData);
             this.restProvider.getRut(rutData)
                 .then(function (data) {
                 _this.rut = data;
@@ -82,7 +88,7 @@ var PassportloginPage = /** @class */ (function () {
             templateUrl: 'passportlogin.html',
         }),
         __metadata("design:paramtypes", [NavController, NavParams, Platform,
-            FormBuilder, Keyboard, RestProvider])
+            FormBuilder, Keyboard, RestProvider, Storage])
     ], PassportloginPage);
     return PassportloginPage;
 }());

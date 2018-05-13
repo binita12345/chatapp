@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the TraveladvicePage page.
  *
@@ -17,15 +18,21 @@ export class TraveladvicePage {
 
   advices: any;
   adviceArray : any = [];
+  getdata : any;
 	// advices: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider, public storage: Storage) {
  //  	this.advices = [
 	//     {image: "assets/imgs/Marqueta/12.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
 	//     {image: "assets/imgs/Marqueta/13.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
 	//     {image: "assets/imgs/Marqueta/14.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
 	//     {image: "assets/imgs/Marqueta/15.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"}
 	// ];
+
+    this.storage.get('rutdata').then((getdata) => {
+      console.log('getdata ' +getdata);
+      this.getdata = getdata;
+    });
 
     this.getTravelAdviceData();
   }
@@ -36,7 +43,16 @@ export class TraveladvicePage {
 
   goback(){
     // this.navCtrl.pop();
-    this.navCtrl.push("MenuPage");
+    // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+    // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+    if(this.getdata == ''){
+      this.navCtrl.push("NotlogedinPage");
+    } else {
+      this.navCtrl.push("MenuPage");
+    }
+    // this.navCtrl.push("MenuPage");
+    // this.navCtrl.popToRoot();
+    // this.navCtrl.canGoBack();
   }
 
   getTravelAdviceData() {

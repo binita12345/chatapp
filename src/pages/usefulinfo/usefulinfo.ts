@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the UsefulinfoPage page.
  *
@@ -24,8 +24,15 @@ export class UsefulinfoPage {
 	numthree : any;
 	address : any;
 	emailadd : any;
+  getdata : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+
+    this.storage.get('rutdata').then((getdata) => {
+      console.log('getdata ' +getdata);
+      this.getdata = getdata;
+    });
+
   	this.options =  [
       {
         "name": "India",
@@ -60,8 +67,19 @@ export class UsefulinfoPage {
     console.log('ionViewDidLoad UsefulinfoPage');
   }
   goback(){
+
+    if(this.getdata == ''){
+      this.navCtrl.push("NotlogedinPage");
+    } else {
+      this.navCtrl.push("MenuPage");
+    }
     // this.navCtrl.pop();
-    this.navCtrl.push("MenuPage");
+    // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+    // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+    // this.navCtrl.push("MenuPage");
+    // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
+    // this.navCtrl.popToRoot();
+    // this.navCtrl.canGoBack();
   }
 
 }

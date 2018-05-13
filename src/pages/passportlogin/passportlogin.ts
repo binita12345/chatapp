@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { RestProvider } from '../../providers/rest/rest';
 import { RutValidator } from '../../validators/rut';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the PassportloginPage page.
  *
@@ -24,7 +25,7 @@ export class PassportloginPage {
   rut : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, 
-              private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider) {
+              private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider, public storage: Storage) {
 
   	this.passportloginForm = formBuilder.group({
       usuario: ['', Validators.compose([Validators.required, RutValidator.isValid])]
@@ -56,6 +57,7 @@ export class PassportloginPage {
   passportlogin(){
     console.log("login by passport");
     console.log("rut data", this.passportloginForm.value.usuario);
+    this.storage.set('rutdata', this.passportloginForm.value.usuario);
 
     let rutData : any = this.passportloginForm.value.usuario;
 
@@ -66,11 +68,18 @@ export class PassportloginPage {
     } else{
       // this.error = false;
       console.log("rutData", rutData);
+      // this.storage.set('rutdata', rutData);
+
       this.restProvider.getRut(rutData)
       .then(data => {
-        this.rut = data;
-        console.log(this.rut);
-        this.navCtrl.push("PasswordPage", {rut : rutData});
+        // this.rut = data;
+        console.log("data", data);
+        // if(data == "RUT no existe"){
+
+        // }
+        // console.log(this.rut);
+      }).catch(error => {
+        console.log("rut error", error);
       });
       
 
