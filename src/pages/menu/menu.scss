@@ -126,8 +126,9 @@ page-menu {
 	    width: 100%;
 	}
 	.travelImg{
+        height: 100px;
 	    margin-left: -6px;
-	    min-width: 110%;
+	    min-width: 111%;
 	    border: 0;
 	    border-bottom-left-radius: 5px;
 	    border-top-left-radius: 15px;
@@ -140,25 +141,25 @@ page-menu {
 	    border-bottom-left-radius: 5px;
 	    border-top-left-radius: 15px;
 	    margin-top: -6px;
-	    height: 119px;
+	    height: 100px;
 	}
 	.infoImg1{
-	    margin-left: -6px;
-	    max-width: 108%;
+        margin-left: -6px;
+	    max-width: 110%;
 	    border: 0;
 	    border-bottom-right-radius: 5px;
 	    border-top-right-radius: 15px;
 	    margin-top: -6px;
-	    height: 100%;
+	    height: 102%;
 	}
 	.infoImg{
-		margin-left: -7px;
+		margin-left: -6px;
 	    max-width: 109%;
 	    border: 0;
 	    border-bottom-right-radius: 5px;
 	    border-top-right-radius: 15px;
 	    margin-top: -6px;
-	    height: 101%;
+	    height: 102%;
 	}
 	.calldiv{
 		border: 1px solid #B3061E;
@@ -186,6 +187,9 @@ page-menu {
 	}
 	.para2{
 		font-size: 24px;font-weight: 400;
+	}
+	.ipad768{
+		height: 142px;
 	}
 
 	@media(min-width: 768px) and (max-width: 1024px){

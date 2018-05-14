@@ -49,7 +49,7 @@ export class RestProvider {
 	}
 
 	getuserInfo(appId) {
-		console.log("service user info");
+		console.log("service user info", appId);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
 	    this.http.get('http://sensussoft.com/ionic/datosutiles.php?app='+appId)

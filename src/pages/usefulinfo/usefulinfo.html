@@ -31,7 +31,8 @@
 		</ion-row>
 	</ion-grid>
 	<h6 class="header6">Datos Utiles</h6>
-	<ion-grid>
+	<ion-grid *ngIf="informations">
+		{{ informations | json }}
 		<ion-row class="borderdrop">
 			<ion-col col-12 col-xl-12>
 				<ion-item class="drpdown">
@@ -46,9 +47,9 @@
 				{{error}}
 			</div>
 		</ion-row>
-	</ion-grid>
+	<!-- </ion-grid> -->
 	<br/>
-	<ion-grid>
+	<!-- <ion-grid> -->
 		<ion-row class="border ionrow oddcolor">
 			<ion-col col-1 col-xl-1 class="iconfix">
 				<!-- <ion-icon name="logo-usd" class="iconsize"></ion-icon> -->
@@ -58,7 +59,8 @@
 				Moneda
 			</ion-col>
 			<ion-col col-6 col-xl-6>
-				<ion-input class="iontext" type="text" [(ngModel)]="currency"></ion-input>
+				<!-- <ion-input class="iontext" type="text" [(ngModel)]="currency"></ion-input> -->
+				<ion-input class="iontext" type="text">{{info?.moneda}}</ion-input>
 			</ion-col>
 		</ion-row>
 
@@ -73,6 +75,7 @@
 			</ion-col>
 			<ion-col col-6 col-xl-6>
 				<ion-input class="iontext" type="text" [(ngModel)]="capitalcity"></ion-input>
+				<!-- <ion-input class="iontext" type="text">{{info[1].capital}}</ion-input> -->
 			</ion-col>
 		</ion-row>
 
@@ -87,11 +90,12 @@
 			</ion-col>
 			<ion-col col-6 col-xl-6>
 				<ion-input class="iontext" type="text" [(ngModel)]="idiom"></ion-input>
+				<!-- <ion-input class="iontext" type="text">{{info[2].idioma}}</ion-input> -->
 			</ion-col>
 		</ion-row>
-	</ion-grid>
+	<!-- </ion-grid> -->
 
-	<ion-grid>
+	<!-- <ion-grid> -->
 		<ion-row>
 			<p class="title1">Consulado en Washington</p>
 		</ion-row>
@@ -157,9 +161,9 @@
 				<ion-input class="iontext" type="text" [(ngModel)]="emailadd"></ion-input>
 			</ion-col>
 		</ion-row> -->
-	</ion-grid>
+	<!-- </ion-grid> -->
 
-	<ion-grid>
+	<!-- <ion-grid> -->
 		<ion-row>
 			<p class="title1">Consulado en Miami</p>
 		</ion-row>

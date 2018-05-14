@@ -37,21 +37,39 @@ export class UsefulinfoPage {
   // countryArray : any;
   country: any;
   error : any = '';
+  infoarray : any =[];
+  informations : any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public restProvider: RestProvider) {
 
-    this.storage.get('appId').then((appID) => {
-      console.log('appID ' +appID);
-      this.appID = appID;
-    });
 
-    this.getuserInfoData();
+
+    // this.getuserInfoData();
 
     this.storage.get("isLogin").then((resulst) => {
       console.log("results login status", resulst);
       if(resulst){
         this.corpocustoInfo = true;
         this.travelAgencyInfo = false;
+        this.storage.get('appId').then((appID) => {
+          console.log('appID ' +appID);
+          this.appID = appID;
+          this.restProvider.getuserInfo(this.appID)
+            .then(data => {
+              this.infoarray =  data;
+              console.log("ts user data", this.infoarray['datosutiles']);
+              this.informations = this.infoarray['datosutiles'];
+              console.log("this.informations", this.informations);
+              // console.log("moneda", serviceData.)
+              // this.advices = data;
+              // console.log(this.advices);
+              // for(let advice of this.advices){
+              //   console.log("for loop advice", advice);
+              // }
+              // this.adviceArray = serviceData;
+              // console.log(this.adviceArray);
+            });
+        });
       } else {
         this.corpocustoInfo = false;
         this.travelAgencyInfo = true;
@@ -66,31 +84,23 @@ export class UsefulinfoPage {
     // this.numthree = "Phone Number 03"
     // this.address = "Address"
     // this.emailadd = "Email Address 01"
-    this.currency = ""
-    this.capitalcity = ""
-    this.idiom = ""
-
-    this.numone = ""
-    this.numtwo = ""
-    this.numthree = ""
-    this.address = ""
-    this.emailadd = ""
+    
 	}
 
-  getuserInfoData() {
-    this.restProvider.getuserInfo(this.appID)
-    .then(data => {
-      let serviceData : any =  data;
-      console.log("ts user data", serviceData);
-      // this.advices = data;
-      // console.log(this.advices);
-      // for(let advice of this.advices){
-      //   console.log("for loop advice", advice);
-      // }
-      // this.adviceArray = serviceData;
-      // console.log(this.adviceArray);
-    });
-  }
+  // getuserInfoData() {
+  //   this.restProvider.getuserInfo(this.appID)
+  //   .then(data => {
+  //     let serviceData : any =  data;
+  //     console.log("ts user data", serviceData);
+  //     // this.advices = data;
+  //     // console.log(this.advices);
+  //     // for(let advice of this.advices){
+  //     //   console.log("for loop advice", advice);
+  //     // }
+  //     // this.adviceArray = serviceData;
+  //     // console.log(this.adviceArray);
+  //   });
+  // }
 
   onCountryChange(country){
     // this.restProvider.getCountries()
