@@ -19,8 +19,11 @@
 			<ion-col col- col-xl-1>
 				<img src="assets/imgs/Marqueta/keyboard-left-arrow-button.png" style="margin-top: 12px;" (click)="goback()">
 			</ion-col>
-			<ion-col col-10 col-xl-10 style="text-align: center;">
+			<ion-col col-10 col-xl-10 style="text-align: center;" *ngIf="corpocustoTravel">
 				<img src="assets/imgs/Marqueta/logo_2.png">
+			</ion-col>
+			<ion-col col-10 col-xl-10 style="text-align: center;" *ngIf="travelAgencyTravel">
+				<img src="assets/imgs/Marqueta/logo.png">
 			</ion-col>
 			<ion-col col-1 col-xl-1>
 			</ion-col>

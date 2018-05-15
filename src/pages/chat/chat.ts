@@ -31,6 +31,10 @@ export class ChatPage {
   editorMsg = '';
   showEmojiPicker = false;
   getdata : any;
+  corpocustoHeader : boolean;
+  travelAgencyHeader : boolean;
+  corpocustoContent : boolean;
+  travelAgencyContent : boolean;
 
   // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private toastCtrl: ToastController) {
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController,private chatService: ChatService,
@@ -49,6 +53,21 @@ export class ChatPage {
     this.chatService.getUserInfo()
     .then((res) => {
       this.user = res
+    });
+
+    this.storage.get("isLogin").then((resulst) => {
+      console.log("results login status", resulst);
+      if(resulst){
+        this.corpocustoHeader = true;
+        this.travelAgencyHeader = false;
+        this.corpocustoContent = true;
+        this.travelAgencyContent = false;
+      } else {
+        this.corpocustoHeader = false;
+        this.travelAgencyHeader = true;
+        this.corpocustoContent = false;
+        this.travelAgencyContent = true;
+      }
     });
   	// this.nickname = this.navParams.get('nickname');
  
@@ -193,11 +212,11 @@ export class ChatPage {
     // this.navCtrl.pop();
     // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
     // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
-    if(this.getdata == ''){
-      this.navCtrl.push("NotlogedinPage");
-    } else {
+    // if(this.getdata == ''){
+    //   this.navCtrl.push("NotlogedinPage");
+    // } else {
       this.navCtrl.push("MenuPage");
-    }
+    // }
     // this.navCtrl.push("MenuPage");
     // this.navCtrl.popToRoot();
     // this.navCtrl.canGoBack();

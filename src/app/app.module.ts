@@ -10,6 +10,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 // import { MenuPage } from '../pages/menu/menu';
 import { PassportloginPage } from '../pages/passportlogin/passportlogin';
+import { PassportloginPageModule } from '../pages/passportlogin/passportlogin.module';
 // import { NotlogedinPage } from '../pages/notlogedin/notlogedin';
 
 import { HeaderComponent } from '../components/header/header';
@@ -30,7 +31,7 @@ import { RestProvider } from '../providers/rest/rest';
   declarations: [
     MyApp,
     HomePage,
-    PassportloginPage,
+    // PassportloginPage,
     // NotlogedinPage
   ],
   imports: [
@@ -39,9 +40,9 @@ import { RestProvider } from '../providers/rest/rest';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HeaderComponentModule,
-    FooterComponentModule
+    FooterComponentModule,
     // SocketIoModule.forRoot(config)
-    // PassportloginPageModule
+    PassportloginPageModule
 
   ],
   bootstrap: [IonicApp],

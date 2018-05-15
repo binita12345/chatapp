@@ -19,6 +19,8 @@ export class TraveladvicePage {
   advices: any;
   adviceArray : any = [];
   getdata : any;
+  corpocustoTravel : boolean;
+  travelAgencyTravel : boolean;
 	// advices: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider, public storage: Storage) {
@@ -35,6 +37,17 @@ export class TraveladvicePage {
     });
 
     this.getTravelAdviceData();
+
+    this.storage.get("isLogin").then((resulst) => {
+      console.log("results login status", resulst);
+      if(resulst){
+        this.corpocustoTravel = true;
+        this.travelAgencyTravel = false;
+      } else {
+        this.corpocustoTravel = false;
+        this.travelAgencyTravel = true;
+      }
+    });
   }
 
   ionViewDidLoad() {
@@ -45,11 +58,11 @@ export class TraveladvicePage {
     // this.navCtrl.pop();
     // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
     // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
-    if(this.getdata == ''){
-      this.navCtrl.push("NotlogedinPage");
-    } else {
+    // if(this.getdata == ''){
+    //   this.navCtrl.push("NotlogedinPage");
+    // } else {
       this.navCtrl.push("MenuPage");
-    }
+    // }
     // this.navCtrl.push("MenuPage");
     // this.navCtrl.popToRoot();
     // this.navCtrl.canGoBack();

@@ -47,6 +47,8 @@ export class MyApp {
       this.keyboard.onKeyboardHide().subscribe(() => {
           document.body.classList.remove('keyboard-is-open');
       });
+
+      
       // this.statusBar.overlaysWebView(false); 
     });
 

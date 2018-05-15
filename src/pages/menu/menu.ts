@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // import { Socket } from 'ng-socket-io';
 import { CallNumber } from '@ionic-native/call-number';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the MenuPage page.
  *
@@ -17,43 +18,39 @@ import { CallNumber } from '@ionic-native/call-number';
 export class MenuPage {
 
   toUser : {toUserId: string, toUserName: string};
+  // corpocustoHeader : boolean;
+  // travelAgencyHeader : boolean;
+  corpocustoContent : boolean;
+  travelAgencyContent : boolean;
 
   // nickname = 'Binita Doriwala';
 
   // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private callNumber: CallNumber) {
-    constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber, private storage: Storage) {
     this.toUser = {
       toUserId:'210000198410281948',
       toUserName:'Hancock'
     }
-  }
-  // constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber) {
-  // }
+    this.storage.get("isLogin").then((resulst) => {
+      console.log("results login status", resulst);
+      if(resulst){
+        // this.corpocustoHeader = true;
+        // this.travelAgencyHeader = false;
+        this.corpocustoContent = true;
+        this.travelAgencyContent = false;
+      } else {
+        // this.corpocustoHeader = false;
+        // this.travelAgencyHeader = true;
+        this.corpocustoContent = false;
+        this.travelAgencyContent = true;
+      }
+    });
 
+  }
+ 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuPage');
   }
-
-  // configura(){
-  // 	console.log("go to configura");
-  // 	this.navCtrl.push("ConfiguraPage");
-  // }
-  // celulares(){
-  //   console.log("go to CelularesPage");
-  //   this.navCtrl.push("CelularesPage");
-  // }
-  // videos(){
-  //   console.log("go to VideosPage");
-  //   this.navCtrl.push("VideosPage");
-  // }
-  // preguntas(){
-  //   console.log("go to PreguntasPage");
-  //   this.navCtrl.push("PreguntasPage");
-  // }
-  // chat(){
-  //   console.log("go to ChatPage");
-  //   this.navCtrl.push("ChatPage");
-  // }
 
   chatting(){
     console.log("go to chattingPage");

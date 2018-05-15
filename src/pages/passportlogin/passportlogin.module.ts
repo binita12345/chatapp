@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PassportloginPage } from './passportlogin';
-import { FooterComponentModule } from '../../components/footer/footer.module';
+import { HeaderComponentModule } from '../../components/header/header.module';
 
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import { FooterComponentModule } from '../../components/footer/footer.module';
   ],
   imports: [
     IonicPageModule.forChild(PassportloginPage),
-    FooterComponentModule
+    HeaderComponentModule
   ],
 })
 export class PassportloginPageModule {}

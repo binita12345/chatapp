@@ -57,7 +57,7 @@ export class PassportloginPage {
   passportlogin(){
     console.log("login by passport");
     console.log("rut data", this.passportloginForm.value.usuario);
-    this.storage.set('rutdata', this.passportloginForm.value.usuario);
+    // this.storage.set('rutdata', this.passportloginForm.value.usuario);
 
     let rutData : any = this.passportloginForm.value.usuario;
 
@@ -74,6 +74,16 @@ export class PassportloginPage {
       .then(data => {
         // this.rut = data;
         console.log("data", data);
+        console.log("data error", data['error']);
+
+        if(data['error']){
+          this.error = data['error'];
+        } else {
+          // this.storage.set('rutdata', this.passportloginForm.value.usuario);
+          this.navCtrl.push("PasswordPage", {rut: data['RUT']});
+
+        }
+        // this.navCtrl.push("PasswordPage");
         // if(data == "RUT no existe"){
 
         // }
@@ -90,7 +100,8 @@ export class PassportloginPage {
   }
 
   gotonotlogedin(){
-    this.navCtrl.push("NotlogedinPage");
+    this.error = '';
+    this.navCtrl.push("MenuPage");
   }
 
   // keyboardCheck() {

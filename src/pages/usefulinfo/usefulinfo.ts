@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { RestProvider } from '../../providers/rest/rest';
 /**
  * Generated class for the UsefulinfoPage page.
  *
@@ -14,8 +15,12 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'usefulinfo.html',
 })
 export class UsefulinfoPage {
-	// countries : any;
-	options = [];
+	// countries : any = [];
+
+  countries: string[];
+  errorMessage: string;
+
+	// country : any;;
 	currency : any;
 	capitalcity : any;
 	idiom : any;
@@ -24,20 +29,34 @@ export class UsefulinfoPage {
 	numthree : any;
 	address : any;
 	emailadd : any;
-  getdata : any;
+  appID : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  corpocustoInfo : boolean;
+  travelAgencyInfo : boolean;
 
-    this.storage.get('rutdata').then((getdata) => {
-      console.log('getdata ' +getdata);
-      this.getdata = getdata;
+  // countryArray : any;
+  country: any;
+  error : any = '';
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public restProvider: RestProvider) {
+
+    this.storage.get('appId').then((appID) => {
+      console.log('appID ' +appID);
+      this.appID = appID;
     });
 
-  	this.options =  [
-      {
-        "name": "India",
+    this.getuserInfoData();
+
+    this.storage.get("isLogin").then((resulst) => {
+      console.log("results login status", resulst);
+      if(resulst){
+        this.corpocustoInfo = true;
+        this.travelAgencyInfo = false;
+      } else {
+        this.corpocustoInfo = false;
+        this.travelAgencyInfo = true;
       }
-    ];
+    });
     // this.currency = "currency"
     // this.capitalcity = "Capital City"
     // this.idiom = "Idiom"
@@ -58,21 +77,63 @@ export class UsefulinfoPage {
     this.emailadd = ""
 	}
 
- //  optionsFn() {
-	//   console.log(this.countries);
-	//   let item = this.countries;
-	// }
+  getuserInfoData() {
+    this.restProvider.getuserInfo(this.appID)
+    .then(data => {
+      let serviceData : any =  data;
+      console.log("ts user data", serviceData);
+      // this.advices = data;
+      // console.log(this.advices);
+      // for(let advice of this.advices){
+      //   console.log("for loop advice", advice);
+      // }
+      // this.adviceArray = serviceData;
+      // console.log(this.adviceArray);
+    });
+  }
+
+  onCountryChange(country){
+    // this.restProvider.getCountries()
+    //    .subscribe(data => {
+    //      console.log("get countries api", data);
+    //      this.countries = data;
+    //    });
+    // console.log("country ", country);
+    // this.country = null;
+    console.log("country ", country);
+    this.restProvider.getCountries()
+      .subscribe(countries => {
+      // console.log("get countries from api", countries);
+
+        this.countries = countries;
+        for (var i = 0; i < this.countries.length; i++)
+        {
+          // console.log("this.countries[i]", this.countries[i]['name']);
+          if (this.countries[i]['name'] == country) {
+            this.country = this.countries[i]['name'];
+          }
+        }
+      },
+      (error) =>  {
+        console.log("get country err", error);
+        // this.errorMessage = <any>error
+      });
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UsefulinfoPage');
+    this.onCountryChange(this.country);
+  }
+  ngOnInit() {
+    this.onCountryChange(this.country);
   }
   goback(){
 
-    if(this.getdata == ''){
-      this.navCtrl.push("NotlogedinPage");
-    } else {
+    // if(this.getdata == ''){
+    //   this.navCtrl.push("NotlogedinPage");
+    // } else {
       this.navCtrl.push("MenuPage");
-    }
+    // }
     // this.navCtrl.pop();
     // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
     // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));

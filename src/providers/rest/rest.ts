@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { map, catchError } from 'rxjs/operators';
 
 /*
   Generated class for the RestProvider provider.
@@ -15,12 +16,52 @@ import 'rxjs/add/operator/toPromise';
 export class RestProvider {
 
 	headers = new Headers({ "Content-Type": "application/json" });
+	private apiUrl = 'https://restcountries.eu/rest/v2/all';
 
 	// apiUrl = 'http://192.168.0.102:8080/ionic/consejosdeviaje.php';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
   }
+
+	private extractData(res: Response) {
+	  let body = res;
+	  return body || {};
+	}
+
+	private handleError (error: Response | any) {
+	  let errMsg: string;
+	  if (error instanceof Response) {
+	    const err = error || '';
+	    errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+	  } else {
+	    errMsg = error.message ? error.message : error.toString();
+	  }
+	  console.error(errMsg);
+	  return Observable.throw(errMsg);
+	}
+
+	getCountries(): Observable<string[]> {
+	  return this.http.get(this.apiUrl).pipe(
+	    map(this.extractData),
+	    catchError(this.handleError)
+	  );
+	}
+
+	getuserInfo(appId) {
+		console.log("service user info");
+	  return new Promise((resolve, reject) => {
+	    // this.http.get(this.apiUrl+'/autenticacion')
+	    this.http.get('http://sensussoft.com/ionic/datosutiles.php?app='+appId)
+	      .subscribe(res => {
+	      	console.log("service res", res);
+	        resolve(res);
+	      }, (err) => {
+	      	console.log("service err", err);
+	        reject(err);
+	      });
+	  });
+	}
 
   // second api for TravelAdvice /traerconsejosdeviaje/status
   // this service to get all travel advice 
@@ -44,10 +85,12 @@ export class RestProvider {
 		console.log("service rut data" +data);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
-	    this.http.get('http://192.168.0.120:8080/ionic/Autenticacion.php?rut='+data)
+	    this.http.get('http://sensussoft.com/ionic/autenticacion.php?rut='+data)
 	      .subscribe(res => {
+	      	console.log("service res", res);
 	        resolve(res);
 	      }, (err) => {
+	      	console.log("service err", err);
 	        reject(err);
 	      });
 	  });
@@ -57,7 +100,7 @@ export class RestProvider {
 		console.log("service clave data", rut, clave);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
-	    this.http.get('http://192.168.0.120:8080/ionic/Autenticacion.php?rut='+rut+'&&clave='+clave)
+	    this.http.get('http://sensussoft.com/ionic/autenticacion.php?rut='+rut+'&&clave='+clave)
 	      .subscribe(res => {
 	        resolve(res);
 	      }, (err) => {

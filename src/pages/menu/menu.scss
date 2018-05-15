@@ -1,4 +1,19 @@
 page-menu {
+
+	// .coladvice1{
+	// 	background-color: #CE1803;
+	// 	border-top-left-radius: 15px;
+ //    	border-bottom-left-radius: 15px;
+ //    	cursor: pointer;
+ //    	min-height: 100px;
+	// }
+	// .colinfo1{
+	// 	background-color: #817F86;
+	// 	border-top-right-radius: 15px;
+ //    	border-bottom-right-radius: 15px;
+ //    	cursor: pointer;
+	// }
+
 	.chatImg{
 		margin-bottom: -30px;
 	}
@@ -112,11 +127,29 @@ page-menu {
 	}
 	.travelImg{
 	    margin-left: -6px;
+	    min-width: 110%;
+	    border: 0;
+	    border-bottom-left-radius: 5px;
+	    border-top-left-radius: 15px;
+	    margin-top: -6px;
+	}
+	.travelImg1{
+		margin-left: -6px;
 	    max-width: 110%;
 	    border: 0;
 	    border-bottom-left-radius: 5px;
 	    border-top-left-radius: 15px;
 	    margin-top: -6px;
+	    height: 119px;
+	}
+	.infoImg1{
+	    margin-left: -6px;
+	    max-width: 108%;
+	    border: 0;
+	    border-bottom-right-radius: 5px;
+	    border-top-right-radius: 15px;
+	    margin-top: -6px;
+	    height: 100%;
 	}
 	.infoImg{
 		margin-left: -7px;
@@ -163,23 +196,38 @@ page-menu {
 			height: 75%;
 		}
 		.travelImg{
-		    width: 104%;
+		    width: 103%;
 		}
 		.infoImg{
-		    min-width: 104%;
+            width: 104%;
 		    margin-left: -8px;
+		    margin-top: -7px;
+		    height: 97%;
+		}
+		.travelImg1{
+		    width: 103%;
+		    height: 92%;
+		}
+		.infoImg1{
+		    max-width: 103%;
+		    margin-left: -7px;
+		    margin-top: -7px;
+		    height: 92%;
 		}
 		.ipad768{
 			min-height: 40%;
 		}
-	}
-
-	@media(min-width: 1024px){
-		.infoImg{
-		    min-width: 103%;
-		    margin-left: -8px;
+		.para{
+		    font-size: 35px;
 		}
 	}
+
+	// @media(min-width: 1024px){
+	// 	.infoImg{
+	// 	    min-width: 103%;
+	// 	    margin-left: -8px;
+	// 	}
+	// }
 
 	@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
 
@@ -189,7 +237,38 @@ page-menu {
 
 	/* Portrait and Landscape */
 	@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) { 
+		.infoImg {
+			max-height: 92%;
+			min-width: 108% !important;
+		}
+		.travelImg {
+		    margin-left: -6px !important;
+		    max-width: 108%;
+		}
+	}
 
+	/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+
+	/* Portrait and Landscape */
+	@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+		.infoImg {
+		    margin-left: -7px;
+		    max-width: 110%;
+		    border: 0;
+		    border-bottom-right-radius: 5px;
+		    border-top-right-radius: 15px;
+		    margin-top: -6px;
+		    max-height: 100%;
+		}
+		.travelImg {
+		    margin-left: -6px;
+		    max-width: 109%;
+		    border: 0;
+		    border-bottom-left-radius: 5px;
+		    border-top-left-radius: 15px;
+		    height: 107px;
+		    margin-top: -6px;
+		}
 	}
 
 	/* ----------- iPhone 6+, 7+ and 8+ ----------- */
@@ -202,17 +281,55 @@ page-menu {
 		}
 		.infoImg {
 			max-height: 100%;
+			max-width: 107% !important;
+		}
+		.travelImg1 {
+			max-height: 100%;
+			min-width: 122%;
+		}
+		.infoImg1 {
+			max-height: 100%;
 			min-width: 108%;
 		}
 	}
+	/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+	/* Portrait and Landscape */
 	@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) { 
 		.travelImg {
 		    margin-left: -5px;
-		    max-width: 108%;
+		    min-width: 108%;
 	    }
 	    .infoImg {
+		    margin-top: -6px;
+    		height: 105%;
+    		min-width: 108% !important;
+		}
+		.travelImg1 {
+		    margin-left: -5px;
+		    max-width: 108%;
+	    }
+	    .infoImg1 {
 			margin-left: -6px;
     		max-width: 107%;
 		}
 	}
+
+	/* ----------- Galaxy S4, S5 and Note 3 ----------- */
+
+	/* Portrait and Landscape */
+	@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
+		.travelImg {
+		    // max-height: 105px;
+		    height: 107px;
+	    }
+		.infoImg {
+	        min-width: 108% !important;
+	        max-height: 103%;
+		}
+	}
+
+	// @media(min-width: 320px){
+		
+	// }
 }

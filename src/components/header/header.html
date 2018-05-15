@@ -13,13 +13,22 @@
             <button ion-button menuToggle> <img src="assets/imgs/Marqueta/menu.png"></button>
           </ion-buttons>
         </ion-col>
-        <ion-col col-8 col-xl-8>
+        <ion-col col-8 col-xl-8 *ngIf="corpocustoHeader">
         	<ion-buttons text-center>
         		<button ion-button> <img src="assets/imgs/Marqueta/logo_2.png"></button>
         	</ion-buttons>
         </ion-col>
-        <ion-col col-2 col-xl-2>
+        <ion-col col-8 col-xl-8 *ngIf="travelAgencyHeader">
+          <ion-buttons text-center>
+            <button ion-button style="max-width: 175px;"> <img src="assets/imgs/Marqueta/logo.png"></button>
+          </ion-buttons>
         </ion-col>
+        <ion-col col-2 col-xl-2 style="text-align: right !important;">
+            <ion-icon name="log-out" style="text-align: right;font-size: 32px;" (click)="logout()"></ion-icon>
+        </ion-col>
+        <!-- <ion-col col-2 col-xl-2 style="text-align: right !important;" *ngIf="travelAgencyBack">
+            <ion-icon name="log-out" style="text-align: right;font-size: 32px;" (click)="logout()"></ion-icon>
+        </ion-col> -->
       </ion-row>
     </ion-grid>
        
