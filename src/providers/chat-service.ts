@@ -3,6 +3,7 @@ import { Events } from 'ionic-angular';
 import { map } from 'rxjs/operators/map';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
+import moment from 'moment';
 
 export class ChatMessage {
   messageId: string;
@@ -35,13 +36,13 @@ export class ChatService {
       userName: 'Hancock',
       userAvatar: './assets/to-user.jpg',
       toUserId: '140000198202211138',
-      time: Date.now(),
+      time: moment().format('LT'),
       message: msg.message,
       status: 'success'
     };
 
     setTimeout(() => {
-      this.events.publish('chat:received', mockMsg, Date.now())
+      this.events.publish('chat:received', mockMsg, moment().format('LT'))
     }, Math.random() * 1800)
   }
 

@@ -47,12 +47,30 @@ export class RestProvider {
 	    catchError(this.handleError)
 	  );
 	}
+	// Entrega datos útiles por país, considerando entre otros, información de embajadas, direcciones, teléfonos entre otros.
+	// Con el código ISO del Pais, puede recibir la información.
+	// O en caso contrario entrega la información de todos los países que tiene cargados..
 
 	getuserInfo(appId) {
 		console.log("service user info", appId);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
 	    this.http.get('http://sensussoft.com/ionic/datosutiles.php?app='+appId)
+	      .subscribe(res => {
+	      	console.log("service res", res);
+	        resolve(res);
+	      }, (err) => {
+	      	console.log("service err", err);
+	        reject(err);
+	      });
+	  });
+	}
+
+	getuserInfoWithCountry(appId, Pais) {
+		console.log("service user info with country", appId, Pais);
+	  return new Promise((resolve, reject) => {
+	    // this.http.get(this.apiUrl+'/autenticacion')
+	    this.http.get('http://sensussoft.com/ionic/datosutiles.php?app='+appId+'&&Pais='+Pais)
 	      .subscribe(res => {
 	      	console.log("service res", res);
 	        resolve(res);
@@ -126,15 +144,17 @@ export class RestProvider {
 
 	// // Delivery of emergency telephones for a given user - Returns emergency phone numbers given to certain user.
 	// // With the user's RUT, the assigned executives and pool are reviewed, and these numbers are returned in that order.
-	// addEmergencyCall(data) {
-	//   return new Promise((resolve, reject) => {
-	//     this.http.post(this.apiUrl+'/telefonosemergencia', JSON.stringify(data))
-	//       .subscribe(res => {
-	//         resolve(res);
-	//       }, (err) => {
-	//         reject(err);
-	//       });
-	//   });
-	// }
+	getEmergencyCall(Rut) {
+	  return new Promise((resolve, reject) => {
+	    this.http.get('http://sensussoft.com/ionic/telefonosemergencia.php?Rut='+Rut)
+	      .subscribe(res => {
+	      	console.log("service res", res);
+	        resolve(res);
+	      }, (err) => {
+	      	console.log("service err", err);
+	        reject(err);
+	      });
+	  });
+	}
 
 }

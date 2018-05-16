@@ -88,7 +88,9 @@ export class PasswordPage {
           this.error = data['error'];
         } else {
           this.storage.set('isLogin', true);
-          this.navCtrl.push("MenuPage");
+          console.log("data rut", data['RUT']);
+          this.storage.set('RUT', data['RUT']);
+          this.navCtrl.push("MenuPage", {'Rut' : data['RUT']});
         }
       });
       

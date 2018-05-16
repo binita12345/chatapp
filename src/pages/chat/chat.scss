@@ -6,6 +6,43 @@ page-chat {
 	//     margin-top: 2px;
 	//     padding: 10px;
 	// }
+  // .platform-ios .ion-grid{
+  //   margin-top: 12px !important;
+  // }
+  // .platform-android .ion-grid{
+  //   margin-top: 18px !important;
+  // }
+  // .platform-wp .headuser{
+  //     margin-top: 35px !important;
+  // }
+  .message-wrap .message.right .msg-content {
+    background-color: #FFFFFF !important;
+    float: right; 
+  }
+  .message-wrap .message .msg-detail .msg-content {
+    border-radius: 2px !important;
+    padding: 8px;
+    border: 1px solid #ddd;
+    color: #4A4A4A !important;
+  }
+  .message-wrap .message.right .msg-content span.triangle {
+    background-color: #FFFFFF !important;
+  } 
+  .message-wrap .message .msg-detail .msg-content span.triangle {
+    top: 3px !important;
+  }
+  .toolbar-ios {
+    margin-top: 6px !important;
+    padding-left: 4px;
+    padding-right: 4px;
+    /* min-height: 55px; */
+  }
+  .chathead{
+    max-height: 35px;
+    margin-top: -5px;
+    margin-left: 10px;
+    color: #0066C7;
+  }
   .backicon{
     color: #FED325;
     font-size: 30px;
@@ -27,7 +64,7 @@ page-chat {
     background-color: #F3F4F6;
     border-bottom: 1px solid #C5C5C5;
     border-top: 1px solid #C5C5C5;
-    margin-top: 14px;
+    margin-top: 18px;
     max-height: 45px;
   }
 	.user_name {

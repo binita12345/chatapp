@@ -45,7 +45,7 @@
           <!-- <img src="assets/imgs/Marqueta/left-arrow.png" style="max-height: 25px;" (click)="goback()"> -->
       </ion-col>
       <ion-col col-9 col-xl-9>
-          <ion-label>{{toUser.name}}<br/>{{toUser.status}}</ion-label>
+          <p class="chathead"><b style="color: #5BA870;">Binita Doriwala</b><br/>Offline now</p>
           <!-- <ion-lable>Sarah Jessica</ion-lable> -->
       </ion-col>
       <!-- <ion-col col-2 col-xl-2>
@@ -59,16 +59,14 @@
          class="message"
          [class.left]=" msg.userId === toUser.id "
          [class.right]=" msg.userId === user.id ">
+
+         {{msg | json}}
       <img class="user-img" [src]="msg.userAvatar" alt="" src="">
       <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner>
       <div class="msg-detail">
-        <div class="msg-info">
-          <p>
-            {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p>
-        </div>
         <div class="msg-content">
           <span class="triangle"></span>
-          <p class="line-breaker ">{{msg.message}}</p>
+          <p class="line-breaker ">{{msg.message}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{msg.time}}</p>
         </div>
       </div>
     </div>

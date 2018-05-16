@@ -5,6 +5,7 @@ import { ChatService, ChatMessage, UserInfo } from "../../providers/chat-service
 import { Events, Content } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
+import moment from 'moment';
 /**
  * Generated class for the ChatPage page.
  *
@@ -144,7 +145,7 @@ export class ChatPage {
       userName: this.user.name,
       userAvatar: this.user.avatar,
       toUserId: this.toUser.id,
-      time: Date.now(),
+      time: moment().format('LT'),
       message: this.editorMsg,
       status: 'pending'
     };

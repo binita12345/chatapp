@@ -21,14 +21,14 @@ export class UsefulinfoPage {
   errorMessage: string;
 
 	// country : any;;
-	currency : any;
-	capitalcity : any;
-	idiom : any;
-	numone : any;
-	numtwo : any;
-	numthree : any;
-	address : any;
-	emailadd : any;
+	// currency : any;
+	// capitalcity : any;
+	// idiom : any;
+	// numone : any;
+	// numtwo : any;
+	// numthree : any;
+	// address : any;
+	// emailadd : any;
   appID : any;
 
   corpocustoInfo : boolean;
@@ -39,6 +39,10 @@ export class UsefulinfoPage {
   error : any = '';
   infoarray : any =[];
   informations : any = [];
+  userInfo : any = [];
+  directionInfo : any;
+
+  moneda : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public restProvider: RestProvider) {
 
@@ -60,56 +64,23 @@ export class UsefulinfoPage {
               console.log("ts user data", this.infoarray['datosutiles']);
               this.informations = this.infoarray['datosutiles'];
               console.log("this.informations", this.informations);
-              // console.log("moneda", serviceData.)
-              // this.advices = data;
-              // console.log(this.advices);
-              // for(let advice of this.advices){
-              //   console.log("for loop advice", advice);
-              // }
-              // this.adviceArray = serviceData;
-              // console.log(this.adviceArray);
-            });
+             
+              for(let info of this.informations){
+                console.log("for loop info", info);
+                this.userInfo = info['consulados'];
+                console.log("this.userInfo", this.userInfo);
+              }
+          });
         });
       } else {
         this.corpocustoInfo = false;
         this.travelAgencyInfo = true;
       }
     });
-    // this.currency = "currency"
-    // this.capitalcity = "Capital City"
-    // this.idiom = "Idiom"
-
-    // this.numone = "Phone Number 01"
-    // this.numtwo = "Phone Number 02"
-    // this.numthree = "Phone Number 03"
-    // this.address = "Address"
-    // this.emailadd = "Email Address 01"
     
 	}
 
-  // getuserInfoData() {
-  //   this.restProvider.getuserInfo(this.appID)
-  //   .then(data => {
-  //     let serviceData : any =  data;
-  //     console.log("ts user data", serviceData);
-  //     // this.advices = data;
-  //     // console.log(this.advices);
-  //     // for(let advice of this.advices){
-  //     //   console.log("for loop advice", advice);
-  //     // }
-  //     // this.adviceArray = serviceData;
-  //     // console.log(this.adviceArray);
-  //   });
-  // }
-
   onCountryChange(country){
-    // this.restProvider.getCountries()
-    //    .subscribe(data => {
-    //      console.log("get countries api", data);
-    //      this.countries = data;
-    //    });
-    // console.log("country ", country);
-    // this.country = null;
     console.log("country ", country);
     this.restProvider.getCountries()
       .subscribe(countries => {
@@ -121,6 +92,65 @@ export class UsefulinfoPage {
           // console.log("this.countries[i]", this.countries[i]['name']);
           if (this.countries[i]['name'] == country) {
             this.country = this.countries[i]['name'];
+            console.log("this.country", this.country);
+
+            this.restProvider.getuserInfoWithCountry(this.appID, this.country)
+              .then(data => {
+                console.log("data with country", data);
+                if(data['error']){
+                  this.error = data['error'];
+                  this.informations = [];
+                  this.userInfo = [];
+                } else {
+                  this.error ='';
+                  this.infoarray =  data['paises'];
+                  console.log("ts user data", this.infoarray['datosutiles']);
+                  this.informations = this.infoarray['datosutiles'];
+                  console.log("this.informations", this.informations);
+                 
+                  for(let info of this.informations){
+                    console.log("for loop info", info);
+                    this.userInfo = info['consulados'];
+                    console.log("this.userInfo", this.userInfo);
+                  }
+                }
+            });
+
+            // this.storage.get("isLogin").then((resulst) => {
+            //   console.log("results login status", resulst);
+            //   if(resulst){
+            //     this.corpocustoInfo = true;
+            //     this.travelAgencyInfo = false;
+            //     this.storage.get('appId').then((appID) => {
+            //       console.log('appID ' +appID);
+            //       this.appID = appID;
+            //       this.restProvider.getuserInfoWithCountry(this.appID, this.country)
+            //         .then(data => {
+            //           console.log("data with country", data);
+            //           if(data['error']){
+            //             this.error = data['error'];
+            //             this.informations = [];
+            //             this.userInfo = [];
+            //           } else {
+            //             this.error ='';
+            //             this.infoarray =  data['paises'];
+            //             console.log("ts user data", this.infoarray['datosutiles']);
+            //             this.informations = this.infoarray['datosutiles'];
+            //             console.log("this.informations", this.informations);
+                       
+            //             for(let info of this.informations){
+            //               console.log("for loop info", info);
+            //               this.userInfo = info['consulados'];
+            //               console.log("this.userInfo", this.userInfo);
+            //             }
+            //           }
+            //       });
+            //     });
+            //   } else {
+            //     this.corpocustoInfo = false;
+            //     this.travelAgencyInfo = true;
+            //   }
+            // });
           }
         }
       },
