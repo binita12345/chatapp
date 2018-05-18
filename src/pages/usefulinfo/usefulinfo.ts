@@ -41,14 +41,17 @@ export class UsefulinfoPage {
   informations : any = [];
   userInfo : any = [];
   directionInfo : any;
-
+  getcompanyLogo : any;
   moneda : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public restProvider: RestProvider) {
-
-
-
     // this.getuserInfoData();
+
+    this.storage.get('companyLogo').then((getcompanyLogo) => {
+      console.log('getcompanyLogo',getcompanyLogo);
+      this.getcompanyLogo = getcompanyLogo;
+      console.log('this.getcompanyLogo',this.getcompanyLogo);
+    });
 
     this.storage.get("isLogin").then((resulst) => {
       console.log("results login status", resulst);

@@ -21,6 +21,7 @@ export class TraveladvicePage {
   getdata : any;
   corpocustoTravel : boolean;
   travelAgencyTravel : boolean;
+  getcompanyLogo : any;
 	// advices: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider, public storage: Storage) {
@@ -35,12 +36,17 @@ export class TraveladvicePage {
       console.log('getdata ' +getdata);
       this.getdata = getdata;
     });
-
+    this.storage.get('companyLogo').then((getcompanyLogo) => {
+      console.log('getcompanyLogo',getcompanyLogo);
+      this.getcompanyLogo = getcompanyLogo;
+      console.log('this.getcompanyLogo',this.getcompanyLogo);
+    });
     this.getTravelAdviceData();
 
     this.storage.get("isLogin").then((resulst) => {
-      console.log("results login status", resulst);
+      console.log("results travel advice status", resulst);
       if(resulst){
+        
         this.corpocustoTravel = true;
         this.travelAgencyTravel = false;
       } else {

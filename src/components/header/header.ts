@@ -1,6 +1,7 @@
 import { Component , Input} from '@angular/core';
 import { Storage } from "@ionic/storage";
 import { App, IonicPage, NavController, NavParams } from "ionic-angular";
+import { RestProvider } from '../../providers/rest/rest';
 // import { PassportloginPage } from '../../pages/passportlogin/passportlogin';
 /**
  * Generated class for the HeaderComponent component.
@@ -18,18 +19,61 @@ export class HeaderComponent {
 
     corpocustoHeader : boolean;
     travelAgencyHeader : boolean;
+    appID : any;
+    empresaID : any;
+    companyLogo : any;
 
-  	constructor(public navCtrl: NavController, public appCtrl: App,
-    public app: App,
-    private storage: Storage) {
+  	constructor(public navCtrl: NavController, public app: App, public restProvider: RestProvider, private storage: Storage) {
     	console.log('Hello HeaderComponent Component');
     	this.text = 'Hello World';
 
-      this.storage.get("isLogin").then((resulst) => {
-      console.log("results login status", resulst);
+      // this.storage.get("isLogin").then((resulst) => {
+      //   console.log("results login status", resulst);
+      //   if(resulst){
+      //     this.corpocustoHeader = true;
+      //     this.travelAgencyHeader = false;
+      //   } else {
+      //     this.corpocustoHeader = false;
+      //     this.travelAgencyHeader = true;
+      //   }
+      // });
+
+    this.storage.get("empresaId").then((getempresaID) => {
+      // console.log("getempresaID", getempresaID);
+      this.empresaID = getempresaID;
+    });
+
+    this.storage.get("appId").then((getappID) => {
+      // console.log("getappID", getappID);
+      this.appID = getappID;
+    });
+
+    this.storage.get("isLogin").then((resulst) => {
+      // console.log("results login status", resulst);
       if(resulst){
-        this.corpocustoHeader = true;
-        this.travelAgencyHeader = false;
+
+        // this.appID = this.navParams.get('appId');
+        // console.log("this.appID", this.appID);
+
+        // this.empresaID = this.navParams.get('empresaId');
+        // console.log("this.empresaID", this.empresaID);
+
+        this.restProvider.getCompanyIconImage(this.empresaID, this.appID)
+          .then(data => {
+            // this.rut = data;
+            // if(data['error']){
+            //   this.error = data['error'];
+            //   console.log("this.error", this.error);
+            // } else {
+              // console.log("data", data);
+              this.companyLogo = data['urlarchivo'];
+              this.storage.set('companyLogo', this.companyLogo);
+              this.corpocustoHeader = true;
+              this.travelAgencyHeader = false;
+            // }
+          }).catch(error => {
+            // console.log("rut error", error);
+          });
       } else {
         this.corpocustoHeader = false;
         this.travelAgencyHeader = true;
@@ -38,7 +82,7 @@ export class HeaderComponent {
  	}
 
  	logout(){
- 		console.log("logout");
+ 		// console.log("logout");
  		// const root = this.app.getRootNav();
    //      root.popToRoot("PassportloginPage");
    		this.storage.clear();

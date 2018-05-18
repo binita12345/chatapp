@@ -52,30 +52,30 @@ export class RestProvider {
 	// O en caso contrario entrega la información de todos los países que tiene cargados..
 
 	getuserInfo(appId) {
-		console.log("service user info", appId);
+		// console.log("service user info", appId);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
 	    this.http.get('http://sensussoft.com/ionic/datosutiles.php?app='+appId)
 	      .subscribe(res => {
-	      	console.log("service res", res);
+	      	// console.log("service res", res);
 	        resolve(res);
 	      }, (err) => {
-	      	console.log("service err", err);
+	      	// console.log("service err", err);
 	        reject(err);
 	      });
 	  });
 	}
 
 	getuserInfoWithCountry(appId, Pais) {
-		console.log("service user info with country", appId, Pais);
+		// console.log("service user info with country", appId, Pais);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
 	    this.http.get('http://sensussoft.com/ionic/datosutiles.php?app='+appId+'&&Pais='+Pais)
 	      .subscribe(res => {
-	      	console.log("service res", res);
+	      	// console.log("service res", res);
 	        resolve(res);
 	      }, (err) => {
-	      	console.log("service err", err);
+	      	// console.log("service err", err);
 	        reject(err);
 	      });
 	  });
@@ -85,12 +85,13 @@ export class RestProvider {
   // this service to get all travel advice 
   // This service returns a JSON with all the travel advice in JSON format, with links to the image type contents.
  	getTravelAdvice() {
-	  return new Promise(resolve => {
+	  return new Promise((resolve,reject) => {
 	    this.http.get('http://sensussoft.com/ionic/consejosdeviaje.php').subscribe(data => {
 	      resolve(data);
-	      console.log("travel advice data", data);
-	    }, err => {
-	      console.log(err);
+	      // console.log("travel advice data", data);
+	    }, (err) => {
+	    	reject(err);
+	      // console.log(err);
 	    });
 	  });
 	}
@@ -100,22 +101,22 @@ export class RestProvider {
 	// // This service returns a JSON with the characteristics of the user.
 	// // *RUT = is a number that identifies a chilean national, is a 7-8 sequence number followed by a dash and a number from 0 to 9 or ‘K’. examples: 9456789-K 18934567-4
 	getRut(data) {
-		console.log("service rut data" +data);
+		// console.log("service rut data" +data);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
 	    this.http.get('http://sensussoft.com/ionic/autenticacion.php?rut='+data)
 	      .subscribe(res => {
-	      	console.log("service res", res);
+	      	// console.log("service res", res);
 	        resolve(res);
 	      }, (err) => {
-	      	console.log("service err", err);
+	      	// console.log("service err", err);
 	        reject(err);
 	      });
 	  });
 	}
 
 	getClaveData(rut, clave) {
-		console.log("service clave data", rut, clave);
+		// console.log("service clave data", rut, clave);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
 	    this.http.get('http://sensussoft.com/ionic/autenticacion.php?rut='+rut+'&&clave='+clave)
@@ -148,10 +149,85 @@ export class RestProvider {
 	  return new Promise((resolve, reject) => {
 	    this.http.get('http://sensussoft.com/ionic/telefonosemergencia.php?Rut='+Rut)
 	      .subscribe(res => {
-	      	console.log("service res", res);
+	      	// console.log("service res", res);
+	        resolve(res);
+	      }, (err) => {
+	      	// console.log("service err", err);
+	        reject(err);
+	      });
+	  });
+	}
+
+	// this api Returns the company name and logo.
+	getCompanyIconImage(empresaId, appId) {
+		// console.log("service company logo and name", empresaId, appId);
+	  return new Promise((resolve, reject) => {
+	    this.http.get('http://sensussoft.com/ionic/iconoempresa.php?empresa='+empresaId+'&&App='+appId)
+	      .subscribe(res => {
+	      	// console.log("service res" +JSON.stringify(res));
+	        resolve(res);
+	      }, (err) => {
+	      	// console.log("service err", err);
+	        reject(err);
+	      });
+	  });
+	}
+
+	// It delivers the JID with which it corresponds to connect in the CHAT.
+	getJIDtoChat(Rut, appId) {
+		console.log("service to get chat", Rut, appId);
+	  return new Promise((resolve, reject) => {
+	    this.http.get('http://sensussoft.com/ionic/solicitarjidejecutivo.php?Rut='+Rut+'&&App='+appId)
+	      .subscribe(res => {
+	      	console.log("service res" +JSON.stringify(res));
 	        resolve(res);
 	      }, (err) => {
 	      	console.log("service err", err);
+	        reject(err);
+	      });
+	  });
+	}
+
+	// // It delivers the JID with which it corresponds to connect in the CHAT.
+	getChatHistory(senderJID) {
+		console.log("service to get chat history", senderJID);
+	  return new Promise((resolve, reject) => {
+	    this.http.get('http://sensussoft.com/ionic/historialdechat.php?JID='+senderJID)
+	      .subscribe(res => {
+	      	console.log("service res",res);
+	        resolve(res);
+	      }, (err) => {
+	      	console.log("service err", err);
+	        reject(err);
+	      });
+	  });
+	}
+
+	// It delivers the JID with which it corresponds to connect in the CHAT.
+	addMessageSent(sentData) {
+		console.log("service to get chat history" ,sentData);
+	  return new Promise((resolve, reject) => {
+	    this.http.post('http://sensussoft.com/ionic/mensajenviado.php',JSON.stringify(sentData))
+	      .subscribe(res => {
+	      	console.log("service res",res);
+	        resolve(res);
+	      }, (err) => {
+	      	console.log("service err", err);
+	        reject(err);
+	      });
+	  });
+	}
+
+	// this api Returns the company name and logo.
+	getRecoverClave(Rut, appId) {
+		// console.log("service to get recover password", Rut, appId);
+	  return new Promise((resolve, reject) => {
+	    this.http.get('http://sensussoft.com/ionic/rescatarclave.php?Rut='+Rut+'&&App='+appId)
+	      .subscribe(res => {
+	      	// console.log("service res" +JSON.stringify(res));
+	        resolve(res);
+	      }, (err) => {
+	      	// console.log("service err", err);
 	        reject(err);
 	      });
 	  });

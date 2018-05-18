@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { RestProvider } from '../../providers/rest/rest';
 /**
  * Generated class for the UsefulinfoPage page.
  *
@@ -17,53 +18,139 @@ import { Storage } from '@ionic/storage';
  * Ionic pages and navigation.
  */
 var UsefulinfoPage = /** @class */ (function () {
-    function UsefulinfoPage(navCtrl, navParams, storage) {
+    function UsefulinfoPage(navCtrl, navParams, storage, restProvider) {
+        // this.getuserInfoData();
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.storage = storage;
-        // countries : any;
-        this.options = [];
-        this.storage.get('rutdata').then(function (getdata) {
-            console.log('getdata ' + getdata);
-            _this.getdata = getdata;
+        this.restProvider = restProvider;
+        this.error = '';
+        this.infoarray = [];
+        this.informations = [];
+        this.userInfo = [];
+        this.storage.get('companyLogo').then(function (getcompanyLogo) {
+            console.log('getcompanyLogo', getcompanyLogo);
+            _this.getcompanyLogo = getcompanyLogo;
+            console.log('this.getcompanyLogo', _this.getcompanyLogo);
         });
-        this.options = [
-            {
-                "name": "India",
+        this.storage.get("isLogin").then(function (resulst) {
+            console.log("results login status", resulst);
+            if (resulst) {
+                _this.corpocustoInfo = true;
+                _this.travelAgencyInfo = false;
+                _this.storage.get('appId').then(function (appID) {
+                    console.log('appID ' + appID);
+                    _this.appID = appID;
+                    _this.restProvider.getuserInfo(_this.appID)
+                        .then(function (data) {
+                        _this.infoarray = data;
+                        console.log("ts user data", _this.infoarray['datosutiles']);
+                        _this.informations = _this.infoarray['datosutiles'];
+                        console.log("this.informations", _this.informations);
+                        for (var _i = 0, _a = _this.informations; _i < _a.length; _i++) {
+                            var info = _a[_i];
+                            console.log("for loop info", info);
+                            _this.userInfo = info['consulados'];
+                            console.log("this.userInfo", _this.userInfo);
+                        }
+                    });
+                });
             }
-        ];
-        // this.currency = "currency"
-        // this.capitalcity = "Capital City"
-        // this.idiom = "Idiom"
-        // this.numone = "Phone Number 01"
-        // this.numtwo = "Phone Number 02"
-        // this.numthree = "Phone Number 03"
-        // this.address = "Address"
-        // this.emailadd = "Email Address 01"
-        this.currency = "";
-        this.capitalcity = "";
-        this.idiom = "";
-        this.numone = "";
-        this.numtwo = "";
-        this.numthree = "";
-        this.address = "";
-        this.emailadd = "";
+            else {
+                _this.corpocustoInfo = false;
+                _this.travelAgencyInfo = true;
+            }
+        });
     }
-    //  optionsFn() {
-    //   console.log(this.countries);
-    //   let item = this.countries;
-    // }
+    UsefulinfoPage.prototype.onCountryChange = function (country) {
+        var _this = this;
+        console.log("country ", country);
+        this.restProvider.getCountries()
+            .subscribe(function (countries) {
+            // console.log("get countries from api", countries);
+            _this.countries = countries;
+            for (var i = 0; i < _this.countries.length; i++) {
+                // console.log("this.countries[i]", this.countries[i]['name']);
+                if (_this.countries[i]['name'] == country) {
+                    _this.country = _this.countries[i]['name'];
+                    console.log("this.country", _this.country);
+                    _this.restProvider.getuserInfoWithCountry(_this.appID, _this.country)
+                        .then(function (data) {
+                        console.log("data with country", data);
+                        if (data['error']) {
+                            _this.error = data['error'];
+                            _this.informations = [];
+                            _this.userInfo = [];
+                        }
+                        else {
+                            _this.error = '';
+                            _this.infoarray = data['paises'];
+                            console.log("ts user data", _this.infoarray['datosutiles']);
+                            _this.informations = _this.infoarray['datosutiles'];
+                            console.log("this.informations", _this.informations);
+                            for (var _i = 0, _a = _this.informations; _i < _a.length; _i++) {
+                                var info = _a[_i];
+                                console.log("for loop info", info);
+                                _this.userInfo = info['consulados'];
+                                console.log("this.userInfo", _this.userInfo);
+                            }
+                        }
+                    });
+                    // this.storage.get("isLogin").then((resulst) => {
+                    //   console.log("results login status", resulst);
+                    //   if(resulst){
+                    //     this.corpocustoInfo = true;
+                    //     this.travelAgencyInfo = false;
+                    //     this.storage.get('appId').then((appID) => {
+                    //       console.log('appID ' +appID);
+                    //       this.appID = appID;
+                    //       this.restProvider.getuserInfoWithCountry(this.appID, this.country)
+                    //         .then(data => {
+                    //           console.log("data with country", data);
+                    //           if(data['error']){
+                    //             this.error = data['error'];
+                    //             this.informations = [];
+                    //             this.userInfo = [];
+                    //           } else {
+                    //             this.error ='';
+                    //             this.infoarray =  data['paises'];
+                    //             console.log("ts user data", this.infoarray['datosutiles']);
+                    //             this.informations = this.infoarray['datosutiles'];
+                    //             console.log("this.informations", this.informations);
+                    //             for(let info of this.informations){
+                    //               console.log("for loop info", info);
+                    //               this.userInfo = info['consulados'];
+                    //               console.log("this.userInfo", this.userInfo);
+                    //             }
+                    //           }
+                    //       });
+                    //     });
+                    //   } else {
+                    //     this.corpocustoInfo = false;
+                    //     this.travelAgencyInfo = true;
+                    //   }
+                    // });
+                }
+            }
+        }, function (error) {
+            console.log("get country err", error);
+            // this.errorMessage = <any>error
+        });
+    };
     UsefulinfoPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad UsefulinfoPage');
+        this.onCountryChange(this.country);
+    };
+    UsefulinfoPage.prototype.ngOnInit = function () {
+        this.onCountryChange(this.country);
     };
     UsefulinfoPage.prototype.goback = function () {
-        if (this.getdata == '') {
-            this.navCtrl.push("NotlogedinPage");
-        }
-        else {
-            this.navCtrl.push("MenuPage");
-        }
+        // if(this.getdata == ''){
+        //   this.navCtrl.push("NotlogedinPage");
+        // } else {
+        this.navCtrl.push("MenuPage");
+        // }
         // this.navCtrl.pop();
         // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
         // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
@@ -78,7 +165,7 @@ var UsefulinfoPage = /** @class */ (function () {
             selector: 'page-usefulinfo',
             templateUrl: 'usefulinfo.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, Storage])
+        __metadata("design:paramtypes", [NavController, NavParams, Storage, RestProvider])
     ], UsefulinfoPage);
     return UsefulinfoPage;
 }());

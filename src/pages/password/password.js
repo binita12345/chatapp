@@ -71,7 +71,22 @@ var PasswordPage = /** @class */ (function () {
                 .then(function (data) {
                 // this.rut = data;
                 console.log("clave api data", data);
-                _this.navCtrl.push("MenuPage");
+                _this.appID = data['appid'];
+                _this.storage.set('appId', _this.appID);
+                _this.empresaID = data['idempresa'];
+                _this.storage.set('empresaId', _this.empresaID);
+                console.log("clave data error", data['error']);
+                if (data['error']) {
+                    _this.error = data['error'];
+                }
+                else {
+                    _this.storage.set('isLogin', true);
+                    console.log("data rut", data['RUT']);
+                    _this.storage.set('RUT', data['RUT']);
+                    _this.JID = data['JID'];
+                    _this.storage.set('senderJID', _this.JID);
+                    _this.navCtrl.push("MenuPage", { 'Rut': data['RUT'], 'senderJID': _this.JID });
+                }
             });
         }
     };

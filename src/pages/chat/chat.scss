@@ -15,6 +15,13 @@ page-chat {
   // .platform-wp .headuser{
   //     margin-top: 35px !important;
   // }
+  .message-wrap .message .user-img {
+    position: absolute;
+    border-radius: 45px;
+    width: 50px !important;
+    height: 50px !important; 
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.36);
+  }
   .message-wrap .message.right .msg-content {
     background-color: #FFFFFF !important;
     float: right; 

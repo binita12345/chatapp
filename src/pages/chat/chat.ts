@@ -6,6 +6,7 @@ import { Events, Content } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 import moment from 'moment';
+import { RestProvider } from '../../providers/rest/rest';
 /**
  * Generated class for the ChatPage page.
  *
@@ -26,26 +27,81 @@ export class ChatPage {
 
   @ViewChild(Content) content: Content;
   @ViewChild('chat_input') messageInput: ElementRef;
-  msgList: ChatMessage[] = [];
+  msgArray: ChatMessage[] = [];
   user: UserInfo;
   toUser: UserInfo;
   editorMsg = '';
   showEmojiPicker = false;
   getdata : any;
-  corpocustoHeader : boolean;
-  travelAgencyHeader : boolean;
-  corpocustoContent : boolean;
-  travelAgencyContent : boolean;
+  reciverJID : any;
+  name : any;
+  senderJID : any;
+  message : any;
+  // msgArray : any;
+  messages : any;
+  // corpocustoHeader : boolean;
+  // travelAgencyHeader : boolean;
+  // corpocustoContent : boolean;
+  // travelAgencyContent : boolean;
 
   // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private toastCtrl: ToastController) {
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController,private chatService: ChatService,
-              private events: Events, public storage: Storage) {
+              private events: Events, public storage: Storage, public restProvider: RestProvider) {
 
     this.storage.get('rutdata').then((getdata) => {
       console.log('getdata ' +getdata);
       this.getdata = getdata;
     });
+    
+    this.storage.get('reciverJID').then((reciverJID) => {
+      console.log('reciverJID ' +reciverJID);
+      this.reciverJID = reciverJID;
+    });
+    this.storage.get("isLogin").then((resulst) => {
+      console.log("results login status chat page", resulst);
+      if(resulst){
+        this.storage.get("senderJID").then((getsenderJID) => {
+          console.log("getsenderJID", getsenderJID);
+          this.senderJID = getsenderJID;
+          this.restProvider.getChatHistory(this.senderJID)
+            .then(data => {
+              // console.log("get msg history api data", data);
+              this.msgArray = data['historialdechat'];
+              // console.log("this.msgArray", this.msgArray);
+              // console.log("this.msgArray['idremitente']", this.msgArray['idremitente']);
+              for(let msgs of this.msgArray){
+                console.log("getting msgs", msgs);
+                this.messages = msgs;
+                console.log("this.messages['idremitente']", this.messages['idremitente']);
+                console.log("this.reciverJID", this.reciverJID);
+                if(this.messages['idremitente'] == this.reciverJID){
+                  this.toUser.id = this.messages['idremitente'];
+                } else {
+                  this.user = this.messages['idremitente'];
+                }
+              }
+              // console.log("getting messages", this.messages);
+              // if(idremitente == this.reciverJID){
 
+              // }
+
+            }).catch(error => {
+              console.log("rut error", error);
+            });
+        });
+      } 
+    });
+    // this.reciverJID = this.navParams.get('reciverJID');
+    // console.log("this.reciverJID", this.reciverJID);
+
+    // this.senderJID = this.navParams.get('senderJID');
+    // console.log("this.senderJID", this.senderJID);
+    // this.name = this.navParams.get('name');
+    // console.log("this.name", this.name);
+    this.storage.get("name").then((getname) => {
+      console.log("getname", getname);
+      this.name = getname;
+    });
     this.toUser = {
       id: navParams.get('toUserId'),
       name: navParams.get('toUserName')
@@ -56,20 +112,20 @@ export class ChatPage {
       this.user = res
     });
 
-    this.storage.get("isLogin").then((resulst) => {
-      console.log("results login status", resulst);
-      if(resulst){
-        this.corpocustoHeader = true;
-        this.travelAgencyHeader = false;
-        this.corpocustoContent = true;
-        this.travelAgencyContent = false;
-      } else {
-        this.corpocustoHeader = false;
-        this.travelAgencyHeader = true;
-        this.corpocustoContent = false;
-        this.travelAgencyContent = true;
-      }
-    });
+    // this.storage.get("isLogin").then((resulst) => {
+    //   console.log("results login status", resulst);
+    //   if(resulst){
+    //     this.corpocustoHeader = true;
+    //     this.travelAgencyHeader = false;
+    //     this.corpocustoContent = true;
+    //     this.travelAgencyContent = false;
+    //   } else {
+    //     this.corpocustoHeader = false;
+    //     this.travelAgencyHeader = true;
+    //     this.corpocustoContent = false;
+    //     this.travelAgencyContent = true;
+    //   }
+    // });
   	// this.nickname = this.navParams.get('nickname');
  
     // this.getMessages().subscribe(message => {
@@ -84,6 +140,7 @@ export class ChatPage {
     //     this.showToast('User joined: ' + user);
     //   }
     // });
+    
 
   }
   ionViewWillLeave() {
@@ -93,7 +150,7 @@ export class ChatPage {
 
   ionViewDidEnter() {
     //get message list
-    this.getMsg();
+    // this.getMsg();
 
     // Subscribe to received  new message events
     this.events.subscribe('chat:received', msg => {
@@ -117,24 +174,42 @@ export class ChatPage {
     this.scrollToBottom();
   }
 
-  /**
-   * @name getMsg
-   * @returns {Promise<ChatMessage[]>}
-   */
-  getMsg() {
-    // Get mock message list
-    return this.chatService
-    .getMsgList()
-    .subscribe(res => {
-      this.msgList = res;
-      this.scrollToBottom();
-    });
-  }
+  // /**
+  //  * @name getMsg
+  //  * @returns {Promise<ChatMessage[]>}
+  //  */
+  // getMsg() {
+  //   // // Get mock message list
+  //   // return this.chatService
+  //   // .getmsgArray()
+  //   // .subscribe(res => {
+  //   //   this.msgArray = res;
+  //   //   this.scrollToBottom();
+  //   // });
+    
+
+
+  // }
 
   /**
    * @name sendMsg
    */
   sendMsg() {
+    console.log("this.message", this.message);
+    let sentData = {
+      'JID' : this.senderJID,
+      'jid' : this.reciverJID,
+      'mensaje' : this.message
+    }
+    console.log("sentData", sentData);
+    this.restProvider.addMessageSent(sentData)
+      .then(data => {
+        console.log("sent msg api data", data);
+
+      }).catch(error => {
+        console.log("rut error", error);
+      });
+
     if (!this.editorMsg.trim()) return;
 
     // Mock message
@@ -145,8 +220,8 @@ export class ChatPage {
       userName: this.user.name,
       userAvatar: this.user.avatar,
       toUserId: this.toUser.id,
-      time: moment().format('LT'),
-      message: this.editorMsg,
+      hora: moment().format('LT'),
+      mensaje: this.editorMsg,
       status: 'pending'
     };
 
@@ -161,7 +236,7 @@ export class ChatPage {
     .then(() => {
       let index = this.getMsgIndexById(id);
       if (index !== -1) {
-        this.msgList[index].status = 'success';
+        this.msgArray[index].status = 'success';
       }
     })
   }
@@ -175,15 +250,15 @@ export class ChatPage {
       toUserId = this.toUser.id;
     // Verify user relationships
     if (msg.userId === userId && msg.toUserId === toUserId) {
-      this.msgList.push(msg);
+      this.msgArray.push(msg);
     } else if (msg.toUserId === userId && msg.userId === toUserId) {
-      this.msgList.push(msg);
+      this.msgArray.push(msg);
     }
     this.scrollToBottom();
   }
 
   getMsgIndexById(id: string) {
-    return this.msgList.findIndex(e => e.messageId === id)
+    return this.msgArray.findIndex(e => e.messageId === id)
   }
 
   scrollToBottom() {

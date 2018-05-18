@@ -11,8 +11,8 @@ export class ChatMessage {
   userName: string;
   userAvatar: string;
   toUserId: string;
-  time: number | string;
-  message: string;
+  hora: number | string;
+  mensaje: string;
   status: string;
 }
 
@@ -32,12 +32,12 @@ export class ChatService {
   mockNewMsg(msg) {
     const mockMsg: ChatMessage = {
       messageId: Date.now().toString(),
-      userId: '210000198410281948',
+      userId: 'correos%gearlabs.cl@demo.radeon.cl',
       userName: 'Hancock',
-      userAvatar: './assets/to-user.jpg',
-      toUserId: '140000198202211138',
-      time: moment().format('LT'),
-      message: msg.message,
+      userAvatar: 'assets/imgs/Marqueta/ad.png',
+      toUserId: 'kkskdkskdsk@dkdkdfddk.cl',
+      hora: moment().format('LT'),
+      mensaje: msg.mensaje,
       status: 'success'
     };
 
@@ -59,9 +59,9 @@ export class ChatService {
 
   getUserInfo(): Promise<UserInfo> {
     const userInfo: UserInfo = {
-      id: '140000198202211138',
+      id: 'kkskdkskdsk@dkdkdfddk.cl',
       name: 'Luff',
-      avatar: './assets/user.jpg'
+      avatar: 'assets/imgs/Marqueta/dgs.png'
     };
     return new Promise(resolve => resolve(userInfo));
   }

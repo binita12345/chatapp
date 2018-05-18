@@ -45,7 +45,7 @@
           <!-- <img src="assets/imgs/Marqueta/left-arrow.png" style="max-height: 25px;" (click)="goback()"> -->
       </ion-col>
       <ion-col col-9 col-xl-9>
-          <p class="chathead"><b style="color: #5BA870;">Binita Doriwala</b><br/>Offline now</p>
+          <p class="chathead"><b style="color: #5BA870;">{{name}}</b><br/>Offline now</p>
           <!-- <ion-lable>Sarah Jessica</ion-lable> -->
       </ion-col>
       <!-- <ion-col col-2 col-xl-2>
@@ -55,18 +55,18 @@
   </ion-grid>
   <div class="message-wrap">
     
-    <div *ngFor="let msg of msgList"
+    <div *ngFor="let msg of msgArray"
          class="message"
-         [class.left]=" msg.userId === toUser.id "
-         [class.right]=" msg.userId === user.id ">
+         [class.left]=" msg.idremitente === toUser.id "
+         [class.right]=" msg.idremitente === user.id ">
 
-         {{msg | json}}
+         <!-- {{msg | json}} -->
       <img class="user-img" [src]="msg.userAvatar" alt="" src="">
-      <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner>
+      <!-- <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner> -->
       <div class="msg-detail">
         <div class="msg-content">
           <span class="triangle"></span>
-          <p class="line-breaker ">{{msg.message}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{msg.time}}</p>
+          <p class="line-breaker ">{{msg.mensaje}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{msg.hora}}</p>
         </div>
       </div>
     </div>

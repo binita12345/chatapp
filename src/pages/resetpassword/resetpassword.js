@@ -10,8 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
-import { EmailValidator } from '../../validators/email';
+import { RutValidator } from '../../validators/rut';
 import { Loader } from "../../providers/loader/loader";
+import { RestProvider } from '../../providers/rest/rest';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the ResetpasswordPage page.
  *
@@ -19,15 +21,31 @@ import { Loader } from "../../providers/loader/loader";
  * Ionic pages and navigation.
  */
 var ResetpasswordPage = /** @class */ (function () {
-    function ResetpasswordPage(navCtrl, navParams, plt, formBuilder, loader, toastCtrl) {
+    function ResetpasswordPage(navCtrl, navParams, plt, formBuilder, loader, toastCtrl, restProvider, storage) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.plt = plt;
         this.formBuilder = formBuilder;
         this.loader = loader;
         this.toastCtrl = toastCtrl;
+        this.restProvider = restProvider;
+        this.storage = storage;
+        this.storage.get("isPassportLogin").then(function (resulst) {
+            console.log("results passport login status", resulst);
+            if (resulst) {
+                _this.storage.get("rut").then(function (getRut) {
+                    console.log("getRut", getRut);
+                    _this.rut = getRut;
+                });
+                _this.storage.get("appid").then(function (getappid) {
+                    console.log("getappid", getappid);
+                    _this.appid = getappid;
+                });
+            }
+        });
         this.resetForm = formBuilder.group({
-            email: ['', Validators.compose([Validators.required, EmailValidator.isValid])]
+            rut: ['', Validators.compose([Validators.required, RutValidator.isValid])]
         });
         if (this.plt.is('ios')) {
             // This will only print when on iOS
@@ -42,24 +60,52 @@ var ResetpasswordPage = /** @class */ (function () {
     ResetpasswordPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ResetpasswordPage');
     };
-    ResetpasswordPage.prototype.reset = function () {
-        this.error = '';
-        this.loader.show('Please Wait');
-        var email = this.resetForm.value.email;
-        // this._AuthProvider.resetPasswordEmail(email).then(
-        //     (res) => {   
-        if (email) {
-            this.loader.hide();
-            var toastSuccess = this.toastCtrl.create({
-                message: 'Password reset Link sent, please check your mail!',
-                duration: 6000,
-                position: 'top',
-                showCloseButton: true,
-                closeButtonText: 'X',
-                cssClass: "toast-success",
-            });
-            toastSuccess.present();
+    ResetpasswordPage.prototype.onChange = function () {
+        if (this.resetForm.value.rut.length > -1) {
+            this.error = '';
         }
+    };
+    ResetpasswordPage.prototype.reset = function () {
+        var _this = this;
+        // this.error = ''
+        // this.loader.show('Please Wait'); 
+        var rut = this.resetForm.value.rut;
+        console.log("reset rut", rut);
+        console.log("this.rut", this.rut);
+        console.log("this.appid", this.appid);
+        this.restProvider.getRecoverClave(rut, this.appid)
+            .then(function (data) {
+            // this.rut = data;
+            console.log("data", data);
+            // this.empresaID = data['idempresa'];
+            // console.log("passport this.empresaID", this.empresaID);
+            // this.storage.set('empresaId', this.empresaID);
+            console.log("data error", data['error']);
+            if (data['error']) {
+                _this.error = data['error'];
+            }
+            else {
+                _this.error = '';
+                // this.storage.set('rutdata', this.passportloginForm.value.usuario);
+                // this.navCtrl.push("PasswordPage", {rut: data['RUT']});
+            }
+        }).catch(function (error) {
+            console.log("rut error", error);
+        });
+        // this._AuthProvider.resetPasswordrut(rut).then(
+        //     (res) => {   
+        // if(rut){
+        // 	this.loader.hide();        
+        //      	let toastSuccess = this.toastCtrl.create({
+        //      message: 'Password reset Link sent, please check your mail!',
+        //      duration: 6000,
+        //      position: 'top',
+        //      showCloseButton:true,
+        //      closeButtonText:'X',
+        //      cssClass: "toast-success",
+        //  });
+        //  toastSuccess.present();
+        // } 
         // },
         //   (err) => {
         //     this.loader.hide();
@@ -73,7 +119,8 @@ var ResetpasswordPage = /** @class */ (function () {
             selector: 'page-resetpassword',
             templateUrl: 'resetpassword.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, Platform, FormBuilder, Loader, ToastController])
+        __metadata("design:paramtypes", [NavController, NavParams, Platform, FormBuilder,
+            Loader, ToastController, RestProvider, Storage])
     ], ResetpasswordPage);
     return ResetpasswordPage;
 }());

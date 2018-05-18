@@ -23,6 +23,7 @@ export class PassportloginPage {
 	public passportloginForm:FormGroup;  
   error : any = '';
   rut : any;
+  empresaID : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, 
               private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider, public storage: Storage) {
@@ -74,38 +75,34 @@ export class PassportloginPage {
       .then(data => {
         // this.rut = data;
         console.log("data", data);
+        this.empresaID = data['idempresa'];
+        console.log("passport this.empresaID", this.empresaID);
+        this.storage.set('empresaId', this.empresaID);
+        this.storage.set('rut', data['RUT']);
+        this.storage.set('appid', data['appid']);
+
         console.log("data error", data['error']);
 
         if(data['error']){
           this.error = data['error'];
         } else {
+          this.storage.set('isPassportLogin', true);
           // this.storage.set('rutdata', this.passportloginForm.value.usuario);
           this.navCtrl.push("PasswordPage", {rut: data['RUT']});
 
         }
-        // this.navCtrl.push("PasswordPage");
-        // if(data == "RUT no existe"){
-
-        // }
-        // console.log(this.rut);
       }).catch(error => {
         console.log("rut error", error);
       });
-      
-
     }
-  	// if(this.passportloginForm.value.usuario.length > 0){
-   //    this.errors = false;
-   //  }
   }
 
   gotonotlogedin(){
     this.error = '';
+    this.storage.remove('isPassportLogin');
+    this.storage.remove('isLogin');
+    console.log("clicked on skip");
+    
     this.navCtrl.push("MenuPage");
   }
-
-  // keyboardCheck() {
-  //    return !this.keyboard.show();
-  // }
-
 }

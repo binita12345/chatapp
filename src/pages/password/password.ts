@@ -23,6 +23,8 @@ export class PasswordPage {
   error : any;
   rut : any;
   appID : any;
+  empresaID : any;
+  JID : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, 
               private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider, public storage: Storage) {
@@ -79,9 +81,11 @@ export class PasswordPage {
         // this.rut = data;
         console.log("clave api data", data);
 
-        this.appID = data['idempresa'];
+        this.appID = data['appid'];
         this.storage.set('appId', this.appID);
-        
+        this.empresaID = data['idempresa'];
+        this.storage.set('empresaId', this.empresaID);
+
         console.log("clave data error", data['error']);
 
         if(data['error']){
@@ -90,6 +94,10 @@ export class PasswordPage {
           this.storage.set('isLogin', true);
           console.log("data rut", data['RUT']);
           this.storage.set('RUT', data['RUT']);
+          this.JID = data['JID'];
+          console.log("this.JID ", this.JID);
+          this.storage.set('senderJID', this.JID);
+
           this.navCtrl.push("MenuPage", {'Rut' : data['RUT']});
         }
       });

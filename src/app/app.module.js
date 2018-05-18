@@ -15,6 +15,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 // import { MenuPage } from '../pages/menu/menu';
 import { PassportloginPage } from '../pages/passportlogin/passportlogin';
+import { PassportloginPageModule } from '../pages/passportlogin/passportlogin.module';
 // import { NotlogedinPage } from '../pages/notlogedin/notlogedin';
 import { HeaderComponent } from '../components/header/header';
 import { HeaderComponentModule } from '../components/header/header.module';
@@ -25,8 +26,8 @@ import { Loader } from '../providers/loader/loader';
 import { EmojiProvider } from '../providers/emoji';
 import { HttpClientModule } from "@angular/common/http";
 import { RestProvider } from '../providers/rest/rest';
-// const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
-// import { MenuPageModule } from '../pages/menu/menu';
+import { SocketIoModule } from 'ng-socket-io';
+var config = { url: 'http://localhost:3001', options: {} };
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -35,7 +36,6 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 MyApp,
                 HomePage,
-                PassportloginPage,
             ],
             imports: [
                 HttpClientModule,
@@ -43,9 +43,9 @@ var AppModule = /** @class */ (function () {
                 IonicModule.forRoot(MyApp),
                 IonicStorageModule.forRoot(),
                 HeaderComponentModule,
-                FooterComponentModule
-                // SocketIoModule.forRoot(config)
-                // PassportloginPageModule
+                FooterComponentModule,
+                SocketIoModule.forRoot(config),
+                PassportloginPageModule
             ],
             bootstrap: [IonicApp],
             entryComponents: [

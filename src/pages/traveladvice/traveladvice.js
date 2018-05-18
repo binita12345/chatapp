@@ -36,7 +36,23 @@ var TraveladvicePage = /** @class */ (function () {
             console.log('getdata ' + getdata);
             _this.getdata = getdata;
         });
+        this.storage.get('companyLogo').then(function (getcompanyLogo) {
+            console.log('getcompanyLogo', getcompanyLogo);
+            _this.getcompanyLogo = getcompanyLogo;
+            console.log('this.getcompanyLogo', _this.getcompanyLogo);
+        });
         this.getTravelAdviceData();
+        this.storage.get("isLogin").then(function (resulst) {
+            console.log("results travel advice status", resulst);
+            if (resulst) {
+                _this.corpocustoTravel = true;
+                _this.travelAgencyTravel = false;
+            }
+            else {
+                _this.corpocustoTravel = false;
+                _this.travelAgencyTravel = true;
+            }
+        });
     }
     TraveladvicePage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad TraveladvicePage');
@@ -45,12 +61,11 @@ var TraveladvicePage = /** @class */ (function () {
         // this.navCtrl.pop();
         // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
         // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
-        if (this.getdata == '') {
-            this.navCtrl.push("NotlogedinPage");
-        }
-        else {
-            this.navCtrl.push("MenuPage");
-        }
+        // if(this.getdata == ''){
+        //   this.navCtrl.push("NotlogedinPage");
+        // } else {
+        this.navCtrl.push("MenuPage");
+        // }
         // this.navCtrl.push("MenuPage");
         // this.navCtrl.popToRoot();
         // this.navCtrl.canGoBack();

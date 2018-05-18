@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { map } from 'rxjs/operators/map';
 import { HttpClient } from "@angular/common/http";
+import moment from 'moment';
 var ChatMessage = /** @class */ (function () {
     function ChatMessage() {
     }
@@ -34,14 +35,14 @@ var ChatService = /** @class */ (function () {
             messageId: Date.now().toString(),
             userId: '210000198410281948',
             userName: 'Hancock',
-            userAvatar: './assets/to-user.jpg',
+            userAvatar: 'assets/imgs/Marqueta/ad.png',
             toUserId: '140000198202211138',
-            time: Date.now(),
+            time: moment().format('LT'),
             message: msg.message,
             status: 'success'
         };
         setTimeout(function () {
-            _this.events.publish('chat:received', mockMsg, Date.now());
+            _this.events.publish('chat:received', mockMsg, moment().format('LT'));
         }, Math.random() * 1800);
     };
     ChatService.prototype.getMsgList = function () {
@@ -58,7 +59,7 @@ var ChatService = /** @class */ (function () {
         var userInfo = {
             id: '140000198202211138',
             name: 'Luff',
-            avatar: './assets/user.jpg'
+            avatar: 'assets/imgs/Marqueta/dgs.png'
         };
         return new Promise(function (resolve) { return resolve(userInfo); });
     };

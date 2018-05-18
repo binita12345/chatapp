@@ -56,7 +56,7 @@ var PassportloginPage = /** @class */ (function () {
         var _this = this;
         console.log("login by passport");
         console.log("rut data", this.passportloginForm.value.usuario);
-        this.storage.set('rutdata', this.passportloginForm.value.usuario);
+        // this.storage.set('rutdata', this.passportloginForm.value.usuario);
         var rutData = this.passportloginForm.value.usuario;
         console.log(this.passportloginForm.value.usuario.length);
         if (this.passportloginForm.value.usuario == '' || this.passportloginForm.value.usuario.length == 0) {
@@ -69,17 +69,33 @@ var PassportloginPage = /** @class */ (function () {
             // this.storage.set('rutdata', rutData);
             this.restProvider.getRut(rutData)
                 .then(function (data) {
-                _this.rut = data;
-                console.log(_this.rut);
-                _this.navCtrl.push("PasswordPage", { rut: rutData });
+                // this.rut = data;
+                console.log("data", data);
+                _this.empresaID = data['idempresa'];
+                console.log("passport this.empresaID", _this.empresaID);
+                _this.storage.set('empresaId', _this.empresaID);
+                _this.storage.set('rut', data['RUT']);
+                _this.storage.set('appid', data['appid']);
+                console.log("data error", data['error']);
+                if (data['error']) {
+                    _this.error = data['error'];
+                }
+                else {
+                    _this.storage.set('isPassportLogin', true);
+                    // this.storage.set('rutdata', this.passportloginForm.value.usuario);
+                    _this.navCtrl.push("PasswordPage", { rut: data['RUT'] });
+                }
+            }).catch(function (error) {
+                console.log("rut error", error);
             });
         }
-        // if(this.passportloginForm.value.usuario.length > 0){
-        //    this.errors = false;
-        //  }
     };
     PassportloginPage.prototype.gotonotlogedin = function () {
-        this.navCtrl.push("NotlogedinPage");
+        this.storage.remove('isPassportLogin');
+        this.storage.remove('isLogin');
+        console.log("clicked on skip");
+        this.error = '';
+        this.navCtrl.push("MenuPage");
     };
     PassportloginPage = __decorate([
         IonicPage(),

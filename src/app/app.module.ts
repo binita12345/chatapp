@@ -23,9 +23,8 @@ import { EmojiProvider } from '../providers/emoji';
 import { HttpClientModule } from "@angular/common/http";
 import { RestProvider } from '../providers/rest/rest';
 
-
-// const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
-// import { MenuPageModule } from '../pages/menu/menu';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 
 @NgModule({
   declarations: [
@@ -41,7 +40,7 @@ import { RestProvider } from '../providers/rest/rest';
     IonicStorageModule.forRoot(),
     HeaderComponentModule,
     FooterComponentModule,
-    // SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
     PassportloginPageModule
 
   ],

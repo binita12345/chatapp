@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PassportloginPage } from './passportlogin';
-import { FooterComponentModule } from '../../components/footer/footer.module';
+import { HeaderComponentModule } from '../../components/header/header.module';
 var PassportloginPageModule = /** @class */ (function () {
     function PassportloginPageModule() {
     }
@@ -18,7 +18,7 @@ var PassportloginPageModule = /** @class */ (function () {
             ],
             imports: [
                 IonicPageModule.forChild(PassportloginPage),
-                FooterComponentModule
+                HeaderComponentModule
             ],
         })
     ], PassportloginPageModule);
