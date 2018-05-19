@@ -19,7 +19,7 @@ import { AlertController } from 'ionic-angular';
 })
 export class MenuPage {
 
-  toUser : {toUserId: string, toUserName: string};
+  // toUser : {toUserId: string, toUserName: string};
   // corpocustoHeader : boolean;
   // travelAgencyHeader : boolean;
   corpocustoContent : boolean;
@@ -133,10 +133,10 @@ export class MenuPage {
           // console.log(" this.senderJID",  this.senderJID);
           // this.storage.set('senderJID', this.senderJID)
 
-          this.toUser = {
-            toUserId: this.jid,
-            toUserName: data['nombre']
-          }
+          // this.toUser = {
+          //   toUserId: this.jid,
+          //   toUserName: data['nombre']
+          // }
           this.navCtrl.push("ChatPage", {'reciverJID' : this.jid});
         }
         

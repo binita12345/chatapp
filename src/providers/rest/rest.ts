@@ -4,7 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { Events } from 'ionic-angular';
+import { map } from 'rxjs/operators/map';
+import moment from 'moment';
 
 /*
   Generated class for the RestProvider provider.
@@ -12,6 +15,21 @@ import { map, catchError } from 'rxjs/operators';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
+export class ChatMessage {
+  messageId: string;
+  JID: string;
+  jid: string;
+  hora: number | string;
+  mensaje: string;
+}
+
+export class UserInfo {
+  id: string;
+  name?: string;
+  avatar?: string;
+}
+
 @Injectable()
 export class RestProvider {
 
@@ -20,7 +38,7 @@ export class RestProvider {
 
 	// apiUrl = 'http://192.168.0.102:8080/ionic/consejosdeviaje.php';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private events: Events) {
     console.log('Hello RestProvider Provider');
   }
 
@@ -205,9 +223,12 @@ export class RestProvider {
 
 	// It delivers the JID with which it corresponds to connect in the CHAT.
 	addMessageSent(sentData) {
-		console.log("service to get chat history" ,sentData);
+
+		// let headerOptions: any = { 'Content-Type': 'application/json' };
+		// let headers = new Headers(headerOptions);
+	console.log("service to get chat history" ,sentData);
 	  return new Promise((resolve, reject) => {
-	    this.http.post('http://sensussoft.com/ionic/mensajenviado.php',JSON.stringify(sentData))
+	    this.http.get('http://sensussoft.com/ionic/mensajenviado.php?JID='+sentData.JID+'&&jid='+sentData.jid+'&&mensaje='+sentData.mensaje)
 	      .subscribe(res => {
 	      	console.log("service res",res);
 	        resolve(res);
@@ -232,5 +253,42 @@ export class RestProvider {
 	      });
 	  });
 	}
+
+	  // mockNewMsg(msg) {
+  //   const mockMsg: ChatMessage = {
+  //     messageId: Date.now().toString(),
+  //     userId: 'correos%gearlabs.cl@demo.radeon.cl',
+  //     userName: 'Hancock',
+  //     userAvatar: 'assets/imgs/Marqueta/ad.png',
+  //     toUserId: 'kkskdkskdsk@dkdkdfddk.cl',
+  //     hora: moment().format('LT'),
+  //     mensaje: msg.mensaje,
+  //     status: 'success'
+  //   };
+
+  //   setTimeout(() => {
+  //     this.events.publish('chat:received', mockMsg, moment().format('LT'))
+  //   }, Math.random() * 1800)
+  // }
+
+  // getMsgList(): Observable<ChatMessage[]> {
+  //   const msgListUrl = './assets/mock/msg-list.json';
+  //   return this.http.get<any>(msgListUrl)
+  //   .pipe(map(response => response.array));
+  // }
+
+  // sendMsg(msg: ChatMessage) {
+  //   return new Promise(resolve => setTimeout(() => resolve(msg), Math.random() * 1000))
+  //   .then(() => this.mockNewMsg(msg));
+  // }
+
+  // getUserInfo(): Promise<UserInfo> {
+  //   const userInfo: UserInfo = {
+  //     id: 'kkskdkskdsk@dkdkdfddk.cl',
+  //     name: 'Luff',
+  //     avatar: 'assets/imgs/Marqueta/dgs.png'
+  //   };
+  //   return new Promise(resolve => resolve(userInfo));
+  // }
 
 }

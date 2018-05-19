@@ -111,15 +111,15 @@ page-chat {
 	}
 	.sendmsg{
 		border: 1px solid;
-    	border-radius: 8px;
-    	margin-left: 15px;
+  	border-radius: 8px;
+  	margin-left: 15px;
 	}
-    .msggrid{
-        margin-bottom: 20px;
-    }
-    .padding-top{
-        margin-top: 65px !important;
-    }
+  .msggrid{
+      margin-bottom: 20px;
+  }
+  .padding-top{
+      margin-top: 65px !important;
+  }
 
 
     $userBackgroundColor: #387ef5;
@@ -145,6 +145,7 @@ page-chat {
   }
 
   .message-wrap {
+    margin-bottom: 20px;
     border-top: 1px solid #C5C5C5;
     padding: 0 10px;
     margin-top: 1px;
@@ -250,6 +251,14 @@ page-chat {
 
     }
 
+  }
+
+  .message-wrap .message.left .msg-content {
+    background-color: #F0F0F0;
+    float: left;
+  }
+  .message-wrap .message .msg-detail .msg-content span.triangle {
+    background-color: #F0F0F0;
   }
 
 

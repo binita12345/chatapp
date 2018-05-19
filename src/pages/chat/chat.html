@@ -57,11 +57,12 @@
     
     <div *ngFor="let msg of msgArray"
          class="message"
-         [class.left]=" msg.idremitente === toUser.id "
-         [class.right]=" msg.idremitente === user.id ">
+         [class.left]=" msg.idremitente === toUser.id"
+         [class.right]=" msg.idremitente === user ">
 
          <!-- {{msg | json}} -->
-      <img class="user-img" [src]="msg.userAvatar" alt="" src="">
+      <img class="user-img" alt="" src="assets/imgs/Marqueta/dgs.png" *ngIf="msg.idremitente === user">
+      <img class="user-img" alt="" src="assets/imgs/Marqueta/ad.png" *ngIf="msg.idremitente === toUser.id">
       <!-- <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner> -->
       <div class="msg-detail">
         <div class="msg-content">
@@ -84,7 +85,7 @@
               (focusin)="onFocus()" placeholder="Enviar mansaje..." [(ngModel)]="message" class="textmsg"></ion-textarea>
       </ion-col>
       <ion-col col-1 col-xl-1>
-        <img src="assets/imgs/Marqueta/send-button.png" (click)="sendMsg()">
+        <img src="assets/imgs/Marqueta/send-button.png" (click)="sendMsg(editorMsg)">
       </ion-col>
     </ion-row>
   </ion-grid>
