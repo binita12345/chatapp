@@ -69,28 +69,28 @@ export class RestProvider {
 	// Con el código ISO del Pais, puede recibir la información.
 	// O en caso contrario entrega la información de todos los países que tiene cargados..
 
-	getuserInfo(appId) {
-		// console.log("service user info", appId);
-	  return new Promise((resolve, reject) => {
-	    // this.http.get(this.apiUrl+'/autenticacion')
-	    this.http.get('http://sensussoft.com/ionic/datosutiles.php?app='+appId)
-	      .subscribe(res => {
-	      	// console.log("service res", res);
-	        resolve(res);
-	      }, (err) => {
-	      	// console.log("service err", err);
-	        reject(err);
-	      });
-	  });
-	}
+	// getuserInfo(appId) {
+	// 	// console.log("service user info", appId);
+	//   return new Promise((resolve, reject) => {
+	//     // this.http.get(this.apiUrl+'/autenticacion')
+	//     this.http.get('https://dev.gchat.cl/datosutiles/'+appId)
+	//       .subscribe(res => {
+	//       	// console.log("service res", res);
+	//         resolve(res);
+	//       }, (err) => {
+	//       	// console.log("service err", err);
+	//         reject(err);
+	//       });
+	//   });
+	// }
 
 	getuserInfoWithCountry(appId, Pais) {
 		// console.log("service user info with country", appId, Pais);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
-	    this.http.get('http://sensussoft.com/ionic/datosutiles.php?app='+appId+'&&Pais='+Pais)
+	    this.http.get('https://dev.gchat.cl/datosutiles/'+appId+'/'+Pais)
 	      .subscribe(res => {
-	      	// console.log("service res", res);
+	      	console.log("service user info res", res);
 	        resolve(res);
 	      }, (err) => {
 	      	// console.log("service err", err);
@@ -186,7 +186,7 @@ export class RestProvider {
 	getCompanyIconImage(empresaId, appId) {
 		// console.log("service company logo and name", empresaId, appId);
 	  return new Promise((resolve, reject) => {
-	    this.http.get('http://sensussoft.com/ionic/iconoempresa.php?empresa='+empresaId+'&&App='+appId)
+	    this.http.get('https://dev.gchat.cl/iconoempresa/'+empresaId+'/'+appId)
 	      .subscribe(res => {
 	      	// console.log("service res" +JSON.stringify(res));
 	        resolve(res);

@@ -125,6 +125,8 @@ export class MenuPage {
       }
     }).catch(error => {
       console.log("rut error", error);
+      this.loader.hide();
+      this.error = error.error['error'];
     });
   }
 

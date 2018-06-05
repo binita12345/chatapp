@@ -2,6 +2,8 @@ import { Component , Input} from '@angular/core';
 import { Storage } from "@ionic/storage";
 import { App, IonicPage, NavController, NavParams } from "ionic-angular";
 import { RestProvider } from '../../providers/rest/rest';
+import { Loader } from "../../providers/loader/loader";
+import { AlertController } from 'ionic-angular';
 // import { PassportloginPage } from '../../pages/passportlogin/passportlogin';
 /**
  * Generated class for the HeaderComponent component.
@@ -22,8 +24,10 @@ export class HeaderComponent {
     appID : any;
     empresaID : any;
     companyLogo : any;
+    error : any = '';
 
-  	constructor(public navCtrl: NavController, public app: App, public restProvider: RestProvider, private storage: Storage) {
+  	constructor(public navCtrl: NavController, public app: App, public restProvider: RestProvider, 
+      private storage: Storage, private loader: Loader, private alertCtrl: AlertController) {
     	console.log('Hello HeaderComponent Component');
     	this.text = 'Hello World';
 
@@ -44,7 +48,7 @@ export class HeaderComponent {
     });
 
     this.storage.get("appId").then((getappID) => {
-      // console.log("getappID", getappID);
+      console.log("getappID", getappID);
       this.appID = getappID;
     });
 
@@ -65,20 +69,29 @@ export class HeaderComponent {
             //   this.error = data['error'];
             //   console.log("this.error", this.error);
             // } else {
-              // console.log("data", data);
+              console.log("data header compny info", data);
               this.companyLogo = data['urlarchivo'];
               this.storage.set('companyLogo', this.companyLogo);
               this.corpocustoHeader = true;
               this.travelAgencyHeader = false;
             // }
           }).catch(error => {
-            // console.log("rut error", error);
+            console.log("company info error", error);
+            this.loader.hide();
+            let alert = this.alertCtrl.create({
+              title: 'error',
+              subTitle: error.error['error'],
+              buttons: ['Dismiss']
+            });
+            alert.present();
+            // this.error = error.error['error'];
           });
       } else {
         this.corpocustoHeader = false;
         this.travelAgencyHeader = true;
       }
     });
+      
  	}
 
  	logout(){
