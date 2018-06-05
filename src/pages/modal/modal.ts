@@ -21,13 +21,7 @@ export class ModalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private callNumber: CallNumber) {
   	this.emergencyNos = navParams.get('emergencyNos');
-  	console.log("emergency nos", this.emergencyNos);
   	this.emergencyCalls = this.emergencyNos;
-  	console.log("this.emergencyCalls", this.emergencyCalls);
-  	// for(let call of this.emergencyCalls){
-  	// 	console.log("call", call);
-  	// 	this.call = call;
-  	// }
   }
 
   ionViewDidLoad() {
@@ -43,7 +37,6 @@ export class ModalPage {
   }
 
   emerCall(callno){
-  	console.log("call to customer", callno);
   	this.callNumber.callNumber(callno, true)
     .then(() => console.log('Launched dialer!'))
     .catch(() => console.log('Error launching dialer'));

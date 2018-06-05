@@ -26,8 +26,8 @@ import { Loader } from '../providers/loader/loader';
 import { EmojiProvider } from '../providers/emoji';
 import { HttpClientModule } from "@angular/common/http";
 import { RestProvider } from '../providers/rest/rest';
-import { SocketIoModule } from 'ng-socket-io';
-var config = { url: 'http://localhost:3001', options: {} };
+// import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+// const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -40,11 +40,11 @@ var AppModule = /** @class */ (function () {
             imports: [
                 HttpClientModule,
                 BrowserModule,
-                IonicModule.forRoot(MyApp),
+                IonicModule.forRoot(MyApp, { scrollAssist: false }),
                 IonicStorageModule.forRoot(),
                 HeaderComponentModule,
                 FooterComponentModule,
-                SocketIoModule.forRoot(config),
+                // SocketIoModule.forRoot(config),
                 PassportloginPageModule
             ],
             bootstrap: [IonicApp],

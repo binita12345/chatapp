@@ -67,51 +67,39 @@ var ResetpasswordPage = /** @class */ (function () {
     };
     ResetpasswordPage.prototype.reset = function () {
         var _this = this;
-        // this.error = ''
-        // this.loader.show('Please Wait'); 
+        this.error = '';
+        this.loader.show('Please Wait');
         var rut = this.resetForm.value.rut;
         console.log("reset rut", rut);
         console.log("this.rut", this.rut);
         console.log("this.appid", this.appid);
         this.restProvider.getRecoverClave(rut, this.appid)
             .then(function (data) {
-            // this.rut = data;
+            _this.email = data['email'];
             console.log("data", data);
-            // this.empresaID = data['idempresa'];
-            // console.log("passport this.empresaID", this.empresaID);
-            // this.storage.set('empresaId', this.empresaID);
-            console.log("data error", data['error']);
+            console.log("this.rut", _this.rut);
+            if (_this.email) {
+                _this.loader.hide();
+                var toastSuccess = _this.toastCtrl.create({
+                    message: 'Password sent, please check your mail!',
+                    duration: 6000,
+                    position: 'top',
+                    showCloseButton: true,
+                    closeButtonText: 'X',
+                    cssClass: "toast-success",
+                });
+                toastSuccess.present();
+                _this.navCtrl.push("PassportloginPage");
+            }
             if (data['error']) {
                 _this.error = data['error'];
             }
             else {
                 _this.error = '';
-                // this.storage.set('rutdata', this.passportloginForm.value.usuario);
-                // this.navCtrl.push("PasswordPage", {rut: data['RUT']});
             }
         }).catch(function (error) {
             console.log("rut error", error);
         });
-        // this._AuthProvider.resetPasswordrut(rut).then(
-        //     (res) => {   
-        // if(rut){
-        // 	this.loader.hide();        
-        //      	let toastSuccess = this.toastCtrl.create({
-        //      message: 'Password reset Link sent, please check your mail!',
-        //      duration: 6000,
-        //      position: 'top',
-        //      showCloseButton:true,
-        //      closeButtonText:'X',
-        //      cssClass: "toast-success",
-        //  });
-        //  toastSuccess.present();
-        // } 
-        // },
-        //   (err) => {
-        //     this.loader.hide();
-        //     this.error = err.message;
-        //   }
-        // );
     };
     ResetpasswordPage = __decorate([
         IonicPage(),

@@ -1,19 +1,5 @@
 page-menu {
 
-	// .coladvice1{
-	// 	background-color: #CE1803;
-	// 	border-top-left-radius: 15px;
- //    	border-bottom-left-radius: 15px;
- //    	cursor: pointer;
- //    	min-height: 100px;
-	// }
-	// .colinfo1{
-	// 	background-color: #817F86;
-	// 	border-top-right-radius: 15px;
- //    	border-bottom-right-radius: 15px;
- //    	cursor: pointer;
-	// }
-
 	.chatImg{
 		margin-bottom: -30px;
 	}
@@ -35,14 +21,6 @@ page-menu {
 	    margin-top: -42%;
 	    font-size: 18px;
 	}
-	// .btn{
-	// 	border-color: #8e8f91;
-	//     background-color: #0071CE;
-	//     background-image: linear-gradient(0deg, #8e8f91, #8e8f91 50%, transparent 50%);
-	//     padding: 8px;
-	//     height: 84px;
-	//     overflow: hidden;
-	// }
 	.btn:hover{
 		background-image:none;
 		background-color:#8e8f91;
@@ -74,19 +52,7 @@ page-menu {
 	}
 	.imgbtn{
 		background-color: transparent;
-		// max-width: 110%;
-	 //    border: 0;
-	 //    margin-left: -7px;
-	    
 	}
-	// .callbtn {
-	//     background: linear-gradient(to bottom, rgba(255,104,22,1) 0%,rgba(237,75,0,1) 100%);
-	//     display: inline-table;
-	//     height: auto;
-	//     width: 100%;
-	//     padding: 10px 7px;
-	//     border-radius: 0px 0px 0px 0px;
-	// }
 	button:hover{
 		opacity: 0.85;
 	}
@@ -227,13 +193,6 @@ page-menu {
 		}
 	}
 
-	// @media(min-width: 1024px){
-	// 	.infoImg{
-	// 	    min-width: 103%;
-	// 	    margin-left: -8px;
-	// 	}
-	// }
-
 	@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
 
 	}
@@ -263,16 +222,34 @@ page-menu {
 		    border-bottom-right-radius: 5px;
 		    border-top-right-radius: 15px;
 		    margin-top: -6px;
-		    max-height: 100%;
+		    height: 100px;
 		}
 		.travelImg {
 		    margin-left: -6px;
-		    min-width: 110%;
+		    max-width: 110%;
 		    border: 0;
 		    border-bottom-left-radius: 5px;
 		    border-top-left-radius: 15px;
-		    height: 98px;
 		    margin-top: -6px;
+		    height: 100px;
+		}
+		.travelImg1 {
+			margin-left: -6px;
+		    max-width: 110%;
+		    border: 0;
+		    border-bottom-left-radius: 5px;
+		    border-top-left-radius: 15px;
+		    margin-top: -6px;
+		    height: 100px;
+		}
+		.infoImg1 {
+			margin-left: -6px;
+		    max-width: 110%;
+		    border: 0;
+		    border-bottom-right-radius: 5px;
+		    border-top-right-radius: 15px;
+		    margin-top: -6px;
+		    height: 100px;
 		}
 	}
 
@@ -333,8 +310,4 @@ page-menu {
 	        max-height: 103%;
 		}
 	}
-
-	// @media(min-width: 320px){
-		
-	// }
 }

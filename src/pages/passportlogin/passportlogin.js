@@ -14,6 +14,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { RestProvider } from '../../providers/rest/rest';
 import { RutValidator } from '../../validators/rut';
 import { Storage } from '@ionic/storage';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the PassportloginPage page.
  *
@@ -21,10 +22,11 @@ import { Storage } from '@ionic/storage';
  * Ionic pages and navigation.
  */
 var PassportloginPage = /** @class */ (function () {
-    function PassportloginPage(navCtrl, navParams, plt, formBuilder, keyboard, restProvider, storage) {
+    function PassportloginPage(navCtrl, navParams, plt, loader, formBuilder, keyboard, restProvider, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.plt = plt;
+        this.loader = loader;
         this.formBuilder = formBuilder;
         this.keyboard = keyboard;
         this.restProvider = restProvider;
@@ -32,7 +34,6 @@ var PassportloginPage = /** @class */ (function () {
         this.error = '';
         this.passportloginForm = formBuilder.group({
             usuario: ['', Validators.compose([Validators.required, RutValidator.isValid])]
-            // usuario: ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{8}-[a-zA-Z0-9]{1}')])]
         });
         if (this.plt.is('ios')) {
             // This will only print when on iOS
@@ -54,35 +55,28 @@ var PassportloginPage = /** @class */ (function () {
     };
     PassportloginPage.prototype.passportlogin = function () {
         var _this = this;
-        console.log("login by passport");
-        console.log("rut data", this.passportloginForm.value.usuario);
-        // this.storage.set('rutdata', this.passportloginForm.value.usuario);
+        this.error = '';
+        this.loader.show('Please Wait');
         var rutData = this.passportloginForm.value.usuario;
-        console.log(this.passportloginForm.value.usuario.length);
         if (this.passportloginForm.value.usuario == '' || this.passportloginForm.value.usuario.length == 0) {
             this.error = "please enter your RUT Usuario";
-            // this.error = true;
+            this.loader.hide();
         }
         else {
-            // this.error = false;
-            console.log("rutData", rutData);
-            // this.storage.set('rutdata', rutData);
             this.restProvider.getRut(rutData)
                 .then(function (data) {
-                // this.rut = data;
-                console.log("data", data);
+                console.log("rut data");
                 _this.empresaID = data['idempresa'];
-                console.log("passport this.empresaID", _this.empresaID);
                 _this.storage.set('empresaId', _this.empresaID);
                 _this.storage.set('rut', data['RUT']);
                 _this.storage.set('appid', data['appid']);
-                console.log("data error", data['error']);
                 if (data['error']) {
+                    _this.loader.hide();
                     _this.error = data['error'];
                 }
                 else {
+                    _this.loader.hide();
                     _this.storage.set('isPassportLogin', true);
-                    // this.storage.set('rutdata', this.passportloginForm.value.usuario);
                     _this.navCtrl.push("PasswordPage", { rut: data['RUT'] });
                 }
             }).catch(function (error) {
@@ -91,10 +85,9 @@ var PassportloginPage = /** @class */ (function () {
         }
     };
     PassportloginPage.prototype.gotonotlogedin = function () {
+        this.error = '';
         this.storage.remove('isPassportLogin');
         this.storage.remove('isLogin');
-        console.log("clicked on skip");
-        this.error = '';
         this.navCtrl.push("MenuPage");
     };
     PassportloginPage = __decorate([
@@ -103,7 +96,7 @@ var PassportloginPage = /** @class */ (function () {
             selector: 'page-passportlogin',
             templateUrl: 'passportlogin.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, Platform,
+        __metadata("design:paramtypes", [NavController, NavParams, Platform, Loader,
             FormBuilder, Keyboard, RestProvider, Storage])
     ], PassportloginPage);
     return PassportloginPage;

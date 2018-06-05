@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -104,7 +104,7 @@ export class RestProvider {
   // This service returns a JSON with all the travel advice in JSON format, with links to the image type contents.
  	getTravelAdvice() {
 	  return new Promise((resolve,reject) => {
-	    this.http.get('http://sensussoft.com/ionic/consejosdeviaje.php').subscribe(data => {
+	    this.http.get('https://dev.gchat.cl/consejosdeviaje').subscribe(data => {
 	      resolve(data);
 	      // console.log("travel advice data", data);
 	    }, (err) => {
@@ -119,15 +119,18 @@ export class RestProvider {
 	// // This service returns a JSON with the characteristics of the user.
 	// // *RUT = is a number that identifies a chilean national, is a 7-8 sequence number followed by a dash and a number from 0 to 9 or ‘K’. examples: 9456789-K 18934567-4
 	getRut(data) {
-		// console.log("service rut data" +data);
+		// let creds = 'email=' + user.email + "&password=" + user.password;
+		console.log("service rut data" +JSON.stringify(data));
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
-	    this.http.get('http://sensussoft.com/ionic/autenticacion.php?rut='+data)
+	    this.http.get('https://dev.gchat.cl/autenticacion/'+data, {
+            headers: new HttpHeaders().set('Authorization', 'Basic dXNlckFwaTozNGxxNG9kOHVzZGE='),
+          })
 	      .subscribe(res => {
-	      	// console.log("service res", res);
+	      	console.log("service res" +JSON.stringify(res));
 	        resolve(res);
 	      }, (err) => {
-	      	// console.log("service err", err);
+	      	console.log("service err" +JSON.stringify(err));
 	        reject(err);
 	      });
 	  });
@@ -137,8 +140,11 @@ export class RestProvider {
 		// console.log("service clave data", rut, clave);
 	  return new Promise((resolve, reject) => {
 	    // this.http.get(this.apiUrl+'/autenticacion')
-	    this.http.get('http://sensussoft.com/ionic/autenticacion.php?rut='+rut+'&&clave='+clave)
+	    this.http.get('https://dev.gchat.cl/autenticacion/'+rut+ '/' +clave, {
+            headers: new HttpHeaders().set('Authorization', 'Basic dXNlckFwaTozNGxxNG9kOHVzZGE='),
+          })
 	      .subscribe(res => {
+	      	console.log("service clave res" +JSON.stringify(res));
 	        resolve(res);
 	      }, (err) => {
 	        reject(err);
@@ -165,7 +171,7 @@ export class RestProvider {
 	// // With the user's RUT, the assigned executives and pool are reviewed, and these numbers are returned in that order.
 	getEmergencyCall(Rut) {
 	  return new Promise((resolve, reject) => {
-	    this.http.get('http://sensussoft.com/ionic/telefonosemergencia.php?Rut='+Rut)
+	    this.http.get('http://dev.gchat.cl/telefonosemergencia/'+Rut)
 	      .subscribe(res => {
 	      	// console.log("service res", res);
 	        resolve(res);
@@ -240,12 +246,12 @@ export class RestProvider {
 	}
 
 	// this api Returns the company name and logo.
-	getRecoverClave(Rut, appId) {
+	getRecoverClave(Rut, appId, idempresa) {
 		// console.log("service to get recover password", Rut, appId);
 	  return new Promise((resolve, reject) => {
-	    this.http.get('http://sensussoft.com/ionic/rescatarclave.php?Rut='+Rut+'&&App='+appId)
+	    this.http.get('https://dev.gchat.cl/rescatarclave/'+Rut+ '/' +appId+ '/' +idempresa)
 	      .subscribe(res => {
-	      	// console.log("service res" +JSON.stringify(res));
+	      	console.log("service recover res" +JSON.stringify(res));
 	        resolve(res);
 	      }, (err) => {
 	      	// console.log("service err", err);

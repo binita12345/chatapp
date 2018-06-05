@@ -4,14 +4,6 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<!-- <ion-header>
-
-  <ion-navbar>
-    <ion-title>traveladvice</ion-title>
-  </ion-navbar>
-
-</ion-header> -->
-<!-- <header title=""> </header>  -->
 
 <ion-content scrollY="true" style="background-color: #F3F4F6">
 	<ion-grid>
@@ -21,7 +13,6 @@
 			</ion-col>
 			<ion-col col-10 col-xl-10 style="text-align: center;" *ngIf="corpocustoTravel">
 				<img src="{{getcompanyLogo}}">
-				<!-- <img src="assets/imgs/Marqueta/logo_2.png"> -->
 			</ion-col>
 			<ion-col col-10 col-xl-10 style="text-align: center;" *ngIf="travelAgencyTravel">
 				<img src="assets/imgs/Marqueta/logo.png">
@@ -36,7 +27,6 @@
 		<ion-row>
 			<ion-col col-12 col-xl-12>
 				<ion-list *ngFor="let advice of adviceArray">
-					<!-- {{advice | json}} -->
 				  <ion-item class="itemlist">
 				    <ion-thumbnail item-start>
 				      <img src="{{advice.imagen}}">

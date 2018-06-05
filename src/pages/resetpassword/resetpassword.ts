@@ -24,6 +24,8 @@ export class ResetpasswordPage {
 	error : any;
   rut : any;
   appid : any;
+  email : any;
+  idempresa : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private formBuilder: FormBuilder, 
     private loader: Loader, public toastCtrl: ToastController, public restProvider: RestProvider, private storage: Storage) {
@@ -38,6 +40,10 @@ export class ResetpasswordPage {
         this.storage.get("appid").then((getappid) => {
           console.log("getappid", getappid);
           this.appid = getappid;
+        });
+        this.storage.get("empresaId").then((getidempresa) => {
+          console.log("getidempresa", getidempresa);
+          this.idempresa = getidempresa;
         });
       }
     });
@@ -68,55 +74,41 @@ export class ResetpasswordPage {
   }
 
   reset(){
-  		// this.error = ''
-  		// this.loader.show('Please Wait'); 
+  		this.error = ''
+  		this.loader.show('Please Wait'); 
   		let rut = this.resetForm.value.rut;
       console.log("reset rut", rut);
       console.log("this.rut", this.rut);
       console.log("this.appid", this.appid);
-      this.restProvider.getRecoverClave(rut, this.appid)
+      this.restProvider.getRecoverClave(rut, this.appid, this.idempresa)
       .then(data => {
-        // this.rut = data;
+        this.email = data['email'];
         console.log("data", data);
-        // this.empresaID = data['idempresa'];
-        // console.log("passport this.empresaID", this.empresaID);
-        // this.storage.set('empresaId', this.empresaID);
-
-        console.log("data error", data['error']);
+        console.log("this.rut", this.rut);
+        if(this.email){
+          this.loader.hide();        
+              let toastSuccess = this.toastCtrl.create({
+              message: 'Password sent, please check your mail!',
+              duration: 6000,
+              position: 'top',
+              showCloseButton:true,
+              closeButtonText:'X',
+              cssClass: "toast-success",
+          });
+          toastSuccess.present();
+          this.navCtrl.push("PassportloginPage");
+        } 
 
         if(data['error']){
           this.error = data['error'];
         } else {
           this.error = '';
-          // this.storage.set('rutdata', this.passportloginForm.value.usuario);
-          // this.navCtrl.push("PasswordPage", {rut: data['RUT']});
-
         }
       }).catch(error => {
         console.log("rut error", error);
+        this.loader.hide();
+        this.error = error.error['error'];
       });
-
-  		// this._AuthProvider.resetPasswordrut(rut).then(
-    //     (res) => {   
-    	// if(rut){
-    	// 	this.loader.hide();        
-     //      	let toastSuccess = this.toastCtrl.create({
-		   //      message: 'Password reset Link sent, please check your mail!',
-		   //      duration: 6000,
-		   //      position: 'top',
-		   //      showCloseButton:true,
-		   //      closeButtonText:'X',
-		   //      cssClass: "toast-success",
-		   //  });
-		   //  toastSuccess.present();
-    	// } 
-          	
-        // },
-        //   (err) => {
-        //     this.loader.hide();
-        //     this.error = err.message;
-        //   }
-        // );
   		
   	}
 

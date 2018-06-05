@@ -1,20 +1,4 @@
 page-chat {
-	// .lbl{
-	// 	border: 1px solid black;
-	//     min-width: 105%;
-	//     margin-left: -9px!important;
-	//     margin-top: 2px;
-	//     padding: 10px;
-	// }
-  // .platform-ios .ion-grid{
-  //   margin-top: 12px !important;
-  // }
-  // .platform-android .ion-grid{
-  //   margin-top: 18px !important;
-  // }
-  // .platform-wp .headuser{
-  //     margin-top: 35px !important;
-  // }
   .message-wrap .message .user-img {
     position: absolute;
     border-radius: 45px;
@@ -42,7 +26,6 @@ page-chat {
     margin-top: 6px !important;
     padding-left: 4px;
     padding-right: 4px;
-    /* min-height: 55px; */
   }
   .chathead{
     max-height: 35px;
@@ -53,7 +36,6 @@ page-chat {
   .backicon{
     color: #FED325;
     font-size: 30px;
-    // text-align: center;
   }
   .textmsg{
     max-height: 0px;
@@ -61,11 +43,11 @@ page-chat {
   }
   .footer{
     position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      background-color: #F3F4F6;
-      border-top: 1px solid #C5C5C5;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #F3F4F6;
+    border-top: 1px solid #C5C5C5;
   }
   .headuser{
     background-color: #F3F4F6;
@@ -75,54 +57,54 @@ page-chat {
     max-height: 45px;
   }
 	.user_name {
-        color: #afafaf;
-    }
-    .message {
-        padding: 10px !important;
-        transition: all 250ms ease-in-out !important;
-        border-radius: 10px !important;
-        margin-bottom: 4px !important;
-    }
-    .my_message {
-        background: color($colors, primary) !important;
-        color: #000 !important;
-    }
-    .other_message {
-        background: #dcdcdc !important;
-        color: #000 !important;
-    }
-    .time {
-        color: #afafaf;
-        float: right;
-        font-size: small;
-    }
-    .message_row {
-        background-color: #fff;
-    }
+    color: #afafaf;
+  }
+  .message {
+    padding: 10px !important;
+    transition: all 250ms ease-in-out !important;
+    border-radius: 10px !important;
+    margin-bottom: 4px !important;
+  }
+  .my_message {
+    background: color($colors, primary) !important;
+    color: #000 !important;
+  }
+  .other_message {
+    background: #dcdcdc !important;
+    color: #000 !important;
+  }
+  .time {
+    color: #afafaf;
+    float: right;
+    font-size: small;
+  }
+  .message_row {
+    background-color: #fff;
+  }
 
-    .icons {
-	    display: inline-block;
-	    font-size: 16px;
-	    border: 1px solid black;
-	    padding: 5px;
-	    border-radius: 33px;
-	    margin-left: 44px;
-	    margin-top: 7px;
-	}
+  .icons {
+    display: inline-block;
+    font-size: 16px;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 33px;
+    margin-left: 44px;
+    margin-top: 7px;
+  }
 	.sendmsg{
 		border: 1px solid;
   	border-radius: 8px;
   	margin-left: 15px;
 	}
   .msggrid{
-      margin-bottom: 20px;
+    margin-bottom: 20px;
   }
   .padding-top{
-      margin-top: 65px !important;
+    margin-top: 65px !important;
   }
 
 
-    $userBackgroundColor: #387ef5;
+  $userBackgroundColor: #387ef5;
   $toUserBackgroundColor: #fff;
 
   ion-content .scroll-content {
@@ -248,11 +230,8 @@ page-chat {
           right: -5px;
         }
       }
-
     }
-
   }
-
   .message-wrap .message.left .msg-content {
     background-color: #F0F0F0;
     float: left;

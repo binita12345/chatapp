@@ -5,6 +5,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { RestProvider } from '../../providers/rest/rest';
 import { RutValidator } from '../../validators/rut';
 import { Storage } from '@ionic/storage';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the PassportloginPage page.
  *
@@ -25,12 +26,11 @@ export class PassportloginPage {
   rut : any;
   empresaID : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private loader: Loader,
               private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider, public storage: Storage) {
 
   	this.passportloginForm = formBuilder.group({
       usuario: ['', Validators.compose([Validators.required, RutValidator.isValid])]
-      // usuario: ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{8}-[a-zA-Z0-9]{1}')])]
     });
 
   	if (this.plt.is('ios')) {
@@ -56,43 +56,37 @@ export class PassportloginPage {
   }
   
   passportlogin(){
-    console.log("login by passport");
-    console.log("rut data", this.passportloginForm.value.usuario);
-    // this.storage.set('rutdata', this.passportloginForm.value.usuario);
-
+    this.error = '';
+    this.loader.show('Please Wait');
     let rutData : any = this.passportloginForm.value.usuario;
 
-    console.log(this.passportloginForm.value.usuario.length);
     if(this.passportloginForm.value.usuario == '' || this.passportloginForm.value.usuario.length == 0){
       this.error = "please enter your RUT Usuario";
-      // this.error = true;
+      this.loader.hide();
     } else{
-      // this.error = false;
-      console.log("rutData", rutData);
-      // this.storage.set('rutdata', rutData);
-
       this.restProvider.getRut(rutData)
       .then(data => {
-        // this.rut = data;
-        console.log("data", data);
+        console.log("rut data", data);
         this.empresaID = data['idempresa'];
-        console.log("passport this.empresaID", this.empresaID);
+
         this.storage.set('empresaId', this.empresaID);
         this.storage.set('rut', data['RUT']);
-        this.storage.set('appid', data['appid']);
-
-        console.log("data error", data['error']);
+        this.storage.set('appid', "23982933");
 
         if(data['error']){
+          this.loader.hide();
           this.error = data['error'];
         } else {
+          this.loader.hide();
           this.storage.set('isPassportLogin', true);
-          // this.storage.set('rutdata', this.passportloginForm.value.usuario);
           this.navCtrl.push("PasswordPage", {rut: data['RUT']});
 
         }
       }).catch(error => {
         console.log("rut error", error);
+        this.loader.hide();
+        this.error = error.error['error'];
+
       });
     }
   }
@@ -101,8 +95,6 @@ export class PassportloginPage {
     this.error = '';
     this.storage.remove('isPassportLogin');
     this.storage.remove('isLogin');
-    console.log("clicked on skip");
-    
     this.navCtrl.push("MenuPage");
   }
 }

@@ -18,14 +18,7 @@ import { Storage } from '@ionic/storage';
  * Ionic pages and navigation.
  */
 var TraveladvicePage = /** @class */ (function () {
-    // advices: any = [];
     function TraveladvicePage(navCtrl, navParams, restProvider, storage) {
-        //  	this.advices = [
-        //     {image: "assets/imgs/Marqueta/12.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
-        //     {image: "assets/imgs/Marqueta/13.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
-        //     {image: "assets/imgs/Marqueta/14.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"},
-        //     {image: "assets/imgs/Marqueta/15.png", parag: "Lorem ipsum dolor sit amet,consectuter adispiscing elic, Nunc maximus, nulla ut commodo sagittis, sapuin dui mattis dui, non pulvinar lorem felis nec erat"}
-        // ];
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -58,31 +51,14 @@ var TraveladvicePage = /** @class */ (function () {
         console.log('ionViewDidLoad TraveladvicePage');
     };
     TraveladvicePage.prototype.goback = function () {
-        // this.navCtrl.pop();
-        // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
-        // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
-        // if(this.getdata == ''){
-        //   this.navCtrl.push("NotlogedinPage");
-        // } else {
         this.navCtrl.push("MenuPage");
-        // }
-        // this.navCtrl.push("MenuPage");
-        // this.navCtrl.popToRoot();
-        // this.navCtrl.canGoBack();
     };
     TraveladvicePage.prototype.getTravelAdviceData = function () {
         var _this = this;
         this.restProvider.getTravelAdvice()
             .then(function (data) {
             var serviceData = data['consejosviaje'];
-            console.log("ts data", serviceData);
-            // this.advices = data;
-            // console.log(this.advices);
-            // for(let advice of this.advices){
-            //   console.log("for loop advice", advice);
-            // }
             _this.adviceArray = serviceData;
-            // console.log(this.adviceArray);
         });
     };
     TraveladvicePage = __decorate([

@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 // import { Socket } from 'ng-socket-io';
-import { ChatService } from "../../providers/chat-service";
 import { Events, Content } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import moment from 'moment';
@@ -22,182 +21,103 @@ import { RestProvider } from '../../providers/rest/rest';
  * Ionic pages and navigation.
  */
 var ChatPage = /** @class */ (function () {
-    // corpocustoHeader : boolean;
-    // travelAgencyHeader : boolean;
-    // corpocustoContent : boolean;
-    // travelAgencyContent : boolean;
-    // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private toastCtrl: ToastController) {
-    function ChatPage(navCtrl, navParams, toastCtrl, chatService, events, storage, restProvider) {
+    function ChatPage(navCtrl, navParams, toastCtrl, events, storage, restProvider) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.toastCtrl = toastCtrl;
-        this.chatService = chatService;
         this.events = events;
         this.storage = storage;
         this.restProvider = restProvider;
-        this.msgList = [];
+        this.msgArray = [];
         this.editorMsg = '';
-        this.showEmojiPicker = false;
         this.storage.get('rutdata').then(function (getdata) {
-            console.log('getdata ' + getdata);
             _this.getdata = getdata;
         });
-        this.storage.get('senderJID').then(function (senderJID) {
-            console.log('senderJID ' + senderJID);
-            _this.senderJID = senderJID;
-        });
         this.storage.get('reciverJID').then(function (reciverJID) {
-            console.log('reciverJID ' + reciverJID);
             _this.reciverJID = reciverJID;
         });
-        // this.reciverJID = this.navParams.get('reciverJID');
-        // console.log("this.reciverJID", this.reciverJID);
-        // this.senderJID = this.navParams.get('senderJID');
-        // console.log("this.senderJID", this.senderJID);
-        // this.name = this.navParams.get('name');
-        // console.log("this.name", this.name);
+        this.storage.get('senderJID').then(function (senderJID) {
+            _this.senderJID = senderJID;
+        });
         this.storage.get("name").then(function (getname) {
-            console.log("getname", getname);
             _this.name = getname;
         });
         this.toUser = {
-            id: navParams.get('toUserId'),
-            name: navParams.get('toUserName')
+            id: navParams.get('toUserId')
         };
-        // Get mock user information
-        this.chatService.getUserInfo()
-            .then(function (res) {
-            _this.user = res;
-        });
-        // this.storage.get("isLogin").then((resulst) => {
-        //   console.log("results login status", resulst);
-        //   if(resulst){
-        //     this.corpocustoHeader = true;
-        //     this.travelAgencyHeader = false;
-        //     this.corpocustoContent = true;
-        //     this.travelAgencyContent = false;
-        //   } else {
-        //     this.corpocustoHeader = false;
-        //     this.travelAgencyHeader = true;
-        //     this.corpocustoContent = false;
-        //     this.travelAgencyContent = true;
-        //   }
-        // });
-        // this.nickname = this.navParams.get('nickname');
-        // this.getMessages().subscribe(message => {
-        //   this.messages.push(message);
-        // });
-        // this.getUsers().subscribe(data => {
-        //   let user = data['user'];
-        //   if (data['event'] === 'left') {
-        //     this.showToast('User left: ' + user);
-        //   } else {
-        //     this.showToast('User joined: ' + user);
-        //   }
-        // });
-        this.getMsg();
+        this.getMessage();
     }
+    ChatPage.prototype.getMessage = function () {
+        var _this = this;
+        this.storage.get("isLogin").then(function (resulst) {
+            if (resulst) {
+                _this.storage.get("senderJID").then(function (getsenderJID) {
+                    _this.senderJID = getsenderJID;
+                    _this.restProvider.getChatHistory(_this.senderJID)
+                        .then(function (data) {
+                        _this.msgArray = data['historialdechat'];
+                        for (var _i = 0, _a = _this.msgArray; _i < _a.length; _i++) {
+                            var msgs = _a[_i];
+                            _this.messages = msgs;
+                            if (_this.messages['idremitente'] == _this.reciverJID) {
+                                _this.toUser.id = _this.messages['idremitente'];
+                            }
+                            else {
+                                _this.user = _this.messages['idremitente'];
+                            }
+                        }
+                    }).catch(function (error) {
+                        console.log("rut error", error);
+                    });
+                });
+            }
+        });
+    };
     ChatPage.prototype.ionViewWillLeave = function () {
         // unsubscribe
+        this.getMessage();
         this.events.unsubscribe('chat:received');
     };
     ChatPage.prototype.ionViewDidEnter = function () {
         var _this = this;
         //get message list
-        this.getMsg();
+        this.getMessage();
         // Subscribe to received  new message events
         this.events.subscribe('chat:received', function (msg) {
             _this.pushNewMsg(msg);
         });
     };
     ChatPage.prototype.onFocus = function () {
-        this.showEmojiPicker = false;
         this.content.resize();
         this.scrollToBottom();
-    };
-    ChatPage.prototype.switchEmojiPicker = function () {
-        this.showEmojiPicker = !this.showEmojiPicker;
-        if (!this.showEmojiPicker) {
-            this.focus();
-        }
-        else {
-            this.setTextareaScroll();
-        }
-        this.content.resize();
-        this.scrollToBottom();
-    };
-    /**
-     * @name getMsg
-     * @returns {Promise<ChatMessage[]>}
-     */
-    ChatPage.prototype.getMsg = function () {
-        var _this = this;
-        // // Get mock message list
-        // return this.chatService
-        // .getMsgList()
-        // .subscribe(res => {
-        //   this.msgList = res;
-        //   this.scrollToBottom();
-        // });
-        this.restProvider.getChatHistory(this.senderJID)
-            .then(function (data) {
-            // console.log("get msg history api data", data);
-            _this.msgArray = data[''];
-            console.log("this.msgArray", _this.msgArray);
-            // console.log("this.msgArray['idremitente']", this.msgArray['idremitente']);
-            // for(let msgs of this.msgArray){
-            //   console.log("getting msgs", msgs);
-            // }
-            // if(idremitente == this.reciverJID){
-            // }
-        }).catch(function (error) {
-            console.log("rut error", error);
-        });
     };
     /**
      * @name sendMsg
      */
     ChatPage.prototype.sendMsg = function () {
         var _this = this;
-        console.log("this.message", this.message);
-        var sentData = {
-            'mensaje': this.message,
-            'JID': this.senderJID,
-            'jid': this.reciverJID
-        };
-        console.log("sentData", sentData);
-        this.restProvider.addMessageSent(sentData)
-            .then(function (data) {
-            console.log("sent msg api data", data);
-        }).catch(function (error) {
-            console.log("rut error", error);
-        });
         if (!this.editorMsg.trim())
             return;
+        console.log("this.editorMsg", this.editorMsg);
         // Mock message
         var id = Date.now().toString();
         var newMsg = {
             messageId: Date.now().toString(),
-            userId: this.user.id,
-            userName: this.user.name,
-            userAvatar: this.user.avatar,
-            toUserId: this.toUser.id,
-            time: moment().format('LT'),
-            message: this.editorMsg,
-            status: 'pending'
+            JID: this.senderJID,
+            jid: this.reciverJID,
+            hora: moment().format('LT'),
+            mensaje: this.editorMsg,
         };
-        this.pushNewMsg(newMsg);
+        console.log("newMsg logs", newMsg);
         this.editorMsg = '';
-        if (!this.showEmojiPicker) {
-            this.focus();
-        }
-        this.chatService.sendMsg(newMsg)
-            .then(function () {
-            var index = _this.getMsgIndexById(id);
-            if (index !== -1) {
-                _this.msgList[index].status = 'success';
-            }
+        this.restProvider.addMessageSent(newMsg)
+            .then(function (data) {
+            console.log("sent msg api data ts", data);
+            _this.scrollToBottom();
+            _this.getMessage();
+        }).catch(function (error) {
+            console.log("rut error", error);
         });
     };
     /**
@@ -205,18 +125,21 @@ var ChatPage = /** @class */ (function () {
      * @param msg
      */
     ChatPage.prototype.pushNewMsg = function (msg) {
-        var userId = this.user.id, toUserId = this.toUser.id;
+        console.log("this.senderJID push", this.senderJID);
+        console.log("this.reciverJID push", this.reciverJID);
+        console.log("push new msg", msg);
+        var userId = this.senderJID, toUserId = this.reciverJID;
         // Verify user relationships
-        if (msg.userId === userId && msg.toUserId === toUserId) {
-            this.msgList.push(msg);
+        if (msg.JID === this.senderJID && msg.jid === this.reciverJID) {
+            this.msgArray.push(msg);
         }
-        else if (msg.toUserId === userId && msg.userId === toUserId) {
-            this.msgList.push(msg);
+        else if (msg.jid === this.senderJID && msg.JID === this.reciverJID) {
+            this.msgArray.push(msg);
         }
         this.scrollToBottom();
     };
     ChatPage.prototype.getMsgIndexById = function (id) {
-        return this.msgList.findIndex(function (e) { return e.messageId === id; });
+        return this.msgArray.findIndex(function (e) { return e.messageId === id; });
     };
     ChatPage.prototype.scrollToBottom = function () {
         var _this = this;
@@ -239,17 +162,7 @@ var ChatPage = /** @class */ (function () {
         console.log('ionViewDidLoad ChatPage');
     };
     ChatPage.prototype.goback = function () {
-        // this.navCtrl.pop();
-        // console.log(this.navCtrl.getByIndex(this.navCtrl.length()-2));
-        // this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length()-2));
-        // if(this.getdata == ''){
-        //   this.navCtrl.push("NotlogedinPage");
-        // } else {
         this.navCtrl.push("MenuPage");
-        // }
-        // this.navCtrl.push("MenuPage");
-        // this.navCtrl.popToRoot();
-        // this.navCtrl.canGoBack();
     };
     __decorate([
         ViewChild(Content),
@@ -265,7 +178,7 @@ var ChatPage = /** @class */ (function () {
             selector: 'page-chat',
             templateUrl: 'chat.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, ToastController, ChatService,
+        __metadata("design:paramtypes", [NavController, NavParams, ToastController,
             Events, Storage, RestProvider])
     ], ChatPage);
     return ChatPage;

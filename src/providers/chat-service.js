@@ -1,74 +1,60 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-import { Injectable } from '@angular/core';
-import { Events } from 'ionic-angular';
-import { map } from 'rxjs/operators/map';
-import { HttpClient } from "@angular/common/http";
-import moment from 'moment';
-var ChatMessage = /** @class */ (function () {
-    function ChatMessage() {
-    }
-    return ChatMessage;
-}());
-export { ChatMessage };
-var UserInfo = /** @class */ (function () {
-    function UserInfo() {
-    }
-    return UserInfo;
-}());
-export { UserInfo };
-var ChatService = /** @class */ (function () {
-    function ChatService(http, events) {
-        this.http = http;
-        this.events = events;
-    }
-    ChatService.prototype.mockNewMsg = function (msg) {
-        var _this = this;
-        var mockMsg = {
-            messageId: Date.now().toString(),
-            userId: '210000198410281948',
-            userName: 'Hancock',
-            userAvatar: 'assets/imgs/Marqueta/ad.png',
-            toUserId: '140000198202211138',
-            time: moment().format('LT'),
-            message: msg.message,
-            status: 'success'
-        };
-        setTimeout(function () {
-            _this.events.publish('chat:received', mockMsg, moment().format('LT'));
-        }, Math.random() * 1800);
-    };
-    ChatService.prototype.getMsgList = function () {
-        var msgListUrl = './assets/mock/msg-list.json';
-        return this.http.get(msgListUrl)
-            .pipe(map(function (response) { return response.array; }));
-    };
-    ChatService.prototype.sendMsg = function (msg) {
-        var _this = this;
-        return new Promise(function (resolve) { return setTimeout(function () { return resolve(msg); }, Math.random() * 1000); })
-            .then(function () { return _this.mockNewMsg(msg); });
-    };
-    ChatService.prototype.getUserInfo = function () {
-        var userInfo = {
-            id: '140000198202211138',
-            name: 'Luff',
-            avatar: 'assets/imgs/Marqueta/dgs.png'
-        };
-        return new Promise(function (resolve) { return resolve(userInfo); });
-    };
-    ChatService = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [HttpClient,
-            Events])
-    ], ChatService);
-    return ChatService;
-}());
-export { ChatService };
+// import { Injectable } from '@angular/core';
+// import { Events } from 'ionic-angular';
+// import { map } from 'rxjs/operators/map';
+// import { HttpClient } from "@angular/common/http";
+// import { Observable } from "rxjs/Observable";
+// import moment from 'moment';
+// export class ChatMessage {
+//   messageId: string;
+//   userId: string;
+//   userName: string;
+//   userAvatar: string;
+//   toUserId: string;
+//   hora: number | string;
+//   mensaje: string;
+//   status: string;
+// }
+// export class UserInfo {
+//   id: string;
+//   name?: string;
+//   avatar?: string;
+// }
+// @Injectable()
+// export class ChatService {
+//   constructor(private http: HttpClient,
+//               private events: Events) {
+//   }
+//   // mockNewMsg(msg) {
+//   //   const mockMsg: ChatMessage = {
+//   //     messageId: Date.now().toString(),
+//   //     userId: 'correos%gearlabs.cl@demo.radeon.cl',
+//   //     userName: 'Hancock',
+//   //     userAvatar: 'assets/imgs/Marqueta/ad.png',
+//   //     toUserId: 'kkskdkskdsk@dkdkdfddk.cl',
+//   //     hora: moment().format('LT'),
+//   //     mensaje: msg.mensaje,
+//   //     status: 'success'
+//   //   };
+//   //   setTimeout(() => {
+//   //     this.events.publish('chat:received', mockMsg, moment().format('LT'))
+//   //   }, Math.random() * 1800)
+//   // }
+//   // getMsgList(): Observable<ChatMessage[]> {
+//   //   const msgListUrl = './assets/mock/msg-list.json';
+//   //   return this.http.get<any>(msgListUrl)
+//   //   .pipe(map(response => response.array));
+//   // }
+//   // sendMsg(msg: ChatMessage) {
+//   //   return new Promise(resolve => setTimeout(() => resolve(msg), Math.random() * 1000))
+//   //   .then(() => this.mockNewMsg(msg));
+//   // }
+//   // getUserInfo(): Promise<UserInfo> {
+//   //   const userInfo: UserInfo = {
+//   //     id: 'kkskdkskdsk@dkdkdfddk.cl',
+//   //     name: 'Luff',
+//   //     avatar: 'assets/imgs/Marqueta/dgs.png'
+//   //   };
+//   //   return new Promise(resolve => resolve(userInfo));
+//   // }
+// }
 //# sourceMappingURL=chat-service.js.map

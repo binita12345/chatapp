@@ -12,4 +12,8 @@ header {
 	.back-button.show-back-button {
 	    display: none;
 	}
+	.custom-header{
+		min-width: 100;
+		height: 30px !important;
+	}
 }

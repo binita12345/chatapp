@@ -24,13 +24,7 @@ var ModalPage = /** @class */ (function () {
         this.callNumber = callNumber;
         this.emergencyCalls = [];
         this.emergencyNos = navParams.get('emergencyNos');
-        console.log("emergency nos", this.emergencyNos);
         this.emergencyCalls = this.emergencyNos;
-        console.log("this.emergencyCalls", this.emergencyCalls);
-        // for(let call of this.emergencyCalls){
-        // 	console.log("call", call);
-        // 	this.call = call;
-        // }
     }
     ModalPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ModalPage');
@@ -42,7 +36,6 @@ var ModalPage = /** @class */ (function () {
         this.viewCtrl.dismiss();
     };
     ModalPage.prototype.emerCall = function (callno) {
-        console.log("call to customer", callno);
         this.callNumber.callNumber(callno, true)
             .then(function () { return console.log('Launched dialer!'); })
             .catch(function () { return console.log('Error launching dialer'); });

@@ -17,6 +17,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = PassportloginPage;
   // rootPage:any = NotlogedinPage;
+  appId: any = 23982933;
 
   pages: Array<{title: string, component: any, icon: any}>;
 
@@ -39,7 +40,7 @@ export class MyApp {
       this.statusBar.show();
 
       // this.statusBar.styleDefault();
-
+      // this.keyboard.disableScroll(true);
       this.keyboard.onKeyboardShow().subscribe(() => {
           document.body.classList.add('keyboard-is-open');
       });

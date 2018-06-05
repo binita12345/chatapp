@@ -36,7 +36,7 @@ import { RestProvider } from '../providers/rest/rest';
   imports: [
     HttpClientModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, { scrollAssist: false }),
     IonicStorageModule.forRoot(),
     HeaderComponentModule,
     FooterComponentModule,

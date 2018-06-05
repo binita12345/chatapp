@@ -150,10 +150,14 @@
 //     }
 // }
 .toolbar-ios {
-    // padding-top: 15px;
-    padding-left: 4px;
-    padding-right: 4px;
-    min-height: 61px;
+    // // padding-top: 15px;
+    // padding-left: 4px;
+    // padding-right: 4px;
+    // min-height: 61px;
+    padding-top: 18px;
+    padding-bottom: 0px !important;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 .error-message{
     color: red;
@@ -179,4 +183,14 @@ body.keyboard-is-open .fixed-content {
 body.keyboard-is-open .applyFooter{
         display: none;
         bottom: 0;
+}
+.toast-success {
+  > div{
+       background-color:#00c851!important;
+   }
+}
+.toast-error {
+    > div{
+       background-color:#ff3547!important;
+   }
 }

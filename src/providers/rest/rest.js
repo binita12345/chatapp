@@ -7,23 +7,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { Events } from 'ionic-angular';
+import { map } from 'rxjs/operators/map';
 /*
   Generated class for the RestProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+var ChatMessage = /** @class */ (function () {
+    function ChatMessage() {
+    }
+    return ChatMessage;
+}());
+export { ChatMessage };
+var UserInfo = /** @class */ (function () {
+    function UserInfo() {
+    }
+    return UserInfo;
+}());
+export { UserInfo };
 var RestProvider = /** @class */ (function () {
     // apiUrl = 'http://192.168.0.102:8080/ionic/consejosdeviaje.php';
-    function RestProvider(http) {
+    function RestProvider(http, events) {
         this.http = http;
+        this.events = events;
         this.headers = new Headers({ "Content-Type": "application/json" });
         this.apiUrl = 'https://restcountries.eu/rest/v2/all';
         console.log('Hello RestProvider Provider');
@@ -86,7 +101,7 @@ var RestProvider = /** @class */ (function () {
     RestProvider.prototype.getTravelAdvice = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.http.get('http://sensussoft.com/ionic/consejosdeviaje.php').subscribe(function (data) {
+            _this.http.get('https://dev.gchat.cl/consejosdeviaje').subscribe(function (data) {
                 resolve(data);
                 // console.log("travel advice data", data);
             }, function (err) {
@@ -100,15 +115,18 @@ var RestProvider = /** @class */ (function () {
     // // *RUT = is a number that identifies a chilean national, is a 7-8 sequence number followed by a dash and a number from 0 to 9 or ‘K’. examples: 9456789-K 18934567-4
     RestProvider.prototype.getRut = function (data) {
         var _this = this;
-        // console.log("service rut data" +data);
+        // let creds = 'email=' + user.email + "&password=" + user.password;
+        console.log("service rut data" + JSON.stringify(data));
         return new Promise(function (resolve, reject) {
             // this.http.get(this.apiUrl+'/autenticacion')
-            _this.http.get('http://sensussoft.com/ionic/autenticacion.php?rut=' + data)
+            _this.http.get('https://dev.gchat.cl/autenticacion/' + data, {
+                headers: new HttpHeaders().set('Authorization', 'Basic dXNlckFwaTozNGxxNG9kOHVzZGE='),
+            })
                 .subscribe(function (res) {
-                // console.log("service res", res);
+                console.log("service res" + JSON.stringify(res));
                 resolve(res);
             }, function (err) {
-                // console.log("service err", err);
+                console.log("service err" + JSON.stringify(err));
                 reject(err);
             });
         });
@@ -118,8 +136,11 @@ var RestProvider = /** @class */ (function () {
         // console.log("service clave data", rut, clave);
         return new Promise(function (resolve, reject) {
             // this.http.get(this.apiUrl+'/autenticacion')
-            _this.http.get('http://sensussoft.com/ionic/autenticacion.php?rut=' + rut + '&&clave=' + clave)
+            _this.http.get('https://dev.gchat.cl/autenticacion/' + rut + '/' + clave, {
+                headers: new HttpHeaders().set('Authorization', 'Basic dXNlckFwaTozNGxxNG9kOHVzZGE='),
+            })
                 .subscribe(function (res) {
+                console.log("service clave res" + JSON.stringify(res));
                 resolve(res);
             }, function (err) {
                 reject(err);
@@ -201,9 +222,11 @@ var RestProvider = /** @class */ (function () {
     // It delivers the JID with which it corresponds to connect in the CHAT.
     RestProvider.prototype.addMessageSent = function (sentData) {
         var _this = this;
+        // let headerOptions: any = { 'Content-Type': 'application/json' };
+        // let headers = new Headers(headerOptions);
         console.log("service to get chat history", sentData);
         return new Promise(function (resolve, reject) {
-            _this.http.post('http://sensussoft.com/ionic/mensajenviado.php', sentData)
+            _this.http.get('http://sensussoft.com/ionic/mensajenviado.php?JID=' + sentData.JID + '&&jid=' + sentData.jid + '&&mensaje=' + sentData.mensaje)
                 .subscribe(function (res) {
                 console.log("service res", res);
                 resolve(res);
@@ -218,7 +241,7 @@ var RestProvider = /** @class */ (function () {
         var _this = this;
         // console.log("service to get recover password", Rut, appId);
         return new Promise(function (resolve, reject) {
-            _this.http.get('http://sensussoft.com/ionic/rescatarclave.php?Rut=' + Rut + '&&App=' + appId)
+            _this.http.get('https://dev.gchat.cl/rescatarclave/9370646-3/23982933/2')
                 .subscribe(function (res) {
                 // console.log("service res" +JSON.stringify(res));
                 resolve(res);
@@ -230,7 +253,7 @@ var RestProvider = /** @class */ (function () {
     };
     RestProvider = __decorate([
         Injectable(),
-        __metadata("design:paramtypes", [HttpClient])
+        __metadata("design:paramtypes", [HttpClient, Events])
     ], RestProvider);
     return RestProvider;
 }());

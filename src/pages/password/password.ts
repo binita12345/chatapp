@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { RestProvider } from '../../providers/rest/rest';
 import { Storage } from '@ionic/storage';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the PasswordPage page.
  *
@@ -26,13 +27,10 @@ export class PasswordPage {
   empresaID : any;
   JID : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, private loader: Loader,
               private formBuilder: FormBuilder, public keyboard: Keyboard, public restProvider: RestProvider, public storage: Storage) {
 
     this.rut = this.navParams.get('rut');
-    console.log("this.rut", this.rut);
-
-    // this.storage.set('rutdata', this.rut);
 
   	this.passwordloginForm = formBuilder.group({
       password: ['', Validators.compose([Validators.required, Validators.required])]
@@ -60,46 +58,37 @@ export class PasswordPage {
   }
 
   passwordlogin(){
-    console.log("this.passwordloginForm.value.password", this.passwordloginForm.value.password);
-
+    this.error = '';
+    this.loader.show('Please Wait');
     let clave : any = this.passwordloginForm.value.password;
-    console.log("clave", clave);
-    console.log("rut", this.rut);
-
-    // let loginData = {
-    //   'rut' : this.rut,
-    //   'clave' : clave
-    // }
-
-    // this.storage.set('logData', loginData);
-
+    
     if(this.passwordloginForm.value.password == ''){
       this.error = "please enter your Password";
     } else{
       this.restProvider.getClaveData(this.rut, clave)
       .then(data => {
-        // this.rut = data;
-        console.log("clave api data", data);
-
-        this.appID = data['appid'];
+        console.log("clave data", data);
+        this.appID = "23982933";
         this.storage.set('appId', this.appID);
         this.empresaID = data['idempresa'];
         this.storage.set('empresaId', this.empresaID);
 
-        console.log("clave data error", data['error']);
-
         if(data['error']){
           this.error = data['error'];
+          this.loader.hide();       
         } else {
           this.storage.set('isLogin', true);
-          console.log("data rut", data['RUT']);
           this.storage.set('RUT', data['RUT']);
           this.JID = data['JID'];
-          console.log("this.JID ", this.JID);
           this.storage.set('senderJID', this.JID);
-
-          this.navCtrl.push("MenuPage", {'Rut' : data['RUT']});
+          this.loader.hide();        
+          this.navCtrl.push("MenuPage");
         }
+      }).catch(error => {
+        console.log("clave error", error);
+        this.loader.hide();
+        this.error = error.error['error'];
+
       });
       
     }
@@ -107,9 +96,4 @@ export class PasswordPage {
   resetpassword(){
     this.navCtrl.push("ResetpasswordPage");
   }
-
-  // keyboardCheck() {
-  //    return !this.keyboard.show();
-  // }
-
 }

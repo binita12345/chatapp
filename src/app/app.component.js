@@ -40,6 +40,7 @@ var MyApp = /** @class */ (function () {
             _this.splashScreen.hide();
             _this.statusBar.show();
             // this.statusBar.styleDefault();
+            // this.keyboard.disableScroll(true);
             _this.keyboard.onKeyboardShow().subscribe(function () {
                 document.body.classList.add('keyboard-is-open');
             });

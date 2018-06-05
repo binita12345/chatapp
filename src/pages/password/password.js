@@ -13,6 +13,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { RestProvider } from '../../providers/rest/rest';
 import { Storage } from '@ionic/storage';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the PasswordPage page.
  *
@@ -20,17 +21,16 @@ import { Storage } from '@ionic/storage';
  * Ionic pages and navigation.
  */
 var PasswordPage = /** @class */ (function () {
-    function PasswordPage(navCtrl, navParams, plt, formBuilder, keyboard, restProvider, storage) {
+    function PasswordPage(navCtrl, navParams, plt, loader, formBuilder, keyboard, restProvider, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.plt = plt;
+        this.loader = loader;
         this.formBuilder = formBuilder;
         this.keyboard = keyboard;
         this.restProvider = restProvider;
         this.storage = storage;
         this.rut = this.navParams.get('rut');
-        console.log("this.rut", this.rut);
-        // this.storage.set('rutdata', this.rut);
         this.passwordloginForm = formBuilder.group({
             password: ['', Validators.compose([Validators.required, Validators.required])]
         });
@@ -54,38 +54,30 @@ var PasswordPage = /** @class */ (function () {
     };
     PasswordPage.prototype.passwordlogin = function () {
         var _this = this;
-        console.log("this.passwordloginForm.value.password", this.passwordloginForm.value.password);
+        this.error = '';
+        this.loader.show('Please Wait');
         var clave = this.passwordloginForm.value.password;
-        console.log("clave", clave);
-        console.log("rut", this.rut);
-        // let loginData = {
-        //   'rut' : this.rut,
-        //   'clave' : clave
-        // }
-        // this.storage.set('logData', loginData);
         if (this.passwordloginForm.value.password == '') {
             this.error = "please enter your Password";
         }
         else {
             this.restProvider.getClaveData(this.rut, clave)
                 .then(function (data) {
-                // this.rut = data;
-                console.log("clave api data", data);
                 _this.appID = data['appid'];
                 _this.storage.set('appId', _this.appID);
                 _this.empresaID = data['idempresa'];
                 _this.storage.set('empresaId', _this.empresaID);
-                console.log("clave data error", data['error']);
                 if (data['error']) {
                     _this.error = data['error'];
+                    _this.loader.hide();
                 }
                 else {
                     _this.storage.set('isLogin', true);
-                    console.log("data rut", data['RUT']);
                     _this.storage.set('RUT', data['RUT']);
                     _this.JID = data['JID'];
                     _this.storage.set('senderJID', _this.JID);
-                    _this.navCtrl.push("MenuPage", { 'Rut': data['RUT'], 'senderJID': _this.JID });
+                    _this.loader.hide();
+                    _this.navCtrl.push("MenuPage");
                 }
             });
         }
@@ -99,7 +91,7 @@ var PasswordPage = /** @class */ (function () {
             selector: 'page-password',
             templateUrl: 'password.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, Platform,
+        __metadata("design:paramtypes", [NavController, NavParams, Platform, Loader,
             FormBuilder, Keyboard, RestProvider, Storage])
     ], PasswordPage);
     return PasswordPage;

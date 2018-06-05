@@ -14,6 +14,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
 import { AlertController } from 'ionic-angular';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the MenuPage page.
  *
@@ -21,57 +22,33 @@ import { AlertController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 var MenuPage = /** @class */ (function () {
-    // nickname = 'Binita Doriwala';
-    // constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private callNumber: CallNumber) {
-    function MenuPage(navCtrl, navParams, callNumber, storage, restProvider, modalCtrl, alertCtrl) {
+    function MenuPage(navCtrl, navParams, callNumber, loader, storage, restProvider, modalCtrl, alertCtrl) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.callNumber = callNumber;
+        this.loader = loader;
         this.storage = storage;
         this.restProvider = restProvider;
         this.modalCtrl = modalCtrl;
         this.alertCtrl = alertCtrl;
         this.error = '';
-        this.senderJID = this.navParams.get('senderJID');
-        console.log("this.senderJID", this.senderJID);
+        this.storage.get("senderJID").then(function (getsenderJID) {
+            console.log("getsenderJID", getsenderJID);
+            _this.senderJID = getsenderJID;
+        });
         this.storage.get("empresaId").then(function (getempresaID) {
-            // console.log("getempresaID", getempresaID);
             _this.empresaID = getempresaID;
         });
         this.storage.get("appId").then(function (getappID) {
-            // console.log("getappID", getappID);
             _this.appID = getappID;
         });
         this.storage.get("isLogin").then(function (resulst) {
-            // console.log("results login status", resulst);
             if (resulst) {
                 _this.Rut = _this.navParams.get('Rut');
-                // console.log("this.Rut", this.Rut);
                 _this.storage.get("RUT").then(function (getRut) {
-                    // console.log("getRut", getRut);
                     _this.Rut = getRut;
                 });
-                // this.appID = this.navParams.get('appId');
-                // console.log("this.appID", this.appID);
-                // this.empresaID = this.navParams.get('empresaId');
-                // console.log("this.empresaID", this.empresaID);
-                // this.restProvider.getCompanyIconImage(this.empresaID, this.appID)
-                //   .then(data => {
-                //     // this.rut = data;
-                //     // if(data['error']){
-                //     //   this.error = data['error'];
-                //     //   console.log("this.error", this.error);
-                //     // } else {
-                //       console.log("data", data);
-                //       this.corpocustoContent = true;
-                //       this.companyLogo = data['urlarchivo'];
-                //       this.storage.set('companyLogo', this.companyLogo);
-                //       this.travelAgencyContent = false;
-                //     // }
-                //   }).catch(error => {
-                //     console.log("rut error", error);
-                //   });
                 _this.corpocustoContent = true;
                 _this.travelAgencyContent = false;
             }
@@ -86,70 +63,61 @@ var MenuPage = /** @class */ (function () {
     };
     MenuPage.prototype.chatting = function () {
         var _this = this;
-        console.log("go to chattingPage");
-        // this.socket.connect();
-        // this.socket.emit('set-nickname', this.nickname);
-        // this.navCtrl.push("ChatPage");
-        // this.navCtrl.push("ChatPage", { nickname: this.nickname });
-        console.log("set Rut", this.Rut);
-        console.log("set appid", this.appID);
+        this.loader.show('Please Wait');
         this.restProvider.getJIDtoChat(this.Rut, this.appID)
             .then(function (data) {
-            console.log("chat api data", data);
             if (data['error']) {
                 var alert_1 = _this.alertCtrl.create({
-                    // title: 'Low battery',
                     subTitle: data['error'],
                     buttons: ['Dismiss']
                 });
                 alert_1.present();
-                console.log("this.error", _this.error);
+                _this.loader.hide();
             }
             else {
                 _this.jid = data['jid'];
-                // this.name = data['nombre'];
                 _this.storage.set('name', data['nombre']);
                 _this.storage.set('reciverJID', _this.jid);
-                _this.toUser = {
-                    toUserId: _this.jid,
-                    toUserName: data['nombre']
-                };
-                _this.navCtrl.push("ChatPage", { 'reciverJID': _this.jid, 'senderJID': _this.senderJID });
+                _this.loader.hide();
+                _this.navCtrl.push("ChatPage", { 'reciverJID': _this.jid });
             }
         }).catch(function (error) {
             console.log("rut error", error);
         });
     };
     MenuPage.prototype.traveladvice = function () {
+        this.loader.show('Please Wait');
         console.log("on travel this.companyLogo", this.companyLogo);
+        this.loader.hide();
         this.navCtrl.push("TraveladvicePage");
     };
     MenuPage.prototype.usefulinfo = function () {
+        this.loader.show('Please Wait');
         console.log("on user info this.companyLogo", this.companyLogo);
+        this.loader.hide();
         this.navCtrl.push("UsefulinfoPage");
     };
     MenuPage.prototype.phone = function () {
         var _this = this;
+        this.loader.show('Please Wait');
         console.log("this.Rut.....1", this.Rut);
         this.restProvider.getEmergencyCall(this.Rut)
             .then(function (data) {
-            // this.rut = data;
             if (data['error']) {
                 _this.error = data['error'];
+                _this.loader.hide();
                 console.log("this.error", _this.error);
             }
             else {
                 _this.error = '';
                 console.log("data", data);
+                _this.loader.hide();
                 var modal = _this.modalCtrl.create('ModalPage', { 'emergencyNos': data['telefonosemergencia'] });
                 modal.present();
             }
         }).catch(function (error) {
             console.log("rut error", error);
         });
-        // this.callNumber.callNumber("8734814110", true)
-        // .then(() => console.log('Launched dialer!'))
-        // .catch(() => console.log('Error launching dialer'));
     };
     MenuPage = __decorate([
         IonicPage(),
@@ -157,7 +125,7 @@ var MenuPage = /** @class */ (function () {
             selector: 'page-menu',
             templateUrl: 'menu.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, CallNumber,
+        __metadata("design:paramtypes", [NavController, NavParams, CallNumber, Loader,
             Storage, RestProvider, ModalController, AlertController])
     ], MenuPage);
     return MenuPage;

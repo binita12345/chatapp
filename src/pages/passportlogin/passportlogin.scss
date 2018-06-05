@@ -3,12 +3,6 @@ page-passportlogin {
 	.toolbar-background-ios {
 	    background: #F8F9FB !important;
 	}
-	// .toolbar-background-md {
-	//     background: #F8F9FB !important;
-	// }
-	// .toolbar-background-wp {
-	//     background: #F8F9FB !important;
-	// }
 	.center {
 	    display: block;
 	    margin-left: auto;
@@ -21,13 +15,10 @@ page-passportlogin {
 	    height: 3.6rem;
 	    font-size: 16px;
 	    font-weight: 400;
-	    // text-transform: uppercase;
 	    font-variant: small-caps;
 	    color: #fff;
 	    background-color: #CB0D12;
 	    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-	    // margin: 0.4rem 0.2rem;
-	    // padding: 0 1.1em;
 	}
 	.container .btn:hover{
 		background-color: #CB0D12;
@@ -93,24 +84,4 @@ page-passportlogin {
 	$list-ios-activated-background-color: #CB0D12;
 	$list-md-activated-background-color: #CB0D12;
 	$list-wp-activated-background-color: #CB0D12;
-	// body.keyboard-is-open .hideElementOnKeyboardShown{
-	//     display: none;        
-	// }
-	// body.keyboard-is-open ion-footer {
-	//   display: none;
-	// }
-
-	// body.keyboard-is-open .scroll-content {
-	//   margin-bottom: 0 !important;
-	// }
-
-	// body.keyboard-is-open .fixed-content {
-	//   margin-bottom: 0 !important;
-	// }
-
-	// body.keyboard-is-open .applyFooter{
-	//         display: none;
-	//         bottom: 0;
-	// }
-
 }

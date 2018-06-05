@@ -37,59 +37,38 @@ export class ChatPage {
               private events: Events, public storage: Storage, public restProvider: RestProvider) {
 
     this.storage.get('rutdata').then((getdata) => {
-      // console.log('getdata ' +getdata);
       this.getdata = getdata;
     });
     
     this.storage.get('reciverJID').then((reciverJID) => {
-      // console.log('reciverJID ' +reciverJID);
       this.reciverJID = reciverJID;
     });
     this.storage.get('senderJID').then((senderJID) => {
-      // console.log('senderJID ' +senderJID);
       this.senderJID = senderJID;
     });
     this.storage.get("name").then((getname) => {
-      // console.log("getname", getname);
       this.name = getname;
     });
     this.toUser = {
       id: navParams.get('toUserId')
     };
-    console.log("this.toUser.id", this.toUser.id);
     this.getMessage();
-    // Get mock user information
-    // this.restProvider.getUserInfo()
-    // .then((res) => {
-    //   this.user = res
-    // });
   }
 
   getMessage(){
       this.storage.get("isLogin").then((resulst) => {
-        // console.log("results login status chat page", resulst);
         if(resulst){
           this.storage.get("senderJID").then((getsenderJID) => {
-            // console.log("getsenderJID", getsenderJID);
             this.senderJID = getsenderJID;
             this.restProvider.getChatHistory(this.senderJID)
               .then(data => {
-                // console.log("get msg history api data", data);
                 this.msgArray = data['historialdechat'];
-                // console.log("this.msgArray", this.msgArray);
-                // console.log("this.msgArray['idremitente']", this.msgArray['idremitente']);
-                // this.scrollToBottom();
                 for(let msgs of this.msgArray){
-                  // console.log("getting msgs", msgs);
                   this.messages = msgs;
-                  // console.log("this.messages['idremitente']", this.messages['idremitente']);
-                  // console.log("this.reciverJID", this.reciverJID);
                   if(this.messages['idremitente'] == this.reciverJID){
                     this.toUser.id = this.messages['idremitente'];
-                    console.log("this.toUser.id", this.toUser.id);
                   } else {
                     this.user = this.messages['idremitente'];
-                    console.log("this.user", this.user);
                   }
                 }
                 
@@ -109,7 +88,6 @@ export class ChatPage {
 
   ionViewDidEnter() {
     //get message list
-    // this.getMsg();
     this.getMessage();
     // Subscribe to received  new message events
     this.events.subscribe('chat:received', msg => {
@@ -117,32 +95,13 @@ export class ChatPage {
     })
   }
   onFocus() {
-    // this.showEmojiPicker = false;
     this.content.resize();
     this.scrollToBottom();
   }
-
-  // /**
-  //  * @name getMsg
-  //  * @returns {Promise<ChatMessage[]>}
-  //  */
-  // getMsg() {
-  //   // // Get mock message list
-  //   // return this.chatService
-  //   // .getmsgArray()
-  //   // .subscribe(res => {
-  //   //   this.msgArray = res;
-  //   //   this.scrollToBottom();
-  //   // });
-  // }
-
   /**
    * @name sendMsg
    */
   sendMsg() {
-    // console.log("this.senderJID", this.senderJID);
-    // console.log("this.reciverJID", this.reciverJID);
-    // console.log("this.message", this.message);
 
     if (!this.editorMsg.trim()) return;
     console.log("this.editorMsg", this.editorMsg);
@@ -158,25 +117,13 @@ export class ChatPage {
     console.log("newMsg logs", newMsg);
     
     this.editorMsg = '';
-    
-    // let sentData = {
-    //   JID : this.senderJID,
-    //   jid : this.reciverJID,
-    //   mensaje : this.message
-    // }
-    // console.log("sentData", sentData);
+   
     this.restProvider.addMessageSent(newMsg)
       .then(data => {
         console.log("sent msg api data ts", data);
        
-        // this.pushNewMsg(data['mensaje']);
         this.scrollToBottom();
-         this.getMessage();
-        // let index = this.getMsgIndexById(id);
-        // if (index !== -1) {
-        //   this.msgArray[index].status = 'success';
-
-        // }
+        this.getMessage();
       }).catch(error => {
         console.log("rut error", error);
       });
@@ -193,6 +140,7 @@ export class ChatPage {
     console.log("push new msg", msg)
     const userId = this.senderJID,
       toUserId = this.reciverJID;
+      
     // Verify user relationships
     if (msg.JID === this.senderJID && msg.jid === this.reciverJID) {
       this.msgArray.push(msg);
