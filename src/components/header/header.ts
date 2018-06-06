@@ -62,7 +62,7 @@ export class HeaderComponent {
         // this.empresaID = this.navParams.get('empresaId');
         // console.log("this.empresaID", this.empresaID);
 
-        this.restProvider.getCompanyIconImage(this.empresaID, this.appID)
+        this.restProvider.getCompanyIconImage(this.appID, this.empresaID)
           .then(data => {
             // this.rut = data;
             // if(data['error']){

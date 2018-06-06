@@ -183,12 +183,12 @@ export class RestProvider {
 	}
 
 	// this api Returns the company name and logo.
-	getCompanyIconImage(empresaId, appId) {
+	getCompanyIconImage(appId, empresaId) {
 		// console.log("service company logo and name", empresaId, appId);
 	  return new Promise((resolve, reject) => {
-	    this.http.get('https://dev.gchat.cl/iconoempresa/'+empresaId+'/'+appId)
+	    this.http.get('https://dev.gchat.cl/iconoempresa/'+appId+'/'+empresaId)
 	      .subscribe(res => {
-	      	// console.log("service res" +JSON.stringify(res));
+	      	console.log("service company res" +JSON.stringify(res));
 	        resolve(res);
 	      }, (err) => {
 	      	// console.log("service err", err);
