@@ -61,8 +61,9 @@ export class PassportloginPage {
     let rutData : any = this.passportloginForm.value.usuario;
 
     if(this.passportloginForm.value.usuario == '' || this.passportloginForm.value.usuario.length == 0){
-      this.error = "please enter your RUT Usuario";
+      // this.error = "please enter your RUT Usuario";
       this.loader.hide();
+      this.navCtrl.push("MenuPage");
     } else{
       this.restProvider.getRut(rutData)
       .then(data => {
@@ -85,16 +86,21 @@ export class PassportloginPage {
       }).catch(error => {
         console.log("rut error", error);
         this.loader.hide();
-        this.error = error.error['error'];
+        
+        if(error.error['error'] == "RUT no existe") {
+          this.navCtrl.push("MenuPage");
+        } else {
+          this.error = error.error['error'];
+        }
 
       });
     }
   }
 
-  gotonotlogedin(){
-    this.error = '';
-    this.storage.remove('isPassportLogin');
-    this.storage.remove('isLogin');
-    this.navCtrl.push("MenuPage");
-  }
+  // gotonotlogedin(){
+  //   this.error = '';
+  //   this.storage.remove('isPassportLogin');
+  //   this.storage.remove('isLogin');
+  //   this.navCtrl.push("MenuPage");
+  // }
 }

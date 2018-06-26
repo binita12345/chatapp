@@ -19,12 +19,12 @@
 		<br/>
 		<br/>
 	  	<ion-item class="itemclr">
-	    	<ion-label stacked>Rut Usuario (ex. 9456789-K, 18934567-4)</ion-label>
+	    	<ion-label stacked>Rut Usuario (ej. 9456789-K, 18934567-4)</ion-label>
 	    	<ion-input formControlName="usuario" type="text" 
         	[class.invalid]="!passportloginForm.controls.usuario.valid && passportloginForm.controls.usuario.dirty" (keypress)="onChange($event)"></ion-input>
 	  	</ion-item>
 	  	<div *ngIf="!passportloginForm.controls.usuario.valid  && passportloginForm.controls.usuario.dirty">
-	      	<p class="parag">Please enter a valid usuario.</p>
+	      	<p class="parag">Por favor ingrese un Rut válido.</p>
 	    </div>
 	    <br/>
 	    <div class="error-message">
@@ -33,7 +33,7 @@
 	    <br/>
 		<button ion-button type="submit" class="center btn">continuar</button>
 
-		<button ion-button class="center btn" (click)="gotonotlogedin()">skip</button>
+		<!-- <button ion-button class="center btn" (click)="gotonotlogedin()">skip</button> -->
 	</form>
 	<ion-footer class="footer hideElementOnKeyboardShown hide-on-keyboard-open applyFooter">
 	  <a href="http://gearlabs.cl/" onclick="window.open(this.href, '_blank', 'location=no'); return false;"><img class="footerlogo" src="assets/imgs/Marqueta/paer.png"></a>

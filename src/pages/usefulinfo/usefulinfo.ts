@@ -36,6 +36,8 @@ export class UsefulinfoPage {
   nombre : any;
   direccion : any;
   email : any;
+  telephone : any = [];
+  selectedcountry : boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, 
     public restProvider: RestProvider, private loader: Loader) {
@@ -95,19 +97,23 @@ export class UsefulinfoPage {
 
             this.restProvider.getuserInfoWithCountry(this.appID, this.country)
               .then(data => {
-                console.log("data with country", data);
+                // console.log("data with country", data);
+                this.selectedcountry = true;
                 this.moneda = data['moneda'];
-                console.log("this.moneda", this.moneda);
+                // console.log("this.moneda", this.moneda);
                 this.capital = data['capital'];
-                console.log("this.capital", this.capital);
+                // console.log("this.capital", this.capital);
                 this.idioma = data['idioma'];
-                console.log("this.idioma", this.idioma);
+                // console.log("this.idioma", this.idioma);
                 this.nombre = data['consulados'].nombre;
-                console.log("this.nombre", this.nombre);
+                // console.log("this.nombre", this.nombre);
                 this.direccion = data['consulados'].direccion;
-                console.log("this.direccion", this.direccion);
+                // console.log("this.direccion", this.direccion);
                 this.email = data['consulados'].email;
-                console.log("this.email", this.email);
+
+                this.telephone = data['consulados'].telefonos;
+                console.log("this.telephone", this.telephone);
+                // console.log("this.email", this.email);
                 // if(data['error']){
                 //   this.error = data['error'];
                 //   this.informations = [];
@@ -136,6 +142,9 @@ export class UsefulinfoPage {
               this.direccion = '';
               this.email = '';
             });
+          } else {
+            this.selectedcountry = false;
+            // this.error = "Pais no existe";
           }
         }
       },

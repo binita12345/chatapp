@@ -46,7 +46,7 @@ export class MenuPage {
       this.appID = getappID;
     });
 
-    this.storage.get("isLogin").then((resulst) => {
+    this.storage.get("isPassportLogin").then((resulst) => {
       if(resulst){
         this.Rut = this.navParams.get('Rut');
 
