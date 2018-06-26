@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "508790684170",
+    "firebase_url": "https://chatapp-826dd.firebaseio.com",
+    "project_id": "chatapp-826dd",
+    "storage_bucket": "chatapp-826dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508790684170:android:3fc66d145a32f17a",
+        "android_client_info": {
+          "package_name": "com.cochaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508790684170-mj3ju6idqpckmc3dn7gublg7s7bp3ae7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA8rZoSSod4pviFiP2yh6IHiGGhh6IlWk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

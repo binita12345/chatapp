@@ -3,6 +3,9 @@ import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+// import { Push, PushToken } from '@ionic/cloud-angular';
+
 
 // import { HomePage } from '../pages/home/home';
 import { PassportloginPage } from '../pages/passportlogin/passportlogin';
@@ -21,7 +24,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private keyboard: Keyboard, public menu: MenuController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, 
+    private keyboard: Keyboard, public menu: MenuController, private push: Push) {
     this.initializeApp();
 
     this.pages = [
@@ -30,6 +34,8 @@ export class MyApp {
       { icon: 'ios-arrow-forward', title: 'Datos Utiles', component: 'UsefulinfoPage'},
     ];
   }
+
+  
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -49,7 +55,57 @@ export class MyApp {
           document.body.classList.remove('keyboard-is-open');
       });
 
-      
+      this.push.hasPermission()
+        .then((res: any) => {
+
+          if (res.isEnabled) {
+            console.log('We have permission to send push notifications');
+          } else {
+            console.log('We do not have permission to send push notifications');
+          }
+
+        });
+
+      this.push.createChannel({
+         id: "testchannel1",
+         description: "My first test channel",
+         // The importance property goes from 1 = Lowest, 2 = Low, 3 = Normal, 4 = High and 5 = Highest.
+         importance: 3
+        }).then(() => console.log('Channel created'));
+
+        // Delete a channel (Android O and above)
+        this.push.deleteChannel('testchannel1').then(() => console.log('Channel deleted'));
+
+        // Return a list of currently configured channels
+        this.push.listChannels().then((channels) => console.log('List of channels', channels))
+
+        // to initialize push notifications
+
+        const options: PushOptions = {
+          android: {
+            senderID: "508790684170",
+            clearNotifications: false
+          },
+          ios: {
+               alert: 'true',
+               badge: true,
+               sound: 'false'
+           },
+           windows: {},
+           browser: {
+               pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+           }
+        };
+
+        const pushObject: PushObject = this.push.init(options);
+
+
+        pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+
+        pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+
+        pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+              
       // this.statusBar.overlaysWebView(false); 
     });
 
